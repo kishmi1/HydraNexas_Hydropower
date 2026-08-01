@@ -9,7 +9,7 @@ export async function PUT(request, { params }) {
 
         const body = await request.json();
 
-        const project = await prisma.project.update({
+        const news = await prisma.news.update({
 
             where: {
 
@@ -19,25 +19,21 @@ export async function PUT(request, { params }) {
 
             data: {
 
-                name: body.name,
-                slug: body.slug,
-
-                location: body.location,
-                capacity: body.capacity,
-
-                status: body.status,
-                year: body.year,
+                title: body.title,
+                category: body.category,
+                author: body.author,
+                date: body.date,
 
                 image: body.image,
 
                 description: body.description,
-                details: body.details,
+                content: body.content,
 
-                specifications: body.specifications,
-                progress: body.progress,
-                timeline: body.timeline,
+                highlights: body.highlights,
+                tags: body.tags,
 
                 featured: body.featured,
+                status: body.status,
 
             },
 
@@ -46,11 +42,12 @@ export async function PUT(request, { params }) {
         return NextResponse.json({
 
             success: true,
-            project,
+            news,
 
         });
 
     } catch (error) {
+
         console.error(error);
 
         return NextResponse.json({
@@ -74,7 +71,7 @@ export async function DELETE(request, { params }) {
 
         const { id } = await params;
 
-        await prisma.project.delete({
+        await prisma.news.delete({
 
             where: {
 
@@ -91,6 +88,8 @@ export async function DELETE(request, { params }) {
         });
 
     } catch (error) {
+
+        console.error(error);
 
         return NextResponse.json({
 

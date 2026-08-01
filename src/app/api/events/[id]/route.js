@@ -9,35 +9,19 @@ export async function PUT(request, { params }) {
 
         const body = await request.json();
 
-        const project = await prisma.project.update({
+        await prisma.event.update({
 
             where: {
-
                 id: Number(id),
-
             },
 
             data: {
 
-                name: body.name,
-                slug: body.slug,
-
+                title: body.title,
+                date: body.date,
                 location: body.location,
-                capacity: body.capacity,
-
-                status: body.status,
-                year: body.year,
-
                 image: body.image,
-
                 description: body.description,
-                details: body.details,
-
-                specifications: body.specifications,
-                progress: body.progress,
-                timeline: body.timeline,
-
-                featured: body.featured,
 
             },
 
@@ -46,12 +30,10 @@ export async function PUT(request, { params }) {
         return NextResponse.json({
 
             success: true,
-            project,
 
         });
 
     } catch (error) {
-        console.error(error);
 
         return NextResponse.json({
 
@@ -74,12 +56,10 @@ export async function DELETE(request, { params }) {
 
         const { id } = await params;
 
-        await prisma.project.delete({
+        await prisma.event.delete({
 
             where: {
-
                 id: Number(id),
-
             },
 
         });

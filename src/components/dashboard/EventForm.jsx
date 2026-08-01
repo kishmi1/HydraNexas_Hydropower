@@ -4,100 +4,93 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-export default function DownloadForm({
-
-    download = null,
-
-}) {
+export default function EventForm({ event = null }) {
 
     const router = useRouter();
 
     const [formData, setFormData] = useState({
 
-        title: download?.title || "",
-        type: download?.type || "PDF",
-        size: download?.size || "",
-        file: null,
+        title: event?.title || "",
+        date: event?.date || "",
+        location: event?.location || "",
+        description: event?.description || "",
+        image: null,
 
     });
 
-    const handleChange = (e) => {
+    function handleChange(e) {
 
         const { name, value } = e.target;
 
         setFormData((prev) => ({
+
             ...prev,
             [name]: value,
+
         }));
 
-    };
+    }
 
-    const handleFileChange = (e) => {
+    function handleFileChange(e) {
 
         setFormData((prev) => ({
+
             ...prev,
-            file: e.target.files[0],
+            image: e.target.files[0],
+
         }));
 
-    };
+    }
 
     async function handleSubmit(e) {
 
         e.preventDefault();
 
-        let fileUrl = download?.file || "";
+        let imageUrl = event?.image || "";
 
-        if (formData.file) {
+        if (formData.image) {
 
             const uploadData = new FormData();
 
-            uploadData.append("file", formData.file);
+            uploadData.append("file", formData.image);
 
             const uploadRes = await fetch("/api/upload", {
 
-    method: "POST",
-    body: uploadData,
+                method: "POST",
+                body: uploadData,
 
-});
+            });
 
-const uploadResult = await uploadRes.json();
+            const uploadResult = await uploadRes.json();
 
-console.log("Upload Result:", uploadResult);
+            imageUrl = uploadResult.url;
 
-if (!uploadResult.success) {
-
-    alert(uploadResult.message);
-    return;
-
-}
-
-fileUrl = uploadResult.url;
-
-console.log("File URL:", fileUrl);
-}
+        }
 
         const payload = {
 
             title: formData.title,
-            type: formData.type,
-            size: formData.size,
-            file: fileUrl,
+            date: formData.date,
+            location: formData.location,
+            description: formData.description,
+            image: imageUrl,
 
         };
-        console.log("Payload:", payload);
 
-        const url = download
-            ? `/api/downloads/${download.id}`
-            : "/api/downloads";
+        const url = event
+            ? `/api/events/${event.id}`
+            : "/api/events";
 
-        const method = download ? "PUT" : "POST";
+        const method = event ? "PUT" : "POST";
 
         const res = await fetch(url, {
 
             method,
 
             headers: {
+
                 "Content-Type": "application/json",
+
             },
 
             body: JSON.stringify(payload),
@@ -109,12 +102,12 @@ console.log("File URL:", fileUrl);
         if (data.success) {
 
             alert(
-                download
-                    ? "Download Updated Successfully"
-                    : "Download Added Successfully"
+                event
+                    ? "Event Updated Successfully"
+                    : "Event Added Successfully"
             );
 
-            router.push("/dashboard/investor/downloads");
+            router.push("/dashboard/events");
 
             router.refresh();
 
@@ -127,21 +120,18 @@ console.log("File URL:", fileUrl);
     }
 
     return (
-
-        <div>
-
-        <Link
-            href="/dashboard/investor/downloads"
-            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
-        >
-            <ArrowLeft size={18} />
-            Back to Dashboard
-        </Link>
-
+          <div>
+             <Link
+                href="/dashboard/events"
+                className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+            >
+                <ArrowLeft size={18} />
+                Back to Dashboard
+            </Link>
 
         <form
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm"
+            className="rounded-2xl border bg-white p-8 shadow-sm"
         >
 
             <div className="grid gap-6">
@@ -157,8 +147,7 @@ console.log("File URL:", fileUrl);
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
-                        placeholder="Annual Report 2025"
-                        className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                        className="w-full rounded-xl border px-4 py-3"
                         required
                     />
 
@@ -167,16 +156,16 @@ console.log("File URL:", fileUrl);
                 <div>
 
                     <label className="mb-2 block font-medium">
-                        File Type
+                        Date
                     </label>
 
                     <input
                         type="text"
-                        name="type"
-                        value={formData.type}
+                        name="date"
+                        value={formData.date}
                         onChange={handleChange}
-                        placeholder="PDF"
-                        className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                        placeholder="15 August 2026"
+                        className="w-full rounded-xl border px-4 py-3"
                         required
                     />
 
@@ -185,16 +174,15 @@ console.log("File URL:", fileUrl);
                 <div>
 
                     <label className="mb-2 block font-medium">
-                        File Size
+                        Location
                     </label>
 
                     <input
                         type="text"
-                        name="size"
-                        value={formData.size}
+                        name="location"
+                        value={formData.location}
                         onChange={handleChange}
-                        placeholder="4.8 MB"
-                        className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                        className="w-full rounded-xl border px-4 py-3"
                         required
                     />
 
@@ -203,14 +191,30 @@ console.log("File URL:", fileUrl);
                 <div>
 
                     <label className="mb-2 block font-medium">
-                        Upload File
+                        Event Image
                     </label>
 
                     <input
                         type="file"
                         onChange={handleFileChange}
-                        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                        className="w-full rounded-xl border px-4 py-3"
+                    />
+
+                </div>
+
+                <div>
+
+                    <label className="mb-2 block font-medium">
+                        Description
+                    </label>
+
+                    <textarea
+                        rows={5}
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border px-4 py-3"
+                        required
                     />
 
                 </div>
@@ -221,16 +225,15 @@ console.log("File URL:", fileUrl);
 
                 <button
                     type="submit"
-                    className="rounded-xl bg-blue-600 px-8 py-3 text-white hover:bg-blue-700"
+                    className="rounded-xl bg-blue-600 px-8 py-3 text-white"
                 >
-                    {download ? "Update File" : "Save File"}
+                    {event ? "Update Event" : "Save Event"}
                 </button>
 
             </div>
 
         </form>
         </div>
-
     );
 
 }

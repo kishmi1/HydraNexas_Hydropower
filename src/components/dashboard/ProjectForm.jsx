@@ -1,230 +1,333 @@
 "use client";
 
-export default function ProjectForm({
-    formData,
-    setFormData,
-    timeline,
-    setTimeline,
-    handleSubmit,
-}) {
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+export default function ProjectForm({ project = null }) {
 
-    const handleChange = (e) => {
+    const router = useRouter();
 
-        const { name, value } = e.target;
+    const [formData, setFormData] = useState({
+
+        name: project?.name || "",
+        slug: project?.slug || "",
+
+        location: project?.location || "",
+        capacity: project?.capacity || "",
+
+        status: project?.status || "Ongoing",
+        year: project?.year || "",
+
+        image: null,
+
+        description: project?.description || "",
+        details: project?.details || "",
+
+        specifications: project?.specifications
+            ? JSON.stringify(project.specifications, null, 2)
+            : "",
+
+        timeline: project?.timeline
+            ? JSON.stringify(project.timeline, null, 2)
+            : "",
+
+        progress: project?.progress || "",
+
+        featured: project?.featured || false,
+
+    });
+
+    function handleChange(e) {
+
+        const { name, value, type, checked } = e.target;
 
         setFormData((prev) => ({
+
             ...prev,
-            [name]: value,
+
+            [name]:
+
+                type === "checkbox"
+
+                    ? checked
+
+                    : value,
+
         }));
 
-    };
+    }
 
-    const handleImageChange = (e) => {
+    function handleFileChange(e) {
 
-        const file = e.target.files[0];
+        setFormData((prev) => ({
 
-        if (file) {
+            ...prev,
 
-            setFormData((prev) => ({
-                ...prev,
-                image: file,
-            }));
+            image: e.target.files[0],
+
+        }));
+
+    }
+        async function handleSubmit(e) {
+
+        e.preventDefault();
+
+        let imageUrl = project?.image || "";
+
+        if (formData.image) {
+
+            const uploadData = new FormData();
+
+            uploadData.append("file", formData.image);
+
+            const uploadRes = await fetch("/api/upload", {
+
+                method: "POST",
+                body: uploadData,
+
+            });
+
+            const uploadResult = await uploadRes.json();
+
+            imageUrl = uploadResult.url;
 
         }
 
-    };
+        const payload = {
 
-    const handleTimelineChange = (index, field, value) => {
+            name: formData.name,
+            slug: formData.slug,
 
-        const updated = [...timeline];
+            location: formData.location,
+            capacity: formData.capacity,
 
-        updated[index][field] = value;
+            status: formData.status,
+            year: formData.year,
 
-        setTimeline(updated);
+            image: imageUrl,
 
-    };
+            description: formData.description,
+            details: formData.details,
 
-    const addTimeline = () => {
+            specifications: formData.specifications
+                ? JSON.parse(formData.specifications)
+                : {},
 
-        setTimeline([
-            ...timeline,
-            {
-                year: "",
-                title: "",
+            timeline: formData.timeline
+                ? JSON.parse(formData.timeline)
+                : {},
+
+            progress: formData.progress,
+
+            featured: formData.featured,
+
+        };
+
+        const url = project
+
+            ? `/api/projects/${project.id}`
+
+            : "/api/projects";
+
+        const method = project
+
+            ? "PUT"
+
+            : "POST";
+
+        const res = await fetch(url, {
+
+            method,
+
+            headers: {
+
+                "Content-Type": "application/json",
+
             },
-        ]);
 
-    };
+            body: JSON.stringify(payload),
 
-    const removeTimeline = (index) => {
+        });
 
-        const updated = timeline.filter((_, i) => i !== index);
+        const data = await res.json();
 
-        setTimeline(updated);
+        if (data.success) {
 
-    };
+            alert(
 
+                project
+
+                    ? "Project Updated Successfully"
+
+                    : "Project Created Successfully"
+
+            );
+
+            router.push("/dashboard/projects");
+
+            router.refresh();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    }
     return (
 
-        <form
-            onSubmit={handleSubmit}
-            className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm"
-        >
+         <div>
+             <Link
+                href="/dashboard/projects"
+                className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+            >
+                <ArrowLeft size={18} />
+                Back to Dashboard
+            </Link>
 
-            <h2 className="mb-6 text-xl font-semibold">
-                Basic Information
-            </h2>
-
-<div>
-
-    <label className="mb-2 block font-medium">
-        Project Name
-    </label>
-
-    <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
-
-</div>
-
-<div>
-
-    <label className="mb-2 block font-medium">
-        Slug
-    </label>
-
-    <input
-        type="text"
-        name="slug"
-        value={formData.slug}
-        onChange={handleChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
-
-</div>
-
-<div>
-
-    <label className="mb-2 block font-medium">
-        Location
-    </label>
-
-    <input
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
-
-</div>
-
-<div>
-
-    <label className="mb-2 block font-medium">
-        Capacity
-    </label>
-
-    <input
-        type="text"
-        name="capacity"
-        value={formData.capacity}
-        onChange={handleChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
-
-</div>
-
-
-
-            <div className="grid gap-6 md:grid-cols-2">
-                {/* Status */}
-
-<div>
-    <label className="mb-2 block font-medium">
-        Status
-    </label>
-
-    <select
-        name="status"
-        value={formData.status}
-        onChange={handleChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
+    <form
+        onSubmit={handleSubmit}
+        className="space-y-8 rounded-2xl border bg-white p-8 shadow-sm"
     >
-        <option value="Ongoing">Ongoing</option>
-        <option value="Completed">Completed</option>
-        <option value="Upcoming">Upcoming</option>
-    </select>
-</div>
 
-{/* Year */}
+        <h2 className="text-2xl font-bold">
 
-<div>
-    <label className="mb-2 block font-medium">
-        Year
-    </label>
+            {project ? "Edit Project" : "Create Project"}
 
-    <input
-        type="text"
-        name="year"
-        value={formData.year}
-        onChange={handleChange}
-        placeholder="2026"
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
-</div>
+        </h2>
 
-{/* Featured Image */}
+        {/* Basic Information */}
 
-<div className="md:col-span-2">
+        <div className="grid grid-cols-2 gap-6">
 
-    <label className="mb-2 block font-medium">
-        Featured Image
-    </label>
+            <div>
 
-    <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="w-full rounded-xl border border-slate-300 px-4 py-3"
-    />
+                <label className="mb-2 block font-medium">
+                    Project Name
+                </label>
 
-</div>
+                <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                    required
+                />
 
-{formData.image && (
+            </div>
 
-    <div className="md:col-span-2">
+            <div>
 
-        <img
-            src={URL.createObjectURL(formData.image)}
-            alt="Preview"
-            className="h-56 w-full rounded-xl border object-cover"
-        />
+                <label className="mb-2 block font-medium">
+                    Slug
+                </label>
 
-    </div>
+                <input
+                    type="text"
+                    name="slug"
+                    value={formData.slug}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                    required
+                />
 
-)}
+            </div>
 
-</div>
+            <div>
 
-{/* Description */}
+                <label className="mb-2 block font-medium">
+                    Location
+                </label>
 
-<div className="mt-10">
+                <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                />
 
-    <h2 className="mb-6 text-xl font-semibold">
-        Project Description
-    </h2>
+            </div>
 
-    <div className="grid gap-6">
+            <div>
+
+                <label className="mb-2 block font-medium">
+                    Capacity
+                </label>
+
+                <input
+                    type="text"
+                    name="capacity"
+                    value={formData.capacity}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                />
+
+            </div>
+
+            <div>
+
+                <label className="mb-2 block font-medium">
+                    Status
+                </label>
+
+                <select
+                    name="status"
+                    value={formData.status}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                >
+
+                    <option>Ongoing</option>
+                    <option>Upcoming</option>
+                    <option>Completed</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label className="mb-2 block font-medium">
+                    Year
+                </label>
+
+                <input
+                    type="text"
+                    name="year"
+                    value={formData.year}
+                    onChange={handleChange}
+                    className="w-full rounded-xl border p-3"
+                />
+
+            </div>
+
+        </div>
+
+        {/* Image */}
 
         <div>
 
             <label className="mb-2 block font-medium">
-                Short Description
+                Project Image
+            </label>
+
+            <input
+                type="file"
+                onChange={handleFileChange}
+                className="w-full rounded-xl border p-3"
+            />
+
+        </div>
+
+        {/* Description */}
+
+        <div>
+
+            <label className="mb-2 block font-medium">
+                Description
             </label>
 
             <textarea
@@ -232,107 +335,66 @@ export default function ProjectForm({
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                className="w-full rounded-xl border p-3"
             />
 
         </div>
+
+        {/* Details */}
 
         <div>
 
             <label className="mb-2 block font-medium">
-                Project Details
+                Details
             </label>
 
             <textarea
-                rows={8}
+                rows={6}
                 name="details"
                 value={formData.details}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                className="w-full rounded-xl border p-3"
             />
 
         </div>
 
-    </div>
+        {/* Specifications */}
 
-</div>
+        <div>
 
-{/* Specifications */}
+            <label className="mb-2 block font-medium">
+                Specifications (JSON)
+            </label>
 
-<div className="mt-10">
+            <textarea
+                rows={6}
+                name="specifications"
+                value={formData.specifications}
+                onChange={handleChange}
+                className="w-full rounded-xl border p-3 font-mono"
+            />
 
-    <h2 className="mb-6 text-xl font-semibold">
-        Project Specifications
-    </h2>
+        </div>
 
-    <div className="grid gap-6 md:grid-cols-2">
+        {/* Timeline */}
 
-        <input
-            type="text"
-            name="developer"
-            value={formData.developer}
-            onChange={handleChange}
-            placeholder="Developer"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
+        <div>
 
-        <input
-            type="text"
-            name="river"
-            value={formData.river}
-            onChange={handleChange}
-            placeholder="River"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
+            <label className="mb-2 block font-medium">
+                Timeline (JSON)
+            </label>
 
-        <input
-            type="text"
-            name="projectType"
-            value={formData.projectType}
-            onChange={handleChange}
-            placeholder="Project Type"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
+            <textarea
+                rows={6}
+                name="timeline"
+                value={formData.timeline}
+                onChange={handleChange}
+                className="w-full rounded-xl border p-3 font-mono"
+            />
 
-        <input
-            type="text"
-            name="annualEnergy"
-            value={formData.annualEnergy}
-            onChange={handleChange}
-            placeholder="Annual Energy"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
+        </div>
 
-        <input
-            type="text"
-            name="investment"
-            value={formData.investment}
-            onChange={handleChange}
-            placeholder="Investment"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
-
-        <input
-            type="text"
-            name="constructionPeriod"
-            value={formData.constructionPeriod}
-            onChange={handleChange}
-            placeholder="Construction Period"
-            className="rounded-xl border border-slate-300 px-4 py-3"
-        />
-
-    </div>
-
-</div>
-{/* Project Settings */}
-
-<div className="mt-10">
-
-    <h2 className="mb-6 text-xl font-semibold">
-        Project Settings
-    </h2>
-
-    <div className="grid gap-6 md:grid-cols-2">
+        {/* Progress */}
 
         <div>
 
@@ -345,111 +407,42 @@ export default function ProjectForm({
                 name="progress"
                 value={formData.progress}
                 onChange={handleChange}
-                placeholder="75%"
-                className="w-full rounded-xl border border-slate-300 px-4 py-3"
+                className="w-full rounded-xl border p-3"
             />
 
         </div>
 
-        <div>
+        {/* Featured */}
 
-            <label className="mb-2 block font-medium">
-                Featured
+        <div className="flex items-center gap-3">
+
+            <input
+                type="checkbox"
+                name="featured"
+                checked={formData.featured}
+                onChange={handleChange}
+            />
+
+            <label>
+                Featured Project
             </label>
 
-            <select
-                value={formData.featured ? "Yes" : "No"}
-                onChange={(e) =>
-                    setFormData((prev) => ({
-                        ...prev,
-                        featured: e.target.value === "Yes",
-                    }))
-                }
-                className="w-full rounded-xl border border-slate-300 px-4 py-3"
-            >
-                <option>No</option>
-                <option>Yes</option>
-            </select>
-
         </div>
 
-    </div>
-
-</div>
-
-{/* Timeline */}
-
-<div className="mt-10">
-
-    <div className="mb-6 flex items-center justify-between">
-
-        <h2 className="text-xl font-semibold">
-            Timeline
-        </h2>
-
-        <button
-            type="button"
-            onClick={addTimeline}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-white"
-        >
-            + Add Timeline
-        </button>
-
-    </div>
-
-    {timeline.map((item, index) => (
-
-        <div
-            key={index}
-            className="mb-4 grid gap-4 rounded-xl border p-4 md:grid-cols-2"
-        >
-
-            <input
-                type="text"
-                placeholder="Year"
-                value={item.year}
-                onChange={(e) =>
-                    handleTimelineChange(index, "year", e.target.value)
-                }
-                className="rounded-xl border border-slate-300 px-4 py-3"
-            />
-
-            <input
-                type="text"
-                placeholder="Title"
-                value={item.title}
-                onChange={(e) =>
-                    handleTimelineChange(index, "title", e.target.value)
-                }
-                className="rounded-xl border border-slate-300 px-4 py-3"
-            />
+        <div className="flex justify-end">
 
             <button
-                type="button"
-                onClick={() => removeTimeline(index)}
-                className="text-left text-red-600 hover:underline"
+                type="submit"
+                className="rounded-xl bg-blue-600 px-8 py-3 text-white hover:bg-blue-700"
             >
-                Remove
+
+                {project ? "Update Project" : "Create Project"}
+
             </button>
 
         </div>
 
-    ))}
-
+    </form>
 </div>
-
-<div className="mt-10 flex justify-end">
-
-    <button
-        type="submit"
-        className="rounded-xl bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700"
-    >
-        Save Project
-    </button>
-
-</div>
-
-</form>
-
 );
 }

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 export default function FinancialHighlightForm({
 
     highlight = null,
@@ -75,6 +76,17 @@ export default function FinancialHighlightForm({
     }
 
     return (
+
+        <div>
+
+        <Link
+            href="/dashboard/investor/financial-highlights"
+            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+        </Link>
+
 
         <form
             onSubmit={handleSubmit}
@@ -151,6 +163,7 @@ export default function FinancialHighlightForm({
             </div>
 
         </form>
+        </div>
 
     );
 

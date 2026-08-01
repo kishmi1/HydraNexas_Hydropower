@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Plus, Pencil } from "lucide-react";
-import DeleteProjectButton from "@/components/dashboard/DeleteProjectButton";
 
-export default async function ProjectsPage() {
+import DeleteUserButton from "@/components/dashboard/DeleteUserButton";
 
-    const projects = await prisma.project.findMany({
+export default async function UsersPage() {
+
+    const users = await prisma.user.findMany({
 
         orderBy: {
 
@@ -19,30 +20,28 @@ export default async function ProjectsPage() {
 
         <div>
 
-
-
             <div className="mb-8 flex items-center justify-between">
 
                 <div>
 
                     <h1 className="text-3xl font-bold">
-                        Project Management
+                        Users Management
                     </h1>
 
                     <p className="text-slate-500">
-                        Manage Hydropower Projects
+                        Manage System Users
                     </p>
 
                 </div>
 
                 <Link
-                    href="/dashboard/projects/create"
+                    href="/dashboard/users/create"
                     className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-white"
                 >
 
                     <Plus size={18} />
 
-                    Add Project
+                    Add User
 
                 </Link>
 
@@ -56,12 +55,10 @@ export default async function ProjectsPage() {
 
                         <tr>
 
-                            <th className="p-4 text-left">Image</th>
-                            <th className="p-4 text-left">Project</th>
-                            <th className="p-4 text-left">Location</th>
+                            <th className="p-4 text-left">Name</th>
+                            <th className="p-4 text-left">Email</th>
+                            <th className="p-4 text-left">Role</th>
                             <th className="p-4 text-left">Status</th>
-                            <th className="p-4 text-left">Capacity</th>
-                            <th className="p-4 text-center">Featured</th>
                             <th className="p-4 text-center">Actions</th>
 
                         </tr>
@@ -70,58 +67,45 @@ export default async function ProjectsPage() {
 
                     <tbody>
 
-                        {projects.map((project) => (
+                        {users.map((user) => (
 
                             <tr
-                                key={project.id}
+                                key={user.id}
                                 className="border-b hover:bg-slate-50"
                             >
 
                                 <td className="p-4">
-
-                                    <img
-                                        src={project.image}
-                                        alt={project.name}
-                                        className="h-16 w-24 rounded-lg object-cover"
-                                    />
-
-                                </td>
-
-                                <td className="p-4 font-medium">
-                                    {project.name}
+                                    {user.name}
                                 </td>
 
                                 <td className="p-4">
-                                    {project.location}
+                                    {user.email}
                                 </td>
 
                                 <td className="p-4">
-                                    {project.status}
+                                    {user.role}
                                 </td>
 
                                 <td className="p-4">
-                                    {project.capacity}
+
+                                    <span
+                                        className={`rounded-full px-3 py-1 text-sm ${
+                                            user.status === "Active"
+                                                ? "bg-green-100 text-green-700"
+                                                : "bg-red-100 text-red-700"
+                                        }`}
+                                    >
+                                        {user.status}
+                                    </span>
+
                                 </td>
-<td className="p-4 text-center">
 
-    <span
-        className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-            project.featured
-                ? "bg-green-100 text-green-700"
-                : "bg-slate-100 text-slate-600"
-        }`}
-    >
-        {project.featured ? "Featured" : "Normal"}
-    </span>
-
-</td>
-
-                                <td className="p-4">
+                                <td className="p-4 text-center">
 
                                     <div className="flex justify-center gap-3">
 
                                         <Link
-                                            href={`/dashboard/projects/edit/${project.id}`}
+                                            href={`/dashboard/users/edit/${user.id}`}
                                         >
 
                                             <Pencil
@@ -131,7 +115,7 @@ export default async function ProjectsPage() {
 
                                         </Link>
 
-                                        <DeleteProjectButton id={project.id} />
+                                        <DeleteUserButton id={user.id} />
 
                                     </div>
 

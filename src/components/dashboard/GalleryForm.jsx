@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 export default function GalleryForm({
 
     gallery = null,
@@ -160,7 +161,15 @@ export default function GalleryForm({
     }
 
     return (
+             <div>
 
+        <Link
+            href="/dashboard/gallery"
+            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+        </Link>
         <form
             onSubmit={handleSubmit}
             className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm"
@@ -275,7 +284,7 @@ export default function GalleryForm({
 </div>
 
         </form>
-
+</div>
     );
 
 }

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 export default function FinancialRatioForm({
 
     ratio = null,
@@ -79,6 +80,16 @@ console.log("FormData:", formData);
     }
 
     return (
+        <div>
+
+        <Link
+            href="/dashboard/investor/financial-ratios"
+            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+        </Link>
+
 
         <form
             onSubmit={handleSubmit}
@@ -137,6 +148,7 @@ console.log("FormData:", formData);
             </div>
 
         </form>
+        </div>
 
     );
 

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 export default function ActiveTenderForm({ tender = null }) {
 
     const router = useRouter();
@@ -98,6 +99,17 @@ export default function ActiveTenderForm({ tender = null }) {
     }
 
     return (
+
+        <div>
+
+        <Link
+            href="/dashboard/ebidding/active-tenders"
+            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+        </Link>
+
         <form onSubmit={handleSubmit}>
            <div className="grid gap-6">
 
@@ -238,6 +250,7 @@ export default function ActiveTenderForm({ tender = null }) {
 
 </div>
         </form>
+        </div>
     );
 
 }

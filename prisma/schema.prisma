@@ -288,3 +288,56 @@ model MediaGallery {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Event {
+  id          Int      @id @default(autoincrement())
+
+  title       String
+  date        String
+  location    String
+
+  image       String
+
+  description String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+
+  name      String
+  email     String   @unique
+  password  String
+
+  role      String   @default("Admin")
+  status    String   @default("Active")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id              Int      @id @default(autoincrement())
+
+  companyName     String
+  logo            String
+
+  email           String
+  phone           String
+  address         String
+
+  facebook        String?
+  linkedin        String?
+  youtube         String?
+  instagram       String?
+
+  websiteTitle    String?
+  metaDescription String?
+
+  footerText      String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

@@ -5,12 +5,10 @@ export async function GET() {
 
     try {
 
-        const news = await prisma.news.findMany({
+        const events = await prisma.event.findMany({
 
             orderBy: {
-
                 createdAt: "desc",
-
             },
 
         });
@@ -18,13 +16,11 @@ export async function GET() {
         return NextResponse.json({
 
             success: true,
-            news,
+            events,
 
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return NextResponse.json({
 
@@ -47,25 +43,15 @@ export async function POST(request) {
 
         const body = await request.json();
 
-        const news = await prisma.news.create({
+        const event = await prisma.event.create({
 
             data: {
 
                 title: body.title,
-                category: body.category,
-                author: body.author,
                 date: body.date,
-
+                location: body.location,
                 image: body.image,
-
                 description: body.description,
-                content: body.content,
-
-                highlights: body.highlights,
-                tags: body.tags,
-
-                featured: body.featured,
-                status: body.status,
 
             },
 
@@ -74,13 +60,11 @@ export async function POST(request) {
         return NextResponse.json({
 
             success: true,
-            news,
+            event,
 
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return NextResponse.json({
 

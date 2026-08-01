@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export async function PUT(request, { params }) {
 
@@ -9,49 +10,39 @@ export async function PUT(request, { params }) {
 
         const body = await request.json();
 
-        const project = await prisma.project.update({
+        const data = {
+
+            name: body.name,
+            email: body.email,
+            role: body.role,
+            status: body.status,
+
+        };
+
+        // Password update गर्ने भए मात्र hash गर्ने
+        if (body.password && body.password.trim() !== "") {
+
+            data.password = await bcrypt.hash(body.password, 10);
+
+        }
+
+        await prisma.user.update({
 
             where: {
-
                 id: Number(id),
-
             },
 
-            data: {
-
-                name: body.name,
-                slug: body.slug,
-
-                location: body.location,
-                capacity: body.capacity,
-
-                status: body.status,
-                year: body.year,
-
-                image: body.image,
-
-                description: body.description,
-                details: body.details,
-
-                specifications: body.specifications,
-                progress: body.progress,
-                timeline: body.timeline,
-
-                featured: body.featured,
-
-            },
+            data,
 
         });
 
         return NextResponse.json({
 
             success: true,
-            project,
 
         });
 
     } catch (error) {
-        console.error(error);
 
         return NextResponse.json({
 
@@ -74,12 +65,10 @@ export async function DELETE(request, { params }) {
 
         const { id } = await params;
 
-        await prisma.project.delete({
+        await prisma.user.delete({
 
             where: {
-
                 id: Number(id),
-
             },
 
         });

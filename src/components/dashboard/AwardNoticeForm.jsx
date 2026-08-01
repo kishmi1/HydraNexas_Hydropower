@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 export default function AwardNoticeForm({
 
     award = null,
@@ -77,6 +78,16 @@ export default function AwardNoticeForm({
     }
 
     return (
+        <div>
+
+        <Link
+            href="/dashboard/ebidding/award-notices"
+            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+        </Link>
+
 
         <form
             onSubmit={handleSubmit}
@@ -150,7 +161,7 @@ export default function AwardNoticeForm({
             </div>
 
         </form>
-
+</div>
     );
 
 }

@@ -3,15 +3,15 @@
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function DeleteProjectButton({ id }) {
+export default function DeleteUserButton({ id }) {
 
     const router = useRouter();
 
     async function handleDelete() {
 
-        if (!confirm("Delete this project?")) return;
+        if (!confirm("Delete this user?")) return;
 
-        const res = await fetch(`/api/projects/${id}`, {
+        const res = await fetch(`/api/users/${id}`, {
 
             method: "DELETE",
 
@@ -21,7 +21,7 @@ export default function DeleteProjectButton({ id }) {
 
         if (data.success) {
 
-            alert("Project Deleted Successfully");
+            alert("User Deleted Successfully");
 
             router.refresh();
 
