@@ -1,0 +1,110 @@
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import DeleteGovernanceButton from "@/components/dashboard/DeleteGovernanceButton";
+
+export default async function GovernancePage() {
+
+    const governances = await prisma.governance.findMany({
+
+        orderBy: {
+            createdAt: "desc",
+        },
+
+    });
+
+    return (
+
+        <div>
+
+            <div className="mb-8 flex items-center justify-between">
+
+                <div>
+
+                    <h1 className="text-3xl font-bold">
+                        Corporate Governance
+                    </h1>
+
+                    <p className="mt-2 text-slate-500">
+                        Manage governance information.
+                    </p>
+
+                </div>
+
+                <Link
+                    href="/dashboard/investor/governance/create"
+                    className="rounded-xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700"
+                >
+                    + Add Governance
+                </Link>
+
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+
+                <table className="w-full">
+
+                    <thead className="bg-slate-100">
+
+                        <tr>
+
+                            <th className="px-6 py-4 text-left">
+                                Title
+                            </th>
+
+                            <th className="px-6 py-4 text-left">
+                                Description
+                            </th>
+
+                            <th className="px-6 py-4 text-center">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {governances.map((item) => (
+
+                            <tr
+                                key={item.id}
+                                className="border-t"
+                            >
+
+                                <td className="px-6 py-4">
+                                    {item.title}
+                                </td>
+
+                                <td className="px-6 py-4">
+                                    {item.description}
+                                </td>
+
+                                <td className="px-6 py-4 text-center">
+
+                                    <Link
+                                        href={`/dashboard/investor/governance/edit/${item.id}`}
+                                        className="mr-4 text-blue-600 hover:underline"
+                                    >
+                                        Edit
+                                    </Link>
+
+                                    <DeleteGovernanceButton id={item.id} />
+
+                                </td>
+
+                            </tr>
+
+                        ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    );
+
+}
