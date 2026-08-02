@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-
 export async function GET(request, { params }) {
 
     try {
 
         const { id } = await params;
 
-        const news = await prisma.news.findUnique({
+        const contact = await prisma.contact.findUnique({
 
             where: {
 
@@ -18,25 +17,10 @@ export async function GET(request, { params }) {
 
         });
 
-        if (!news) {
-
-            return NextResponse.json({
-
-                success: false,
-                message: "News not found",
-
-            }, {
-
-                status: 404,
-
-            });
-
-        }
-
         return NextResponse.json({
 
             success: true,
-            news,
+            contact,
 
         });
 
@@ -56,6 +40,7 @@ export async function GET(request, { params }) {
     }
 
 }
+
 export async function PUT(request, { params }) {
 
     try {
@@ -64,7 +49,7 @@ export async function PUT(request, { params }) {
 
         const body = await request.json();
 
-        const news = await prisma.news.update({
+        const contact = await prisma.contact.update({
 
             where: {
 
@@ -74,20 +59,6 @@ export async function PUT(request, { params }) {
 
             data: {
 
-                title: body.title,
-                category: body.category,
-                author: body.author,
-                date: body.date,
-
-                image: body.image,
-
-                description: body.description,
-                content: body.content,
-
-                highlights: body.highlights,
-                tags: body.tags,
-
-                featured: body.featured,
                 status: body.status,
 
             },
@@ -97,13 +68,11 @@ export async function PUT(request, { params }) {
         return NextResponse.json({
 
             success: true,
-            news,
+            contact,
 
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return NextResponse.json({
 
@@ -126,7 +95,7 @@ export async function DELETE(request, { params }) {
 
         const { id } = await params;
 
-        await prisma.news.delete({
+        await prisma.contact.delete({
 
             where: {
 
@@ -143,8 +112,6 @@ export async function DELETE(request, { params }) {
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return NextResponse.json({
 

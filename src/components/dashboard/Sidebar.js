@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { ChevronDown, ChevronRight } from "lucide-react";
@@ -13,6 +13,22 @@ import { SIDEBAR_ITEMS } from "@/constants/sidebar";
 export default function Sidebar() {
 
     const pathname = usePathname();
+    const router = useRouter();
+
+    async function handleLogout() {
+
+        const res = await fetch("/api/auth/logout", {
+            method: "POST",
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            router.push("/login");
+            router.refresh();
+        }
+
+    }
 
     const [openMenus, setOpenMenus] = useState(() => {
 
@@ -163,6 +179,31 @@ export default function Sidebar() {
                                         </ul>
 
                                     )}
+
+                                </li>
+
+                            );
+
+                        }
+
+                        // Logout Menu
+
+                        if (item.action === "logout") {
+
+                            return (
+
+                                <li key={item.title}>
+
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-600 hover:text-white"
+                                    >
+
+                                        <Icon size={20} />
+
+                                        <span>{item.title}</span>
+
+                                    </button>
 
                                 </li>
 

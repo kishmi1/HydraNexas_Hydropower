@@ -2,14 +2,45 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
 export function middleware(request) {
-    const token = request.cookies.get("token")?.value;
 
-    // Login page is always accessible
-    if (request.nextUrl.pathname === "/login") {
-        return NextResponse.next();
+    // Handle CORS preflight
+    if (request.method === "OPTIONS") {
+        return new NextResponse(null, {
+            status: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:5173",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            },
+        });
     }
 
-    // Protect dashboard routes
+    const response = NextResponse.next();
+
+    // Add CORS headers for API routes
+    if (request.nextUrl.pathname.startsWith("/api")) {
+        response.headers.set(
+            "Access-Control-Allow-Origin",
+            "http://localhost:5173"
+        );
+        response.headers.set(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PUT, DELETE, OPTIONS"
+        );
+        response.headers.set(
+            "Access-Control-Allow-Headers",
+            "Content-Type, Authorization"
+        );
+
+        return response;
+    }
+
+    const token = request.cookies.get("token")?.value;
+
+    if (request.nextUrl.pathname === "/login") {
+        return response;
+    }
+
     if (request.nextUrl.pathname.startsWith("/dashboard")) {
         if (!token) {
             return NextResponse.redirect(new URL("/login", request.url));
@@ -17,15 +48,18 @@ export function middleware(request) {
 
         try {
             jwt.verify(token, process.env.JWT_SECRET);
-            return NextResponse.next();
+            return response;
         } catch {
             return NextResponse.redirect(new URL("/login", request.url));
         }
     }
 
-    return NextResponse.next();
+    return response;
 }
 
 export const config = {
-    matcher: ["/dashboard/:path*"],
+    matcher: [
+        "/dashboard/:path*",
+        "/api/:path*",
+    ],
 };

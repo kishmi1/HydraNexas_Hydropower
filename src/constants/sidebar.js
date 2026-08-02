@@ -14,6 +14,7 @@ import {
     Landmark,
     Download,
     GraduationCap,
+    Mail,
 } from "lucide-react";
 
 export const SIDEBAR_ITEMS = [
@@ -165,13 +166,18 @@ export const SIDEBAR_ITEMS = [
         icon: Users,
     },
     {
+        title: "Contact Messages",
+        href: "/dashboard/contact",
+        icon: Mail,
+    },
+    {
         title: "Settings",
         href: "/dashboard/settings",
         icon: Settings,
     },
     {
         title: "Logout",
-        href: "/logout",
+        action: "logout",
         icon: LogOut,
     },
 ];
