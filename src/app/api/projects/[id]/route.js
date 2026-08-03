@@ -1,5 +1,43 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+export async function GET(request, { params }) {
+    try {
+        const { id } = await params;
+
+        const project = await prisma.project.findUnique({
+            where: {
+                id: Number(id),
+            },
+        });
+
+        if (!project) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Project not found",
+                },
+                {
+                    status: 404,
+                }
+            );
+        }
+
+        return NextResponse.json({
+            success: true,
+            project,
+        });
+    } catch (error) {
+        return NextResponse.json(
+            {
+                success: false,
+                message: error.message,
+            },
+            {
+                status: 500,
+            }
+        );
+    }
+}
 
 export async function PUT(request, { params }) {
 

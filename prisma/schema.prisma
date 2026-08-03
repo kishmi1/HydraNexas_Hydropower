@@ -356,3 +356,15 @@ model Contact {
 
   createdAt DateTime @default(now())
 }
+
+
+model LeadershipTeam {
+  id          Int      @id @default(autoincrement())
+  name        String
+  position    String
+  image       String
+  description String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

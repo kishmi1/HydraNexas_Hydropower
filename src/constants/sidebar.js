@@ -156,6 +156,39 @@ export const SIDEBAR_ITEMS = [
         icon: Image,
     },
     {
+        title: "About Management",
+        icon: Users,
+
+        children: [
+
+            {
+                title: "Leadership Team",
+                href: "/dashboard/about/leadership-team",
+                icon: Users,
+            },
+
+            {
+                title: "Board of Directors",
+                href: "/dashboard/about/board-of-directors",
+                icon: Landmark,
+            },
+
+            {
+                title: "Awards",
+                href: "/dashboard/about/awards",
+                icon: BarChart3,
+            },
+
+            {
+                title: "Notices",
+                href: "/dashboard/about/notices",
+                icon: Newspaper,
+            },
+
+        ],
+
+    },
+    {
         title: "Events",
         href: "/dashboard/events",
         icon: CalendarDays,
