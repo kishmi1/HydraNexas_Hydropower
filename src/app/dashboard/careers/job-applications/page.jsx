@@ -1,15 +1,35 @@
-import { prisma } from "@/lib/prisma";
+"use client";
+
+import { useEffect, useState } from "react";
+
+
 import UpdateApplicationStatus from "@/components/dashboard/UpdateApplicationStatus";
 
-export default async function JobApplicationsPage() {
+export default function JobApplicationsPage() {
 
-    const applications = await prisma.jobApplication.findMany({
+        const [jobApplications, setJobApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/job-applications")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setJobApplications(data.jobApplications || data.jobApplication || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

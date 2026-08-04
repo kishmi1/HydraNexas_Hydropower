@@ -1,17 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 
 import DeleteDownloadButton from "@/components/dashboard/DeleteDownloadButton";
 
-export default async function DownloadsPage() {
+export default function DownloadsPage() {
 
-    const downloads = await prisma.download.findMany({
+        const [downloads, setDownloads] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/downloads")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setDownloads(data.downloads || data.download || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

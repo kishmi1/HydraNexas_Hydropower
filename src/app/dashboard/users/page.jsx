@@ -1,20 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteUserButton from "@/components/dashboard/DeleteUserButton";
 
-export default async function UsersPage() {
+export default function UsersPage() {
 
-    const users = await prisma.user.findMany({
+        const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
+    useEffect(() => {
+        fetch("/api/users")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setUsers(data.users || data.user || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-            createdAt: "desc",
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
-        },
 
-    });
 
     return (
 

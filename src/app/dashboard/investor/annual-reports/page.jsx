@@ -1,17 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 
 import DeleteAnnualReportButton from "@/components/dashboard/DeleteAnnualReportButton";
 
-export default async function AnnualReportsPage() {
+export default function AnnualReportsPage() {
 
-    const reports = await prisma.annualReport.findMany({
+        const [annualReports, setAnnualReports] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/annual-reports")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setAnnualReports(data.annualReports || data.annualReport || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

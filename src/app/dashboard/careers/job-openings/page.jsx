@@ -1,18 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteJobOpeningButton from "@/components/dashboard/DeleteJobOpeningButton";
 
-export default async function JobOpeningsPage() {
+export default function JobOpeningsPage() {
 
-    const jobs = await prisma.jobOpening.findMany({
+        const [jobOpenings, setJobOpenings] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/job-openings")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setJobOpenings(data.jobOpenings || data.jobOpening || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

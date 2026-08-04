@@ -1,20 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Eye, Trash2 } from "lucide-react";
 
 import DeleteContactButton from "@/components/dashboard/DeleteContactButton";
 
-export default async function ContactPage() {
+export default function ContactPage() {
 
-    const contacts = await prisma.contact.findMany({
+        const [contacts, setContacts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
+    useEffect(() => {
+        fetch("/api/contact")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setContacts(data.contacts || data.contact || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-            createdAt: "desc",
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
-        },
 
-    });
 
     return (
 

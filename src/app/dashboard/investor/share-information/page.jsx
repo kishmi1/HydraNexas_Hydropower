@@ -1,17 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 
 import DeleteShareInformationButton from "@/components/dashboard/DeleteShareInformationButton";
 
-export default async function ShareInformationPage() {
+export default function ShareInformationPage() {
 
-    const shares = await prisma.shareInformation.findMany({
+        const [shareInformation, setShareInformation] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/share-information")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setShareInformation(data.shareInformations || data.shareInformation || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

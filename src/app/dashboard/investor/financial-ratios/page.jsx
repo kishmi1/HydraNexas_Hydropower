@@ -1,15 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 
 import DeleteFinancialRatioButton from "@/components/dashboard/DeleteFinancialRatioButton";
 
-export default async function FinancialRatiosPage() {
+export default function FinancialRatiosPage() {
 
-    const ratios = await prisma.financialRatio.findMany({
-        orderBy: {
-            createdAt: "desc",
-        },
-    });
+        const [financialRatios, setFinancialRatios] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/api/financial-ratios")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setFinancialRatios(data.financialRatios || data.financialRatio || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

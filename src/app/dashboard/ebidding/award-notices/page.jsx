@@ -1,18 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteAwardNoticeButton from "@/components/dashboard/DeleteAwardNoticeButton";
 
-export default async function AwardNoticesPage() {
+export default function AwardNoticesPage() {
 
-    const awards = await prisma.awardNotice.findMany({
+        const [awardNotices, setAwardNotices] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/award-notices")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setAwardNotices(data.awardNotices || data.awardNotice || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

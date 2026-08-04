@@ -1,16 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import DeleteGovernanceButton from "@/components/dashboard/DeleteGovernanceButton";
 
-export default async function GovernancePage() {
+export default function GovernancePage() {
 
-    const governances = await prisma.governance.findMany({
+        const [governance, setGovernance] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/governance")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setGovernance(data.governances || data.governance || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

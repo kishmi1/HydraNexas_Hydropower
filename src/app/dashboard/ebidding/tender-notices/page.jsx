@@ -1,18 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteTenderNoticeButton from "@/components/dashboard/DeleteTenderNoticeButton";
 
-export default async function TenderNoticesPage() {
+export default function TenderNoticesPage() {
 
-    const notices = await prisma.tenderNotice.findMany({
+        const [tenderNotices, setTenderNotices] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/tender-notices")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setTenderNotices(data.tenderNotices || data.tenderNotice || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

@@ -1,16 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import DeleteDividendHistoryButton from "@/components/dashboard/DeleteDividendHistoryButton";
 
-export default async function DividendHistoryPage() {
+export default function DividendHistoryPage() {
 
-    const dividends = await prisma.dividendHistory.findMany({
+        const [dividendHistory, setDividendHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            year: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/dividend-history")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setDividendHistory(data.dividendHistorys || data.dividendHistory || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

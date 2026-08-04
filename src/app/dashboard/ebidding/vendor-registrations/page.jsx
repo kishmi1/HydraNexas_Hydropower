@@ -1,18 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Eye, Trash2 } from "lucide-react";
 
 import DeleteVendorButton from "@/components/dashboard/DeleteVendorButton";
 
-export default async function VendorRegistrationsPage() {
+export default function VendorRegistrationsPage() {
 
-    const vendors = await prisma.vendorRegistration.findMany({
+        const [vendorRegistrations, setVendorRegistrations] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
-            createdAt: "desc",
-        },
+    useEffect(() => {
+        fetch("/api/vendor-registrations")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setVendorRegistrations(data.vendorRegistrations || data.vendorRegistration || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
+
 
     return (
 

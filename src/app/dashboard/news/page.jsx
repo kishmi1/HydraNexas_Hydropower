@@ -1,20 +1,33 @@
+"use client";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { Plus, Pencil } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import DeleteNewsButton from "@/components/dashboard/DeleteNewsButton";
 
-export default async function NewsPage() {
+export default function NewsPage() {
+    const [newsList, setNewsList] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const newsList = await prisma.news.findMany({
+    useEffect(() => {
+        fetch("/api/news")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setNewsList(data.news || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching news:", error);
+                setLoading(false);
+            });
+    }, []);
 
-        orderBy: {
-
-            createdAt: "desc",
-
-        },
-
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
     return (
 

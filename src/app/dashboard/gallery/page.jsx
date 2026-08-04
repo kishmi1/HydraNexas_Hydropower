@@ -1,20 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteGalleryButton from "@/components/dashboard/DeleteGalleryButton";
 
-export default async function GalleryPage() {
+export default function GalleryPage() {
 
-    const gallery = await prisma.mediaGallery.findMany({
+        const [mediaGallery, setMediaGallery] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
+    useEffect(() => {
+        fetch("/api/media-gallery")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setMediaGallery(data.mediaGallerys || data.mediaGallery || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-            createdAt: "desc",
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
-        },
 
-    });
 
     return (
 

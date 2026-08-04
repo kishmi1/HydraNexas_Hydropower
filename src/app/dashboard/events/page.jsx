@@ -1,20 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+
 import { Plus, Pencil } from "lucide-react";
 
 import DeleteEventButton from "@/components/dashboard/DeleteEventButton";
 
-export default async function EventsPage() {
+export default function EventsPage() {
 
-    const events = await prisma.event.findMany({
+        const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-        orderBy: {
+    useEffect(() => {
+        fetch("/api/events")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setEvents(data.events || data.event || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                setLoading(false);
+            });
+    }, []);
 
-            createdAt: "desc",
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
-        },
 
-    });
 
     return (
 

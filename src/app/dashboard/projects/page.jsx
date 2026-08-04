@@ -1,19 +1,33 @@
+"use client";
+
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { Plus, Pencil } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import DeleteProjectButton from "@/components/dashboard/DeleteProjectButton";
 
-export default async function ProjectsPage() {
+export default function ProjectsPage() {
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const projects = await prisma.project.findMany({
+    useEffect(() => {
+        fetch("/api/projects")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setProjects(data.projects || []);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching projects:", error);
+                setLoading(false);
+            });
+    }, []);
 
-        orderBy: {
-
-            createdAt: "desc",
-
-        },
-
-    });
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
     return (
 
