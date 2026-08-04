@@ -36,19 +36,17 @@ export default function ChatBot(){
 
 
 
-    const [messages,setMessages] = useState(()=>{
+    const [messages,setMessages] = useState(defaultMessage);
 
-
-        const savedChat =
-        localStorage.getItem("hydranexa-chat");
-
-
-        return savedChat
-        ? JSON.parse(savedChat)
-        : defaultMessage;
-
-
-    });
+    // Load chat from localStorage on client side
+    useEffect(()=>{
+        if(typeof window !== 'undefined'){
+            const savedChat = localStorage.getItem("hydranexa-chat");
+            if(savedChat){
+                setMessages(JSON.parse(savedChat));
+            }
+        }
+    }, []);
 
 
     const quickQuestions=[
