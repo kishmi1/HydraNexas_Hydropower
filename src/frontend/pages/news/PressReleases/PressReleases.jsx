@@ -2,7 +2,6 @@ import "./PressReleases.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
-import { useEffect, useState } from "react";
 import { pressReleases } from "../../../data/newsData";
 
 const heroImage = "/assets/images/news/press-hero.jpg";
