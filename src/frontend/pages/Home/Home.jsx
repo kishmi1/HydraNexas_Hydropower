@@ -7,6 +7,7 @@ import InvestorHighlights from "../../components/home/InvestorHighlights/Investo
 import LatestNews from "../../components/home/LatestNews/LatestNews";
 import CTASection from "../../components/home/CTASection/CTASection";
 import LiveDashboard from "../../components/home/LiveDashboard/LiveDashboard";
+import ChatBot from "../../components/common/ChatBot/ChatBot";
 export default function Home() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Home() {
       <InvestorHighlights/>
       <LatestNews/>
       <CTASection/>
+      <ChatBot/>
     </>
   );
 }

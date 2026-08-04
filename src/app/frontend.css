@@ -1,0 +1,58 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap");
+
+@import "../frontend/styles/variables.css";
+@import "../frontend/styles/reset.css";
+@import "../frontend/styles/global.css";
+@import "../frontend/components/layout/Navbar/Navbar.css";
+@import "../frontend/components/layout/Footer/Footer.css";
+
+/* Component CSS */
+@import "../frontend/components/common/ChatBot/ChatBot.css";
+@import "../frontend/components/common/PageHero/PageHero.css";
+@import "../frontend/components/home/CompanyOverview/CompanyOverview.css";
+@import "../frontend/components/home/CTASection/CTASection.css";
+@import "../frontend/components/home/FeaturedProjects/FeaturedProjects.css";
+@import "../frontend/components/home/Hero/Hero.css";
+@import "../frontend/components/home/InvestorHighlights/InvestorHighlights.css";
+@import "../frontend/components/home/LatestNews/LatestNews.css";
+@import "../frontend/components/home/LiveDashboard/LiveDashboard.css";
+@import "../frontend/components/home/Stats/Stats.css";
+@import "../frontend/components/home/Sustainability/Sustainability.css";
+
+/* Page CSS */
+@import "../frontend/pages/About/AwardsRecognition/AwardsRecognition.css";
+@import "../frontend/pages/About/BoardOfDirectors/BoardOfDirectors.css";
+@import "../frontend/pages/About/CompanyHistory/CompanyHistory.css";
+@import "../frontend/pages/About/CompanyOverview/CompanyOverview.css";
+@import "../frontend/pages/About/LeadershipTeam/LeadershipTeam.css";
+@import "../frontend/pages/About/VisionMission/VisionMission.css";
+@import "../frontend/pages/careers/ApplyNow/ApplyNow.css";
+@import "../frontend/pages/careers/CurrentOpenings/CurrentOpenings.css";
+@import "../frontend/pages/careers/InternshipProgram/InternshipProgram.css";
+@import "../frontend/pages/careers/LifeAtHydraNexa/LifeAtHydraNexa.css";
+@import "../frontend/pages/contact/Contact.css";
+@import "../frontend/pages/ebidding/ActiveTenders/ActiveTenders.css";
+@import "../frontend/pages/ebidding/AwardNotices/AwardNotices.css";
+@import "../frontend/pages/ebidding/TenderDetails/TenderDetails.css";
+@import "../frontend/pages/ebidding/TenderDocuments/TenderDocuments.css";
+@import "../frontend/pages/ebidding/TenderNotices/TenderNotices.css";
+@import "../frontend/pages/ebidding/VendorRegistration/VendorRegistration.css";
+@import "../frontend/pages/Home/Home.css";
+@import "../frontend/pages/investor/AnnualReports/AnnualReports.css";
+@import "../frontend/pages/investor/CorporateGovernance/CorporateGovernance.css";
+@import "../frontend/pages/investor/Downloads/Downloads.css";
+@import "../frontend/pages/investor/FinancialHighlights/FinancialHighlights.css";
+@import "../frontend/pages/investor/ShareInformation/ShareInformation.css";
+@import "../frontend/pages/news/EventDetails/EventDetails.css";
+@import "../frontend/pages/news/Events/Events.css";
+@import "../frontend/pages/news/LatestNews/LatestNews.css";
+@import "../frontend/pages/news/MediaGallery/MediaGallery.css";
+@import "../frontend/pages/news/NewsDetails/NewsDetails.css";
+@import "../frontend/pages/news/PressReleases/PressReleases.css";
+@import "../frontend/pages/Projects/AllProjects/AllProjects.css";
+@import "../frontend/pages/Projects/CompletedProjects/CompletedProjects.css";
+@import "../frontend/pages/Projects/OngoingProjects/OngoingProjects.css";
+@import "../frontend/pages/Projects/ProjectDetails/ProjectDetails.css";
+@import "../frontend/pages/Projects/ProjectMap/ProjectMap.css";
+@import "../frontend/pages/Projects/UpcomingProjects/UpcomingProjects.css";
