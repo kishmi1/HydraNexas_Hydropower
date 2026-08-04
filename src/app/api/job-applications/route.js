@@ -88,6 +88,14 @@ export async function POST(request) {
             },
         });
 
+        await prisma.notification.create({
+            data: {
+                title: "New Job Application",
+                message: `${fullName} has applied for ${position}.`,
+                type: "job",
+            },
+        });
+
         return NextResponse.json({
             success: true,
             application,

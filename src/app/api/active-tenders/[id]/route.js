@@ -1,6 +1,42 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+export async function GET(request, { params }) {
+    try {
+        const { id } = await params;
+        console.log("ID:", id);
+
+        const tender = await prisma.activeTender.findUnique({
+            where: {
+                id: Number(id),
+            },
+        });
+
+        if (!tender) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Tender not found",
+                },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json({
+            success: true,
+            tender,
+        });
+
+    } catch (error) {
+        return NextResponse.json(
+            {
+                success: false,
+                message: error.message,
+            },
+            { status: 500 }
+        );
+    }
+}
 export async function PUT(request, { params }) {
 
     try {

@@ -99,7 +99,7 @@ export default function ActiveTendersPage() {
 
                     <tbody>
 
-                        {tenders.map((tender) => (
+                        {activeTenders.map((tender) => (
 
                             <tr
                                 key={tender.id}

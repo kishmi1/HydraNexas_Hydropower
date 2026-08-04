@@ -18,7 +18,7 @@ export default function AwardNoticesPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setAwardNotices(data.awardNotices || data.awardNotice || []);
+                    setAwardNotices(data.awards || []);
                 }
                 setLoading(false);
             })
@@ -83,7 +83,7 @@ export default function AwardNoticesPage() {
 
                     <tbody>
 
-                        {awards.map((award) => (
+                        {awardNotices.map((award) => (
 
                             <tr
                                 key={award.id}

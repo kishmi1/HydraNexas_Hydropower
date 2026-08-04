@@ -1,10 +1,12 @@
-import NewsDetails from "@/frontend/pages/news/NewsDetails/NewsDetails.jsx";
+import NewsDetails from "@/frontend/pages/news/NewsDetails/NewsDetails";
 import FrontendLayout from "@/app/frontend-layout";
 
-export default function NewsDetailsPage({ params }) {
+export default async function NewsDetailsPage({ params }) {
+  const { id } = await params;
+
   return (
     <FrontendLayout>
-      <NewsDetails id={params.id} />
+      <NewsDetails id={id} />
     </FrontendLayout>
   );
 }

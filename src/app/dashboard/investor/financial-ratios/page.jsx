@@ -17,7 +17,7 @@ export default function FinancialRatiosPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setFinancialRatios(data.financialRatios || data.financialRatio || []);
+                    setFinancialRatios(data.ratios || []);
                 }
                 setLoading(false);
             })
@@ -86,7 +86,7 @@ export default function FinancialRatiosPage() {
 
                     <tbody>
 
-                        {ratios.length === 0 ? (
+                        {financialRatios.length === 0 ? (
 
                             <tr>
 
@@ -101,7 +101,7 @@ export default function FinancialRatiosPage() {
 
                         ) : (
 
-                            ratios.map((item) => (
+                            financialRatios.map((item) => (
 
                                 <tr
                                     key={item.id}

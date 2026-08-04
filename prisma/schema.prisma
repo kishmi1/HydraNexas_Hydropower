@@ -36,327 +36,253 @@ model Admin {
 }
 
 model Project {
-  id Int @id @default(autoincrement())
-
-  name String
-  slug String @unique
-
-  location String
-  capacity String
-  status String
-  year String
-
-  image String
-
-  description String
-  details String
-
+  id             Int      @id @default(autoincrement())
+  name           String
+  slug           String   @unique
+  location       String
+  capacity       String
+  status         String
+  year           String
+  image          String
+  description    String
+  details        String
   specifications Json
-
-  progress String
-
-  timeline Json
-
-  featured Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  progress       String
+  timeline       Json
+  featured       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
-
 model FinancialHighlight {
-  id Int @id @default(autoincrement())
-
-  title String
-  value String
+  id          Int      @id @default(autoincrement())
+  title       String
+  value       String
   description String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model FinancialRatio {
-  id Int @id @default(autoincrement())
-
-  title String
-  value String
-
+  id        Int      @id @default(autoincrement())
+  title     String
+  value     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model AnnualReport {
-  id Int @id @default(autoincrement())
-
-  year String
-  title String
+  id          Int      @id @default(autoincrement())
+  year        String
+  title       String
   description String
-  file String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  file        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model ShareInformation {
-  id Int @id @default(autoincrement())
-
-  title String
-  value String
-
+  id        Int      @id @default(autoincrement())
+  title     String
+  value     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model DividendHistory {
-  id Int @id @default(autoincrement())
-
-  year String
-  dividend String
-  bonus String
-
+  id        Int      @id @default(autoincrement())
+  year      String
+  dividend  String
+  bonus     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Governance {
-  id Int @id @default(autoincrement())
-
-  title String
+  id          Int      @id @default(autoincrement())
+  title       String
   description String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Download {
-  id Int @id @default(autoincrement())
-
-  title String
-  type String
-  size String
-  file String
-
+  id        Int      @id @default(autoincrement())
+  title     String
+  type      String
+  size      String
+  file      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model ActiveTender {
   id             Int      @id @default(autoincrement())
-
   title          String
   tenderNo       String
   closingDate    String
   type           String
   location       String
   status         String
-
   description    String
   content        String
-
   scope          Json
   eligibility    Json
-
   contactOfficer String
   contactEmail   String
   contactPhone   String
-
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
 model TenderNotice {
   id          Int      @id @default(autoincrement())
-
   title       String
   publishDate String
   location    String
   description String
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model TenderDocument {
-  id          Int      @id @default(autoincrement())
-
-  title       String
-  type        String
-  size        String
-  uploadDate  String
-  file        String
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  title      String
+  type       String
+  size       String
+  uploadDate String
+  file       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
-
 
 model VendorRegistration {
   id                 Int      @id @default(autoincrement())
-
   companyName        String
   registrationNumber String
   vat                String
   businessCategory   String
-
   contactPerson      String
   email              String   @unique
   phone              String
   address            String
-
   password           String
-
   status             String   @default("Pending")
-
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 }
 
 model AwardNotice {
-  id          Int      @id @default(autoincrement())
-
-  project     String
-  contractor  String
-  awardDate   String
-  value       String
-  status      String
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  project    String
+  contractor String
+  awardDate  String
+  value      String
+  status     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model JobApplication {
-  id             Int      @id @default(autoincrement())
-
-  fullName       String
-  email          String
-  phone          String
-  address        String
-
-  position       String
-  qualification  String
-  experience     String
-
-  company        String?
-  salary         String?
-
-  coverLetter    String
-
-  cv             String
-
-  status         String   @default("Pending")
-
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  fullName      String
+  email         String
+  phone         String
+  address       String
+  position      String
+  qualification String
+  experience    String
+  company       String?
+  salary        String?
+  coverLetter   String
+  cv            String
+  status        String   @default("Pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model JobOpening {
-  id          Int      @id @default(autoincrement())
-
-  position    String
-  department  String
-  location    String
-  type        String
-  deadline    String
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  position   String
+  department String
+  location   String
+  type       String
+  deadline   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model InternshipProgram {
   id          Int      @id @default(autoincrement())
-
   title       String
   duration    String
   description String
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-
 model MediaGallery {
   id          Int      @id @default(autoincrement())
-
   title       String
   category    String
   type        String
-
   image       String?
   video       String?
-
   description String?
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Event {
   id          Int      @id @default(autoincrement())
-
   title       String
   date        String
   location    String
-
   image       String
-
   description String
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model User {
   id        Int      @id @default(autoincrement())
-
   name      String
   email     String   @unique
   password  String
-
   role      String   @default("Admin")
   status    String   @default("Active")
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Setting {
   id              Int      @id @default(autoincrement())
-
   companyName     String
   logo            String
-
   email           String
   phone           String
   address         String
-
   facebook        String?
   linkedin        String?
   youtube         String?
   instagram       String?
-
   websiteTitle    String?
   metaDescription String?
-
   footerText      String?
-
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
 
 model Contact {
   id        Int      @id @default(autoincrement())
-
   name      String
   email     String
   phone     String?
   subject   String
   message   String
-
   status    String   @default("Unread")
-
   createdAt DateTime @default(now())
 }
-
 
 model LeadershipTeam {
   id          Int      @id @default(autoincrement())
@@ -364,7 +290,6 @@ model LeadershipTeam {
   position    String
   image       String
   description String
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -375,7 +300,15 @@ model BoardDirector {
   position    String
   image       String
   description String
-
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  title       String
+  message     String
+  type        String
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }

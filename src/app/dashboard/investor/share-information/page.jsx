@@ -17,7 +17,7 @@ export default function ShareInformationPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setShareInformation(data.shareInformations || data.shareInformation || []);
+                    setShareInformation(data.shares || []);
                 }
                 setLoading(false);
             })
@@ -86,7 +86,7 @@ export default function ShareInformationPage() {
 
                     <tbody>
 
-                        {shares.length === 0 ? (
+                        {shareInformation.length === 0 ? (
 
                             <tr>
 
@@ -101,7 +101,7 @@ export default function ShareInformationPage() {
 
                         ) : (
 
-                            shares.map((item) => (
+                            shareInformation.map((item) => (
 
                                 <tr
                                     key={item.id}

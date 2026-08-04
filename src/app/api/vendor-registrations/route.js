@@ -84,6 +84,14 @@ export async function POST(request) {
             },
         });
 
+        await prisma.notification.create({
+            data: {
+                title: "New Vendor Registration",
+                message: `${body.companyName} has registered as a vendor.`,
+                type: "vendor",
+            },
+        });
+
         return NextResponse.json(
             {
                 success: true,

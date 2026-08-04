@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { activeTenders } from "../../../data/tenderData";
-
+import { useEffect, useState } from "react";
 import "./TenderDetails.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
@@ -23,11 +22,19 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 
-export default function TenderDetails({ params }) {
+export default function TenderDetails({ id }) {
 
-  const tender = activeTenders.find(
-    item => item.id === Number(params.id)
-  );
+  const [tender, setTender] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/active-tenders/${id}`)
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setTender(result.tender);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
   if (!tender) {
     return (

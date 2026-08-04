@@ -1,4 +1,4 @@
-import ActiveTenders from "@/frontend/pages/ebidding/ActiveTenders/ActiveTenders.jsx";
+import ActiveTenders from "@/frontend/pages/ebidding/ActiveTenders/ActiveTenders";
 import FrontendLayout from "@/app/frontend-layout";
 
 export default function ActiveTendersPage() {

@@ -18,7 +18,7 @@ export default function TenderDocumentsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setTenderDocuments(data.tenderDocuments || data.tenderDocument || []);
+                    setTenderDocuments(data.documents || []);
                 }
                 setLoading(false);
             })
@@ -82,7 +82,7 @@ export default function TenderDocumentsPage() {
 
                     <tbody>
 
-                        {documents.map((document) => (
+                        {tenderDocuments.map((document) => (
 
                             <tr
                                 key={document.id}

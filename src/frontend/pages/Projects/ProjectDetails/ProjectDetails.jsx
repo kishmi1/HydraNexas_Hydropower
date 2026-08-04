@@ -11,9 +11,8 @@ import ScrollAnimation from "../../../components/common/ScrollAnimation/ScrollAn
 
 const heroImage = "/assets/images/hero/project-hero.jpg";
 
-export default function ProjectDetails({ params }) {
+export default function ProjectDetails({ id}) {
 
-  const id = params.id;
 
   const [project, setProject] = useState(null);
 

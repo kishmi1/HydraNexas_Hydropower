@@ -16,7 +16,7 @@ export default function DividendHistoryPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setDividendHistory(data.dividendHistorys || data.dividendHistory || []);
+                    setDividendHistory(data.dividends || []);
                 }
                 setLoading(false);
             })
@@ -81,7 +81,7 @@ export default function DividendHistoryPage() {
 
                     <tbody>
 
-                        {dividends.map((item) => (
+                        {dividendHistory.map((item) => (
 
                             <tr key={item.id} className="border-t">
 

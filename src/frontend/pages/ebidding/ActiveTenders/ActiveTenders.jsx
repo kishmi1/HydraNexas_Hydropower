@@ -20,13 +20,25 @@ const [loading, setLoading] = useState(true);
 
 useEffect(() => {
   fetch("/api/active-tenders")
-    .then((res) => res.json())
+    .then((res) => {
+      console.log("Response status:", res.status);
+      return res.json();
+    })
     .then((data) => {
-      setTenders(data.tenders);
+      console.log("API Response:", data);
+      console.log("Tenders:", data.activeTenders);
+
+      if (data.success && data.activeTenders) {
+        setTenders(data.activeTenders);
+      } else {
+        console.error("API returned no tenders or failed");
+        setTenders([]);
+      }
       setLoading(false);
     })
     .catch((error) => {
-      console.log(error);
+      console.error("Fetch error:", error);
+      setTenders([]);
       setLoading(false);
     });
 }, []);
@@ -58,6 +70,7 @@ useEffect(() => {
             </p>
 
           </div>
+          <p>Total Tenders: {tenders.length}</p>
 
           {/* Tender Cards */}
 
@@ -98,12 +111,9 @@ useEffect(() => {
 
   </div>
 
-  <Link
-    href={`/tenders/${tender.id}`}
-    className="primary-btn"
-  >
-    View Details
-  </Link>
+<Link href={`/ebidding/active-tenders/${tender.id}`}>
+  View Details
+</Link>
 
 </div>
 

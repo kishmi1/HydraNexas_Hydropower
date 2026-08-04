@@ -18,7 +18,7 @@ export default function VendorRegistrationsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setVendorRegistrations(data.vendorRegistrations || data.vendorRegistration || []);
+                    setVendorRegistrations(data.vendors || []);
                 }
                 setLoading(false);
             })
@@ -71,7 +71,7 @@ export default function VendorRegistrationsPage() {
 
                     <tbody>
 
-                        {vendors.map((vendor) => (
+                        {vendorRegistrations.map((vendor) => (
 
                             <tr
                                 key={vendor.id}

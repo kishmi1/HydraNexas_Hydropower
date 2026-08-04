@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
 
-    const tenders = await prisma.activeTender.findMany({
+    const activeTenders = await prisma.activeTender.findMany({
 
         orderBy: {
             createdAt: "desc",
@@ -14,7 +14,7 @@ export async function GET() {
     return NextResponse.json({
 
         success: true,
-        tenders,
+        activeTenders,
 
     });
 

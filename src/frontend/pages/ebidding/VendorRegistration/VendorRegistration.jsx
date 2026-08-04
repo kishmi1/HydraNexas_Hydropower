@@ -141,7 +141,7 @@ const handleSubmit = async (e) => {
   try {
     const url = isLogin
       ? "/api/vendor-login"
-      : "/api/vendor-registration";
+      : "/api/vendor-registrations";
 
     const response = await fetch(url, {
       method: "POST",

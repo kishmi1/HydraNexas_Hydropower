@@ -18,7 +18,7 @@ export default function JobOpeningsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setJobOpenings(data.jobOpenings || data.jobOpening || []);
+                    setJobOpenings(data.jobs || []);
                 }
                 setLoading(false);
             })
@@ -83,7 +83,7 @@ export default function JobOpeningsPage() {
 
                     <tbody>
 
-                        {jobs.map((job) => (
+                        {jobOpenings.map((job) => (
 
                             <tr
                                 key={job.id}

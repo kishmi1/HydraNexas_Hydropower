@@ -85,7 +85,7 @@ export default function GovernancePage() {
 
                     <tbody>
 
-                        {governances.map((item) => (
+                        {governance.map((item) => (
 
                             <tr
                                 key={item.id}

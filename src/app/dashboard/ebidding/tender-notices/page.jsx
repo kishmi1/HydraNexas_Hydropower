@@ -18,7 +18,7 @@ export default function TenderNoticesPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setTenderNotices(data.tenderNotices || data.tenderNotice || []);
+                    setTenderNotices(data.notices || []);
                 }
                 setLoading(false);
             })
@@ -81,7 +81,7 @@ export default function TenderNoticesPage() {
 
                     <tbody>
 
-                        {notices.map((notice) => (
+                        {tenderNotices.map((notice) => (
 
                             <tr
                                 key={notice.id}
@@ -119,7 +119,7 @@ export default function TenderNoticesPage() {
 
                         ))}
 
-                        {notices.length === 0 && (
+                        {tenderNotices.length === 0 && (
 
                             <tr>
 

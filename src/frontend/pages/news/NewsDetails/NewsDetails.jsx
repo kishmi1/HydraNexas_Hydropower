@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-import "./NewsDetails.css";
+import { useEffect, useState } from "react";import "./NewsDetails.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
@@ -19,30 +17,27 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-export default function NewsDetails({ params }) {
+export default function NewsDetails({ id }) {
 
-  const id = params.id;
-
+ console.log("NewsDetails id:", id);
   const [news, setNews] = useState(null);
   const [relatedNews, setRelatedNews] = useState([]);
 
-  useEffect(() => {
-
+ useEffect(() => {
+      console.log("Fetching:", `/api/news/${id}`);
     fetch(`/api/news/${id}`)
       .then((res) => res.json())
       .then((result) => {
         console.log("Single News:", result);
         setNews(result.news);
-      })
-      .catch((err) => console.log(err));
+      });
 
     fetch("/api/news")
       .then((res) => res.json())
       .then((result) => {
         setRelatedNews(result.news || []);
       })
-      .catch((err) => console.log(err));
-
+ .catch((err) => console.log(err));
   }, [id]);
 
   if (!news) {

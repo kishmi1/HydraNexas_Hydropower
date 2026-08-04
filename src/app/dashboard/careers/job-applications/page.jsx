@@ -15,7 +15,7 @@ export default function JobApplicationsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setJobApplications(data.jobApplications || data.jobApplication || []);
+                    setJobApplications(data.applications || []);
                 }
                 setLoading(false);
             })
@@ -68,7 +68,7 @@ export default function JobApplicationsPage() {
 
                     <tbody>
 
-                        {applications.map((application) => (
+                        {jobApplications.map((application) => (
 
                             <tr
                                 key={application.id}

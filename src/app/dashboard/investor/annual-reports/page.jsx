@@ -17,7 +17,7 @@ export default function AnnualReportsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setAnnualReports(data.annualReports || data.annualReport || []);
+                    setAnnualReports(data.reports || []);
                 }
                 setLoading(false);
             })
@@ -90,7 +90,7 @@ export default function AnnualReportsPage() {
 
                     <tbody>
 
-                        {reports.length === 0 ? (
+                        {annualReports.length === 0 ? (
 
                             <tr>
 
@@ -105,7 +105,7 @@ export default function AnnualReportsPage() {
 
                         ) : (
 
-                            reports.map((item) => (
+                            annualReports.map((item) => (
 
                                 <tr
                                     key={item.id}
