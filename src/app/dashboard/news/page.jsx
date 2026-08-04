@@ -12,10 +12,16 @@ export default function NewsPage() {
 
     useEffect(() => {
         fetch("/api/news")
-            .then((res) => res.json())
+            .then((res) => {
+                console.log("News API response status:", res.status);
+                return res.json();
+            })
             .then((data) => {
+                console.log("News API data:", data);
                 if (data.success) {
                     setNewsList(data.news || []);
+                } else {
+                    console.error("News API error:", data.message);
                 }
                 setLoading(false);
             })

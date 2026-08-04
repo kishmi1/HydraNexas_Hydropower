@@ -12,10 +12,16 @@ export default function ProjectsPage() {
 
     useEffect(() => {
         fetch("/api/projects")
-            .then((res) => res.json())
+            .then((res) => {
+                console.log("Projects API response status:", res.status);
+                return res.json();
+            })
             .then((data) => {
+                console.log("Projects API data:", data);
                 if (data.success) {
                     setProjects(data.projects || []);
+                } else {
+                    console.error("Projects API error:", data.message);
                 }
                 setLoading(false);
             })
