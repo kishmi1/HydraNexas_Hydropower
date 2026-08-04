@@ -1,18 +1,48 @@
-import { prisma } from "@/lib/prisma";
+"use client";
+
 import {
     Newspaper,
     FolderKanban,
     Briefcase,
     FileText,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import DashboardCard from "@/components/dashboard/DashboardCard";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RecentNews from "@/components/dashboard/RecentNews";
 import RecentActivity from "@/components/dashboard/RecentActivity";
-export default async function DashboardPage() {
-    const totalNews = await prisma.news.count();
-    const totalProjects = await prisma.project.count();
+
+export default function DashboardPage() {
+    const [totalNews, setTotalNews] = useState(0);
+    const [totalProjects, setTotalProjects] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Fetch stats from APIs
+        Promise.all([
+            fetch("/api/news").then(res => res.json()),
+            fetch("/api/projects").then(res => res.json())
+        ])
+        .then(([newsData, projectsData]) => {
+            if (newsData.success) {
+                setTotalNews(newsData.news?.length || 0);
+            }
+            if (projectsData.success) {
+                setTotalProjects(projectsData.projects?.length || 0);
+            }
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error("Error fetching dashboard stats:", error);
+            setLoading(false);
+        });
+    }, []);
+
+    if (loading) {
+        return <div className="p-8">Loading...</div>;
+    }
+
     return (
         <div>
 

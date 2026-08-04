@@ -1,14 +1,30 @@
-import { prisma } from "@/lib/prisma";
+"use client";
+
 import { FilePlus } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default async function RecentActivity() {
+export default function RecentActivity() {
+    const [activities, setActivities] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const activities = await prisma.news.findMany({
-        orderBy: {
-            createdAt: "desc",
-        },
-        take: 5,
-    });
+    useEffect(() => {
+        fetch("/api/news")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setActivities((data.news || []).slice(0, 5));
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching recent activity:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">Loading...</div>;
+    }
 
     return (
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
