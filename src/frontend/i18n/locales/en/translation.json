@@ -1,0 +1,81 @@
+{
+  "navbar": {
+    "logoTitle": "HydraNexa",
+    "logoTagline": "Powering Tomorrow",
+
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "investors": "Investor Relations",
+    "news": "News",
+    "ebidding": "E-Bidding",
+    "careers": "Careers",
+    "contact": "Contact",
+
+    "companyOverview": "Company Overview",
+    "visionMission": "Vision & Mission",
+    "boardOfDirectors": "Board of Directors",
+    "leadershipTeam": "Leadership Team",
+    "companyHistory": "Company History",
+    "awardsRecognition": "Awards & Recognition",
+
+    "allProjects": "All Projects",
+    "ongoingProjects": "Ongoing Projects",
+    "completedProjects": "Completed Projects",
+    "upcomingProjects": "Upcoming Projects",
+    "projectMap": "Project Map",
+
+    "financialHighlights": "Financial Highlights",
+    "annualReports": "Annual Reports",
+    "shareInformation": "Share Information",
+    "corporateGovernance": "Corporate Governance",
+    "downloads": "Downloads",
+
+    "latestNews": "Latest News",
+    "events": "Events",
+    "pressReleases": "Press Releases",
+    "mediaGallery": "Media Gallery",
+
+    "activeTenders": "Active Tenders",
+    "tenderNotices": "Tender Notices",
+    "tenderDocuments": "Tender Documents",
+    "vendorRegistration": "Vendor Registration",
+    "awardNotices": "Award Notices",
+
+    "lifeAtHydraNexa": "Life at HydraNexa",
+    "currentOpenings": "Current Openings",
+    "internshipProgram": "Internship Program",
+    "applyNow": "Apply Now"
+
+
+  },
+   "hero": {
+    "subtitle": "Renewable Energy for Nepal",
+    "title": "Powering Tomorrow Through",
+    "title2": "Sustainable Hydropower",
+    "description": "HydraNexa is building Nepal's future through innovative hydropower projects, reliable clean energy, and sustainable infrastructure.",
+    "explore": "Explore Projects",
+    "investor": "Investor Relations"
+  },
+  "stats": {
+  "installedCapacity": "Installed Capacity",
+  "hydropowerProjects": "Hydropower Projects",
+  "yearsExperience": "Years of Experience",
+  "homesPowered": "Homes Powered",
+  "capacity": "250+ MW",
+  "projects": "15+ Projects",
+  "experience": "25+ Years",
+  "homes": "100K+ Homes"
+},
+"company": {
+  "subtitle": "About HydraNexa",
+  "title": "Building Nepal's Sustainable Energy Future",
+  "description": "HydraNexa Energy is a modern hydropower company dedicated to delivering reliable, clean, and sustainable electricity through innovative engineering and responsible environmental practices.",
+  "feature1": "Renewable Hydropower Solutions",
+  "feature2": "Environmental Responsibility",
+  "feature3": "Community Development",
+  "button": "Learn More"
+}
+}
+
+

@@ -1,0 +1,474 @@
+/* ==========================================
+   CURRENT OPENINGS
+========================================== */
+
+.jobs-section {
+
+    padding: 110px 0;
+
+    background: linear-gradient(180deg,
+            #f8fbff,
+            #eef7f5);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.jobs-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    top: -150px;
+    right: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 132, 61, .05);
+
+}
+
+.jobs-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    bottom: -120px;
+    left: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 91, 170, .05);
+
+}
+
+/* ==========================================
+   GRID
+========================================== */
+
+.jobs-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 35px;
+
+    margin-top: 60px;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.job-card {
+
+    position: relative;
+
+    background: #fff;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .08);
+
+    border: 1px solid rgba(0, 0, 0, .05);
+
+    transition: .4s;
+
+    overflow: hidden;
+
+}
+
+.job-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(90deg,
+            var(--primary),
+            var(--highlight));
+
+}
+
+.job-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, .15);
+
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.job-status {
+
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+    font-size: .85rem;
+
+    font-weight: 700;
+
+    margin-bottom: 20px;
+
+}
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.job-card h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 25px;
+
+    font-size: 1.5rem;
+
+}
+
+/* ==========================================
+   INFO
+========================================== */
+
+.job-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+
+}
+
+.job-info p {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #555;
+
+    line-height: 1.8;
+
+}
+
+.job-info svg {
+
+    color: var(--highlight);
+
+    font-size: 18px;
+
+    min-width: 20px;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.job-card .primary-btn {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.job-card .primary-btn svg {
+
+    transition: .3s;
+
+}
+
+.job-card .primary-btn:hover svg {
+
+    transform: translateX(5px);
+
+}
+
+/* ==========================================
+   HIRING PROCESS
+========================================== */
+
+.hiring-section {
+
+    padding: 110px 0;
+
+    background: #ffffff;
+
+    position: relative;
+
+}
+
+.hiring-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 30px;
+
+    margin-top: 70px;
+
+}
+
+.step {
+
+    position: relative;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border: 1px solid rgba(0, 0, 0, .06);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .08);
+
+    transition: .4s ease;
+
+}
+
+.step:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, .15);
+
+}
+
+.step span {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin: auto;
+
+    margin-bottom: 22px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: linear-gradient(135deg,
+            var(--primary),
+            var(--highlight));
+
+    color: #fff;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 25px rgba(0, 91, 170, .28);
+
+}
+
+.step h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 15px;
+
+}
+
+.step p {
+
+    color: #666;
+
+    line-height: 1.8;
+
+}
+
+/* Connector Line */
+
+.step:not(:last-child)::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 34px;
+
+    right: -32px;
+
+    width: 34px;
+
+    height: 4px;
+
+    background: linear-gradient(90deg,
+            var(--primary),
+            var(--highlight));
+
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+.job-card,
+.step {
+
+    animation: fadeUp .8s ease both;
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1200px) {
+
+    .hiring-grid {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+}
+
+@media(max-width:992px) {
+
+    .jobs-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .hiring-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .step::after {
+
+        display: none;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .jobs-section,
+    .hiring-section {
+
+        padding: 80px 0;
+
+    }
+
+    .section-header h2 {
+
+        font-size: 2rem;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .jobs-grid,
+    .hiring-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .job-card,
+    .step {
+
+        padding: 25px;
+
+    }
+
+    .job-card h3 {
+
+        font-size: 1.3rem;
+
+    }
+
+    .step span {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 1.2rem;
+
+    }
+
+}

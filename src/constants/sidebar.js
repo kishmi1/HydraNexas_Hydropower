@@ -169,8 +169,8 @@ export const SIDEBAR_ITEMS = [
 
             {
                 title: "Board of Directors",
-                href: "/dashboard/about/board-of-directors",
-                icon: Landmark,
+                href: "/dashboard/about/board-directors",
+                icon: Users,
             },
 
             {

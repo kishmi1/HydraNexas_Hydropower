@@ -1,0 +1,217 @@
+.project-map-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+/* ===========================
+   SECTION HEADER
+=========================== */
+
+.section-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 60px;
+}
+
+.section-header span {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.section-header p {
+    color: var(--gray);
+    line-height: 1.8;
+}
+
+/* ===========================
+   MAP + PROJECT LIST
+=========================== */
+
+.map-wrapper {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Google Map */
+
+.map-image {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+}
+
+.map-image iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 15px;
+}
+
+/* ===========================
+   PROJECT LIST
+=========================== */
+
+.project-list {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+    height: 600px;
+    overflow-y: auto;
+}
+
+.project-list h3 {
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+}
+
+.project-location {
+    padding: 18px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.project-location:last-child {
+    border-bottom: none;
+}
+
+.project-location h4 {
+    color: var(--primary);
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+}
+
+.project-location p {
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Green */
+.status.ongoing {
+    background: #22c55e;
+}
+
+/* Blue */
+.status.completed {
+    background: #2563eb;
+}
+
+/* Orange */
+.status.upcoming {
+    background: #f59e0b;
+}
+
+/* ===========================
+   STATS
+=========================== */
+
+.stats-grid {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.stat-card {
+    background: #fff;
+    text-align: center;
+    padding: 35px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+}
+
+.stat-card h3 {
+    color: var(--accent);
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+}
+
+.stat-card p {
+    color: var(--gray);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:992px) {
+
+    .map-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .map-image iframe {
+        height: 450px;
+    }
+
+    .project-list {
+        height: auto;
+        overflow: visible;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .map-image iframe {
+        height: 400px;
+    }
+
+}
+
+@media (max-width:576px) {
+
+    .project-map-section {
+        padding: 70px 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+        font-size: 1.7rem;
+    }
+
+    .map-image iframe {
+        height: 320px;
+    }
+
+}

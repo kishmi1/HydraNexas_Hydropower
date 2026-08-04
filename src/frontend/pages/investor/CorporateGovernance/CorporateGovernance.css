@@ -1,0 +1,111 @@
+/* ==========================
+   GOVERNANCE SECTION
+========================== */
+
+.governance-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+/* ==========================
+   GOVERNANCE GRID
+========================== */
+
+.governance-grid {
+    margin-top: 70px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+/* ==========================
+   GOVERNANCE CARD
+========================== */
+
+.governance-card {
+    background: #ffffff;
+
+    padding: 35px 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+    transition: .35s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.governance-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background: var(--accent);
+}
+
+.governance-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
+}
+
+.governance-card h3 {
+    color: var(--primary);
+
+    font-size: 1.4rem;
+
+    margin-bottom: 18px;
+}
+
+.governance-card p {
+    color: var(--gray);
+
+    line-height: 1.9;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1100px) {
+
+    .governance-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .governance-section {
+        padding: 70px 0;
+    }
+
+    .governance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .governance-card {
+        padding: 30px 25px;
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .governance-card h3 {
+        font-size: 1.25rem;
+    }
+
+}

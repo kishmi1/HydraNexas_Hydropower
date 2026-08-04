@@ -1,0 +1,495 @@
+/* =====================================================
+   INTERNSHIP PROGRAM
+===================================================== */
+
+.internship-section {
+
+    padding: 110px 0;
+
+    background: linear-gradient(180deg,
+            #f8fbff 0%,
+            #eef7f5 100%);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+/* Decorative Background */
+
+.internship-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    top: -180px;
+    right: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 132, 61, .05);
+
+}
+
+.internship-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    bottom: -120px;
+    left: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 91, 170, .05);
+
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.internship-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 35px;
+
+    margin-top: 60px;
+
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.internship-card {
+
+    position: relative;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 40px 32px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(0, 0, 0, .05);
+
+    transition: .45s;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .08);
+
+}
+
+.internship-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(90deg,
+            var(--primary),
+            var(--highlight));
+
+}
+
+.internship-card:hover {
+
+    transform: translateY(-12px);
+
+    box-shadow:
+        0 28px 60px rgba(0, 0, 0, .15);
+
+}
+
+/* ==========================
+   ICON
+========================== */
+
+.internship-icon {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: auto;
+
+    margin-bottom: 25px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: linear-gradient(135deg,
+            var(--primary),
+            var(--highlight));
+
+    color: #fff;
+
+    font-size: 34px;
+
+    transition: .4s;
+
+    box-shadow:
+        0 15px 35px rgba(0, 91, 170, .25);
+
+}
+
+.internship-card:hover .internship-icon {
+
+    transform: rotate(10deg) scale(1.08);
+
+}
+
+/* ==========================
+   TITLE
+========================== */
+
+.internship-card h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 18px;
+
+    font-size: 1.45rem;
+
+}
+
+.internship-card p {
+
+    color: #666;
+
+    line-height: 1.9;
+
+    margin-bottom: 25px;
+
+}
+
+/* ==========================
+   DURATION
+========================== */
+
+.internship-duration {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+    color: var(--highlight);
+
+    font-weight: 600;
+
+}
+
+.internship-duration svg {
+
+    font-size: 18px;
+
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.internship-card .primary-btn {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.internship-card .primary-btn svg {
+
+    transition: .3s;
+
+}
+
+.internship-card .primary-btn:hover svg {
+
+    transform: translateX(5px);
+
+}
+
+/* =====================================================
+   MENTOR SECTION
+===================================================== */
+
+.mentor-section {
+
+    padding: 120px 0;
+
+    background: #ffffff;
+
+}
+
+.mentor-wrapper {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+.mentor-content span {
+
+    display: inline-block;
+
+    padding: 8px 22px;
+
+    border-radius: 30px;
+
+    background: #e9f8f1;
+
+    color: var(--highlight);
+
+    font-weight: 600;
+
+    margin-bottom: 18px;
+
+}
+
+.mentor-content h2 {
+
+    color: var(--primary);
+
+    font-size: 2.5rem;
+
+    margin-bottom: 25px;
+
+    line-height: 1.3;
+
+}
+
+.mentor-content p {
+
+    color: #666;
+
+    line-height: 2;
+
+    margin-bottom: 30px;
+
+}
+
+.mentor-content ul {
+
+    list-style: none;
+
+    padding: 0;
+
+}
+
+.mentor-content li {
+
+    padding: 14px 0;
+
+    color: #444;
+
+    font-weight: 500;
+
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
+
+    transition: .35s;
+
+}
+
+.mentor-content li:hover {
+
+    color: var(--highlight);
+
+    transform: translateX(8px);
+
+}
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.mentor-image {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, .12);
+
+}
+
+.mentor-image img {
+
+    width: 100%;
+
+    display: block;
+
+    transition: .6s;
+
+}
+
+.mentor-image:hover img {
+
+    transform: scale(1.08);
+
+}
+
+.mentor-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(transparent,
+            rgba(0, 0, 0, .15));
+
+}
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+.internship-card,
+.mentor-content,
+.mentor-image {
+
+    animation: fadeUp .8s ease both;
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1200px) {
+
+    .internship-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media(max-width:992px) {
+
+    .mentor-wrapper {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .internship-section,
+    .mentor-section {
+
+        padding: 80px 0;
+
+    }
+
+    .internship-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .mentor-content h2 {
+
+        font-size: 2rem;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .internship-card {
+
+        padding: 28px;
+
+    }
+
+    .internship-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 28px;
+
+    }
+
+    .mentor-content h2 {
+
+        font-size: 1.7rem;
+
+    }
+
+}

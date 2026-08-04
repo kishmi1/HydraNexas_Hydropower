@@ -1,0 +1,142 @@
+.latest-news {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    margin-top: 60px;
+}
+
+
+
+.news-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    transition: all 0.35s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+.news-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.08);
+}
+
+
+
+.news-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    background: var(--accent);
+    color: #ffffff;
+
+    padding: 8px 16px;
+
+    border-radius: 50px;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+
+.news-content {
+    padding: 30px;
+}
+
+.news-content small {
+    display: block;
+    color: #6b7280;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.news-content h3 {
+    color: var(--primary);
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.news-content p {
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+
+
+.news-btn {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.news-btn:hover {
+    color: var(--primary);
+}
+
+
+
+@media (max-width: 992px) {
+
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .latest-news {
+        padding: 70px 0;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-image {
+        height: 220px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .news-content {
+        padding: 25px;
+    }
+
+    .news-content h3 {
+        font-size: 1.2rem;
+    }
+
+}

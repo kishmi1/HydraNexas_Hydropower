@@ -1,0 +1,73 @@
+{
+  "navbar": {
+    "logoTitle": "हाइड्रानेक्सा",
+    "logoTagline": "भोलिको ऊर्जा",
+
+    "home": "गृहपृष्ठ",
+    "about": "हाम्रो बारेमा",
+    "projects": "परियोजनाहरू",
+    "investors": "लगानीकर्ता सम्बन्ध",
+    "news": "समाचार",
+    "ebidding": "ई-बिडिङ",
+    "careers": "रोजगारी",
+    "contact": "सम्पर्क",
+
+    "companyOverview": "कम्पनी परिचय",
+    "visionMission": "दृष्टि तथा उद्देश्य",
+    "boardOfDirectors": "सञ्चालक समिति",
+    "leadershipTeam": "नेतृत्व टोली",
+    "companyHistory": "कम्पनीको इतिहास",
+    "awardsRecognition": "पुरस्कार तथा सम्मान",
+
+    "allProjects": "सबै परियोजनाहरू",
+    "ongoingProjects": "सञ्चालित परियोजनाहरू",
+    "completedProjects": "सम्पन्न परियोजनाहरू",
+    "upcomingProjects": "आगामी परियोजनाहरू",
+    "projectMap": "परियोजना नक्सा",
+
+    "financialHighlights": "वित्तीय मुख्य बुँदा",
+    "annualReports": "वार्षिक प्रतिवेदन",
+    "shareInformation": "सेयर सम्बन्धी जानकारी",
+    "corporateGovernance": "कर्पोरेट सुशासन",
+    "downloads": "डाउनलोड",
+
+    "latestNews": "ताजा समाचार",
+    "events": "कार्यक्रमहरू",
+    "pressReleases": "प्रेस विज्ञप्ति",
+    "mediaGallery": "मिडिया ग्यालरी",
+
+    "activeTenders": "सक्रिय टेन्डर",
+    "tenderNotices": "टेन्डर सूचना",
+    "tenderDocuments": "टेन्डर कागजात",
+    "vendorRegistration": "विक्रेता दर्ता",
+    "awardNotices": "अवार्ड सूचना",
+
+    "lifeAtHydraNexa": "हाइड्रानेक्सामा जीवन",
+    "currentOpenings": "हालका अवसरहरू",
+    "internshipProgram": "इन्टर्नशिप कार्यक्रम",
+    "applyNow": "अहिले आवेदन दिनुहोस्"
+  },
+  "hero": {
+  "subtitle": "नेपालका लागि नवीकरणीय ऊर्जा",
+  "title": "दिगो जलविद्युतमार्फत",
+  "title2": "भोलिको ऊर्जा निर्माण गर्दै",
+  "description": "HydraNexa ले नवीन जलविद्युत आयोजना, भरपर्दो स्वच्छ ऊर्जा र दिगो पूर्वाधारमार्फत नेपालको भविष्य निर्माण गरिरहेको छ।",
+  "explore": "परियोजनाहरू हेर्नुहोस्",
+  "investor": "लगानीकर्ता सम्बन्ध"
+},
+"stats": {
+  "installedCapacity": "स्थापित क्षमता",
+  "hydropowerProjects": "जलविद्युत आयोजनाहरू",
+  "yearsExperience": "वर्षौंको अनुभव",
+  "homesPowered": "विद्युत पुगेका घरहरू"
+},
+"company": {
+  "subtitle": "HydraNexa बारे",
+  "title": "नेपालको दिगो ऊर्जा भविष्य निर्माण गर्दै",
+  "description": "HydraNexa Energy आधुनिक जलविद्युत कम्पनी हो जसले नवीन इन्जिनियरिङ र जिम्मेवार वातावरणीय अभ्यासमार्फत भरपर्दो, स्वच्छ तथा दिगो विद्युत उत्पादनमा समर्पित छ।",
+  "feature1": "नवीकरणीय जलविद्युत समाधान",
+  "feature2": "वातावरणीय जिम्मेवारी",
+  "feature3": "समुदाय विकास",
+  "button": "थप जान्नुहोस्"
+}
+}

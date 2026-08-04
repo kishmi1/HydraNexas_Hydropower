@@ -1,0 +1,99 @@
+/* ===========================
+   STATS
+=========================== */
+
+.stats {
+
+    padding: 100px 0;
+
+    background: #ffffff;
+
+}
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 30px;
+
+}
+
+.stat-card {
+
+    background: #ffffff;
+
+    padding: 40px 30px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .08);
+
+    transition: .35s ease;
+
+}
+
+.stat-card:hover {
+
+    transform: translateY(-10px);
+
+}
+
+.stat-card h2 {
+
+    font-size: 2.7rem;
+
+    color: var(--primary);
+
+    font-weight: 800;
+
+    margin-bottom: 15px;
+
+}
+
+.stat-card p {
+
+    color: var(--gray);
+
+    line-height: 1.7;
+
+}
+
+/* Tablet */
+
+@media(max-width:992px) {
+
+    .stats-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:576px) {
+
+    .stats {
+
+        padding: 70px 0;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .stat-card {
+
+        padding: 30px;
+
+    }
+
+}

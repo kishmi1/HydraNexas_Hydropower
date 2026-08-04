@@ -1,0 +1,526 @@
+/*========================================================
+  APPLY NOW
+========================================================*/
+
+.apply-section {
+
+    padding: 110px 0;
+
+    background: linear-gradient(180deg,
+            #f7fbff 0%,
+            #eef7f5 100%);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.apply-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    background: rgba(0, 132, 61, .05);
+
+    border-radius: 50%;
+
+    top: -180px;
+    right: -120px;
+
+}
+
+.apply-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    background: rgba(0, 91, 170, .05);
+
+    border-radius: 50%;
+
+    left: -120px;
+    bottom: -120px;
+
+}
+
+/*========================================================
+ FORM WRAPPER
+========================================================*/
+
+.apply-wrapper {
+
+    max-width: 1000px;
+
+    margin: 60px auto 0;
+
+    background: #fff;
+
+    border-radius: 24px;
+
+    padding: 50px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, .08);
+
+}
+
+/*========================================================
+ GRID
+========================================================*/
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+
+}
+
+/*========================================================
+ INPUT GROUP
+========================================================*/
+
+.input-group {
+
+    position: relative;
+
+}
+
+.input-group svg {
+
+    position: absolute;
+
+    left: 18px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--highlight);
+
+    font-size: 18px;
+
+}
+
+.input-group input,
+.input-group select {
+
+    width: 100%;
+
+    height: 58px;
+
+    padding-left: 52px;
+
+    padding-right: 18px;
+
+    border: 1px solid #dcdcdc;
+
+    border-radius: 14px;
+
+    background: #fff;
+
+    font-size: 15px;
+
+    transition: .35s;
+
+    outline: none;
+
+}
+
+.input-group input:focus,
+.input-group select:focus {
+
+    border-color: var(--highlight);
+
+    box-shadow:
+        0 0 0 4px rgba(0, 132, 61, .12);
+
+}
+
+/*========================================================
+ TEXTAREA
+========================================================*/
+
+.apply-form textarea {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    border-radius: 16px;
+
+    border: 1px solid #dcdcdc;
+
+    padding: 18px;
+
+    resize: none;
+
+    font-size: 15px;
+
+    transition: .35s;
+
+    outline: none;
+
+}
+
+.apply-form textarea:focus {
+
+    border-color: var(--highlight);
+
+    box-shadow:
+        0 0 0 4px rgba(0, 132, 61, .12);
+
+}
+
+/*========================================================
+ ERROR
+========================================================*/
+
+.apply-form small {
+
+    display: block;
+
+    color: #dc2626;
+
+    margin-top: 8px;
+
+    margin-left: 5px;
+
+    font-size: .85rem;
+
+}
+
+/*========================================================
+ UPLOAD BOX
+========================================================*/
+
+.upload-box {
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    border: 2px dashed #cbd5e1;
+
+    border-radius: 18px;
+
+    background: #f8fbff;
+
+    text-align: center;
+
+    transition: .35s;
+
+}
+
+.upload-box:hover {
+
+    border-color: var(--highlight);
+
+    background: #f1fbf7;
+
+}
+
+.upload-box label {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--primary);
+
+    font-weight: 600;
+
+    margin-bottom: 18px;
+
+    font-size: 1rem;
+
+}
+
+.upload-box svg {
+
+    color: var(--highlight);
+
+    font-size: 26px;
+
+}
+
+.upload-box input[type="file"] {
+
+    width: 100%;
+
+    cursor: pointer;
+
+}
+
+/*========================================================
+ CHECKBOX
+========================================================*/
+
+.checkbox {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin: 30px 0;
+
+}
+
+.checkbox input {
+
+    width: 18px;
+
+    height: 18px;
+
+    accent-color: var(--highlight);
+
+    margin-top: 3px;
+
+}
+
+.checkbox label {
+
+    color: #555;
+
+    line-height: 1.8;
+
+}
+
+/*========================================================
+ BUTTON
+========================================================*/
+
+.apply-form .primary-btn {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    font-size: 1rem;
+
+    border-radius: 14px;
+
+    transition: .35s;
+
+}
+
+.apply-form .primary-btn svg {
+
+    transition: .35s;
+
+}
+
+.apply-form .primary-btn:hover svg {
+
+    transform: translateX(6px);
+
+}
+
+/*========================================================
+ SUCCESS BOX
+========================================================*/
+
+.success-box {
+
+    text-align: center;
+
+    padding: 70px 40px;
+
+    border-radius: 24px;
+
+    background: linear-gradient(135deg,
+            #ffffff,
+            #f3fbf7);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, .08);
+
+    animation: fadeUp .6s ease;
+
+}
+
+.success-box h2 {
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+
+    font-size: 2rem;
+
+}
+
+.success-box p {
+
+    color: #666;
+
+    line-height: 2;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    margin-bottom: 35px;
+
+}
+
+.success-box .primary-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 15px 35px;
+
+}
+
+/*========================================================
+ ANIMATION
+========================================================*/
+
+.apply-wrapper {
+
+    animation: fadeUp .7s ease;
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/*========================================================
+ RESPONSIVE
+========================================================*/
+
+@media(max-width:992px) {
+
+    .apply-wrapper {
+
+        padding: 35px;
+
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .apply-section {
+
+        padding: 80px 0;
+
+    }
+
+    .apply-wrapper {
+
+        padding: 25px;
+
+    }
+
+    .section-header h2 {
+
+        font-size: 2rem;
+
+    }
+
+    .success-box {
+
+        padding: 50px 25px;
+
+    }
+
+    .success-box h2 {
+
+        font-size: 1.6rem;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .input-group input,
+    .input-group select {
+
+        height: 54px;
+
+        font-size: .95rem;
+
+    }
+
+    .apply-form textarea {
+
+        font-size: .95rem;
+
+    }
+
+    .upload-box {
+
+        padding: 22px;
+
+    }
+
+    .checkbox {
+
+        flex-direction: row;
+
+        align-items: flex-start;
+
+    }
+
+    .apply-form .primary-btn {
+
+        font-size: .95rem;
+
+        padding: 14px;
+
+    }
+
+}

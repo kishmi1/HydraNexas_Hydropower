@@ -1,0 +1,273 @@
+.news-details {
+    padding: 90px 0;
+    background: #f6f9fc;
+}
+
+.news-details .container {
+    max-width: 1350px;
+    margin: auto;
+}
+
+.news-layout {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    gap: 60px;
+    align-items: start;
+}
+
+/* LEFT */
+
+.news-left {
+    position: sticky;
+    top: 100px;
+}
+
+.news-details-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .12);
+}
+
+.news-details-image img {
+    width: 100%;
+    height: 720px;
+    object-fit: cover;
+    display: block;
+}
+
+/* RIGHT */
+
+.news-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.news-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.news-category {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 30px;
+}
+
+.news-title {
+    font-size: 2.6rem;
+    line-height: 1.35;
+    margin-bottom: 25px;
+    color: var(--primary);
+}
+
+.news-content {
+    line-height: 2;
+    color: #5d6c82;
+    margin-bottom: 35px;
+}
+
+.news-info-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    margin-bottom: 35px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-grid div {
+    background: #f7f9fc;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.news-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e9ef;
+    padding-top: 30px;
+}
+
+.news-share {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.news-share a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: var(--primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.news-share a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.back-news-btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-news-btn:hover {
+    background: var(--accent);
+}
+
+/* RELATED */
+
+.related-news {
+    padding: 90px 0;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.related-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.related-card:hover {
+    transform: translateY(-8px);
+}
+
+.related-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.related-card div {
+    padding: 20px;
+}
+
+.related-card h4 {
+    color: var(--primary);
+    margin-top: 10px;
+}
+
+/* Responsive */
+
+@media(max-width:992px) {
+
+    .news-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .news-left {
+        position: static;
+    }
+
+    .news-details-image img {
+        height: 450px;
+    }
+
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .news-title {
+        font-size: 2rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-details-image img {
+        height: 300px;
+    }
+
+}
+
+.highlight-title {
+    margin-top: 35px;
+    margin-bottom: 20px;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+
+    color: var(--primary);
+}
+
+.highlight-list {
+    list-style: none;
+
+    padding: 0;
+
+    margin: 25px 0 0;
+}
+
+.highlight-list li {
+    position: relative;
+
+    padding-left: 35px;
+
+    margin-bottom: 16px;
+
+    line-height: 1.8;
+
+    color: #55657b;
+
+    font-size: 1rem;
+}
+
+.highlight-list li::before {
+    content: "✔";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 2px;
+
+    color: #16a34a;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+}

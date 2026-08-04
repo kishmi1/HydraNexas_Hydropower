@@ -1,0 +1,424 @@
+/* ==========================
+   VENDOR REGISTRATION
+========================== */
+
+.vendor-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+/* ==========================
+   LAYOUT
+========================== */
+
+.vendor-wrapper {
+
+    display: grid;
+    grid-template-columns: 1.3fr .9fr;
+
+    gap: 40px;
+
+    margin-top: 60px;
+
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.vendor-form {
+
+    background: #fff;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+}
+
+.vendor-form form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+.vendor-form input,
+.vendor-form textarea,
+.vendor-form select {
+
+    width: 100%;
+
+    padding: 16px 18px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 1rem;
+
+    transition: .3s;
+
+    background: #fff;
+
+}
+
+.vendor-form input:focus,
+.vendor-form textarea:focus,
+.vendor-form select:focus {
+
+    border-color: var(--highlight);
+
+    box-shadow: 0 0 0 3px rgba(42, 168, 118, .15);
+
+}
+
+.vendor-form textarea {
+
+    resize: none;
+
+}
+
+.vendor-form .primary-btn {
+
+    margin-top: 10px;
+
+}
+
+/* ==========================
+   RIGHT SIDE
+========================== */
+
+.vendor-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+}
+
+/* ==========================
+   REQUIREMENTS
+========================== */
+
+.requirements {
+
+    background: #fff;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+}
+
+.requirements h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+
+}
+
+.requirements ul {
+
+    list-style: none;
+
+    padding: 0;
+
+}
+
+.requirements li {
+
+    margin-bottom: 15px;
+
+    color: var(--gray);
+
+    line-height: 1.7;
+
+}
+
+/* ==========================
+   BENEFITS
+========================== */
+
+.benefits {
+
+    background: #fff;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+}
+
+.benefits h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+
+}
+
+.benefit-card {
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border-radius: 14px;
+
+    margin-bottom: 18px;
+
+    transition: .3s;
+
+}
+
+.benefit-card:hover {
+
+    background: var(--highlight);
+
+    transform: translateY(-4px);
+
+}
+
+.benefit-card:hover h4,
+.benefit-card:hover p {
+
+    color: #fff;
+
+}
+
+.benefit-card h4 {
+
+    color: var(--primary);
+
+    margin-bottom: 8px;
+
+}
+
+.benefit-card p {
+
+    color: var(--gray);
+
+    line-height: 1.7;
+
+}
+
+.success-box {
+
+    background: #ecfdf5;
+
+    border: 2px solid #22c55e;
+
+    border-radius: 20px;
+
+    padding: 50px;
+
+    text-align: center;
+
+}
+
+.success-box h2 {
+
+    color: #15803d;
+
+    margin-bottom: 20px;
+
+}
+
+.success-box p {
+
+    color: #555;
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+
+}
+
+.input-group {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.input-group svg {
+
+    position: absolute;
+
+    left: 18px;
+
+    color: #6b7280;
+
+}
+
+.input-group input {
+
+    padding-left: 48px;
+
+}
+
+.password-group {
+
+    position: relative;
+
+}
+
+.toggle-password {
+
+    position: absolute;
+
+    right: 18px;
+
+    cursor: pointer;
+
+    color: #666;
+
+}
+
+.error {
+
+    color: #dc2626;
+
+    font-size: .85rem;
+
+    margin-top: -10px;
+
+    margin-bottom: 8px;
+
+    display: block;
+
+}
+
+.switch-form {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+}
+
+.switch-form span {
+
+    color: var(--highlight);
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    margin-left: 6px;
+
+}
+
+.switch-form span:hover {
+
+    text-decoration: underline;
+
+}
+
+.remember-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 10px 0 20px;
+
+    font-size: .95rem;
+
+}
+
+.remember-row a {
+
+    color: var(--highlight);
+
+    text-decoration: none;
+
+}
+
+.remember-row a:hover {
+
+    text-decoration: underline;
+
+}
+
+.secondary-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.secondary-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px) {
+
+    .vendor-wrapper {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .vendor-section {
+
+        padding: 70px 0;
+
+    }
+
+    .vendor-form,
+    .requirements,
+    .benefits {
+
+        padding: 25px;
+
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .vendor-form input,
+    .vendor-form textarea {
+
+        padding: 14px;
+
+    }
+
+}

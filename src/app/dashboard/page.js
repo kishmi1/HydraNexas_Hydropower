@@ -12,7 +12,7 @@ import RecentNews from "@/components/dashboard/RecentNews";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 export default async function DashboardPage() {
     const totalNews = await prisma.news.count();
-    const totalProjects = await prisma.news.count();
+    const totalProjects = await prisma.project.count();
     return (
         <div>
 

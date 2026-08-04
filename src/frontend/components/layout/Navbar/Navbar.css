@@ -1,0 +1,681 @@
+/* ==========================================
+   PREMIUM CORPORATE NAVBAR
+========================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    background: rgba(255, 255, 255, .95);
+    backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+
+    transition: .35s ease;
+}
+
+.navbar.scrolled {
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .08);
+
+}
+
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.navbar-container {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+    height: 88px;
+
+    gap: 55px;
+
+}
+
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-decoration: none;
+    min-width: 240px;
+    flex-shrink: 0;
+
+}
+
+.logo img {
+
+    width: 62px;
+
+    transition: .35s;
+
+}
+
+.logo:hover img {
+
+    transform: rotate(3deg) scale(1.05);
+
+}
+
+.logo-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.logo-text h2 {
+
+    margin: 0;
+
+    font-size: 1.7rem;
+    font-size: 24px;
+    font-weight: 700;
+
+    color: var(--primary);
+
+}
+
+.logo-text span {
+
+    margin-top: 2px;
+
+    font-size: .78rem;
+
+    color: #777;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+}
+
+
+/* ==========================================
+   RIGHT SIDE
+========================================== */
+
+.navbar-right {
+
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: auto;
+
+    gap: 30px;
+
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+.nav-menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+.nav-menu>a,
+
+.dropdown-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+    font-size: 16px;
+    text-decoration: none;
+
+    color: #1f2937;
+
+    font-size: .95rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition: .3s;
+
+    padding: 35px 0;
+    letter-spacing: .3px;
+}
+
+.nav-menu>a:hover,
+
+.dropdown-title:hover {
+
+    color: var(--highlight);
+
+}
+
+
+/* underline */
+
+.nav-menu>a::after,
+
+.dropdown-title::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 22px;
+
+    width: 0;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: var(--highlight);
+
+    transition: .35s;
+
+}
+
+.nav-menu>a:hover::after,
+
+.dropdown-title:hover::after {
+
+    width: 100%;
+
+}
+
+.active-link {
+
+    color: var(--highlight) !important;
+
+}
+
+.active-link::after {
+
+    width: 100% !important;
+
+}
+
+
+/* ==========================================
+   DROPDOWN
+========================================== */
+
+.nav-dropdown {
+
+    position: relative;
+
+}
+
+.dropdown-title svg {
+
+    font-size: 12px;
+
+    transition: .35s;
+
+}
+
+.rotate {
+
+    transform: rotate(180deg);
+
+}
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
+    width: 250px;
+
+    background: #fff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .12);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(18px);
+
+    transition: .35s;
+
+}
+
+.dropdown-menu.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(8px);
+
+}
+
+.dropdown-menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    padding: 15px 22px;
+
+    color: #374151;
+
+    font-size: .92rem;
+
+    transition: .3s;
+
+}
+
+.dropdown-menu a:hover {
+
+    background: #eefbf6;
+
+    color: var(--highlight);
+
+    padding-left: 28px;
+
+}
+
+/* ==========================================
+   LANGUAGE DROPDOWN
+========================================== */
+
+.language-dropdown {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.language-btn {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #fff;
+
+    border: 1px solid rgba(0, 0, 0, .08);
+
+    border-radius: 50px;
+
+    padding: 10px 18px;
+
+    font-size: .92rem;
+    font-weight: 600;
+
+    color: #1f2937;
+
+    cursor: pointer;
+
+    transition: .35s;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+
+}
+
+.language-btn:hover {
+
+    background: #f8fbfb;
+
+    border-color: var(--highlight);
+
+    color: var(--highlight);
+
+}
+
+.language-menu {
+
+    position: absolute;
+
+    top: 115%;
+
+    right: 0;
+
+    width: 180px;
+
+    background: #fff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .12);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(12px);
+
+    transition: .35s;
+
+    z-index: 999;
+
+}
+
+.language-menu.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+.language-menu button {
+
+    width: 100%;
+
+    border: none;
+
+    background: none;
+
+    padding: 15px 20px;
+
+    text-align: left;
+
+    font-size: .92rem;
+
+    cursor: pointer;
+
+    color: #374151;
+
+    transition: .3s;
+
+}
+
+.language-menu button:hover {
+
+    background: #eefbf6;
+
+    color: var(--highlight);
+
+}
+
+
+/* ==========================================
+   MOBILE BUTTON
+========================================== */
+
+.mobile-toggle {
+
+    display: none;
+
+    border: none;
+
+    background: none;
+
+    color: var(--primary);
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.mobile-toggle:hover {
+
+    color: var(--highlight);
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px) {
+
+    .nav-menu {
+
+        gap: 22px;
+
+    }
+
+}
+
+@media(max-width:992px) {
+
+    .mobile-toggle {
+
+        display: block;
+
+        z-index: 1001;
+
+    }
+
+    .navbar-right {
+
+        margin-left: 0;
+
+    }
+
+    .nav-menu {
+
+        position: fixed;
+
+        top: 88px;
+
+        right: -100%;
+
+        width: 320px;
+
+        height: calc(100vh - 88px);
+
+        background: #fff;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 0;
+
+        padding: 30px;
+
+        overflow-y: auto;
+
+        transition: .4s;
+
+        box-shadow: -8px 0 30px rgba(0, 0, 0, .08);
+
+    }
+
+    .nav-menu.active {
+
+        right: 0;
+
+    }
+
+    .nav-menu>a,
+
+    .dropdown-title {
+
+        width: 100%;
+
+        padding: 16px 0;
+
+    }
+
+    .nav-menu>a::after,
+
+    .dropdown-title::after {
+
+        display: none;
+
+    }
+
+    .nav-dropdown {
+
+        width: 100%;
+
+    }
+
+    .dropdown-menu {
+
+        position: static;
+
+        width: 100%;
+
+        display: none;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+        box-shadow: none;
+
+        border-radius: 10px;
+
+        margin-bottom: 10px;
+
+    }
+
+    .dropdown-menu.show {
+
+        display: block;
+
+    }
+
+    .dropdown-menu a {
+
+        padding: 14px 18px;
+
+    }
+
+    .language-dropdown {
+
+        margin-top: 20px;
+
+        width: 100%;
+
+    }
+
+    .language-btn {
+
+        width: 100%;
+
+        justify-content: space-between;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .navbar-container {
+
+        height: 80px;
+
+    }
+
+    .logo img {
+
+        width: 62px;
+
+    }
+
+    .logo-text h2 {
+
+        font-size: 1.4rem;
+
+    }
+
+    .logo-text span {
+
+        font-size: .7rem;
+
+    }
+
+    .nav-menu {
+
+        top: 80px;
+
+        height: calc(100vh - 80px);
+
+        width: 100%;
+
+    }
+
+}
+
+@media(max-width:480px) {
+
+    .navbar-container {
+
+        gap: 15px;
+
+    }
+
+    .logo {
+
+        gap: 10px;
+
+    }
+
+    .logo img {
+
+        width: 55px;
+
+    }
+
+    .logo-text h2 {
+
+        font-size: 1.2rem;
+
+    }
+
+    .logo-text span {
+
+        display: none;
+
+    }
+
+    .language-btn {
+
+        font-size: .85rem;
+
+    }
+
+}
+
+/* Desktop Hover Dropdown */

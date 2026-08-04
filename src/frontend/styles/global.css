@@ -1,0 +1,119 @@
+@import "./variables.css";
+@import "./reset.css";
+
+/* ==========================
+   GLOBAL
+========================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Nepali Font */
+html[lang="np"] body,
+html[lang="ne"] body {
+    font-family: "Noto Sans Devanagari", sans-serif;
+}
+
+/* Hero & Main Headings */
+h1,
+h2,
+.hero h1,
+.section-title {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Nepali Heading */
+html[lang="np"] h1,
+html[lang="np"] h2,
+html[lang="np"] .hero h1,
+html[lang="ne"] h1,
+html[lang="ne"] h2,
+html[lang="ne"] .hero h1 {
+    font-family: "Noto Sans Devanagari", sans-serif;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Buttons */
+button {
+    font-family: inherit;
+}
+
+/* Container */
+.container {
+    width: min(1320px, 92%);
+    margin: auto;
+}
+
+/* Sections */
+section {
+    padding: 100px 0;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+/* Large Desktop */
+@media (max-width:1200px) {
+
+    .container {
+        width: min(1140px, 94%);
+    }
+
+}
+
+/* Laptop */
+@media (max-width:992px) {
+
+    section {
+        padding: 80px 0;
+    }
+
+}
+
+/* Tablet */
+@media (max-width:768px) {
+
+    section {
+        padding: 70px 0;
+    }
+
+    h1 {
+        line-height: 1.25;
+    }
+
+}
+
+/* Mobile */
+@media (max-width:576px) {
+
+    section {
+        padding: 60px 0;
+    }
+
+}

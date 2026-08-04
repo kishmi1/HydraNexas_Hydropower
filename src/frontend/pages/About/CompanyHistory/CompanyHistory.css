@@ -1,0 +1,199 @@
+/* ==========================
+   COMPANY HISTORY
+========================== */
+
+.history-section {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+
+/* ==========================
+   TIMELINE
+========================== */
+
+.timeline {
+    margin-top: 70px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+
+/* ==========================
+   TIMELINE ITEM
+========================== */
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+
+/* Alternate Layout */
+
+.timeline-item.right .timeline-image {
+    order: 2;
+}
+
+.timeline-item.right .timeline-content {
+    order: 1;
+}
+
+
+/* ==========================
+   IMAGE
+========================== */
+
+.timeline-image {
+    width: 100%;
+    height: 360px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .10);
+}
+
+.timeline-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: .5s ease;
+}
+
+.timeline-item {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.timeline-item:hover img {
+    transform: scale(1.05);
+}
+
+
+/* ==========================
+   CONTENT
+========================== */
+
+
+.timeline {
+    margin-top: 80px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 90px;
+}
+
+.timeline-content span {
+    display: inline-block;
+
+    background: var(--accent);
+    color: #fff;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-size: .9rem;
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+.timeline-content h3 {
+    color: var(--primary);
+
+    font-size: 2.2rem;
+
+    line-height: 1.3;
+
+    margin-bottom: 18px;
+}
+
+.timeline-content p {
+    color: var(--gray);
+
+    line-height: 1.9;
+
+    font-size: 1rem;
+
+    max-width: 520px;
+}
+
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px) {
+
+    .timeline-item {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+    .timeline-image {
+
+        height: 300px;
+
+    }
+
+    .timeline-item.right .timeline-image,
+    .timeline-item.right .timeline-content {
+
+        order: unset;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .history-section {
+
+        padding: 70px 0;
+
+    }
+
+    .timeline {
+
+        gap: 60px;
+
+    }
+
+    .timeline-image {
+
+        height: 240px;
+
+    }
+
+    .timeline-content h3 {
+
+        font-size: 1.7rem;
+
+    }
+
+}

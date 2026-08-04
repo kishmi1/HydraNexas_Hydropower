@@ -1,0 +1,46 @@
+:root {
+
+    /* Brand Colors */
+
+    --primary: #0A2540;
+    --secondary: #1E6FEB;
+    --accent: #14B8A6;
+    --highlight: #F5A623;
+
+    /* Neutral */
+
+    --white: #FFFFFF;
+    --light: #F8FAFC;
+    --gray: #64748B;
+    --dark: #081B2E;
+
+    /* Text */
+
+    --text-dark: #1E293B;
+    --text-light: #94A3B8;
+
+    /* Background */
+
+    --bg: #FFFFFF;
+    --bg-light: #F8FAFC;
+
+    /* Radius */
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 28px;
+
+    /* Shadow */
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, .08);
+
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, .12);
+
+    --shadow-lg: 0 18px 40px rgba(0, 0, 0, .15);
+
+    /* Transition */
+
+    --transition: .35s ease;
+
+}

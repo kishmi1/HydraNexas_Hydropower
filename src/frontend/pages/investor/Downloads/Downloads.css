@@ -1,0 +1,173 @@
+/* ==========================
+   DOWNLOADS SECTION
+========================== */
+
+.downloads-section {
+    padding: 100px 0;
+    background: #f8fafc;
+}
+
+/* ==========================
+   DOWNLOADS GRID
+========================== */
+
+.downloads-grid {
+    margin-top: 70px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 30px;
+}
+
+/* ==========================
+   DOWNLOAD CARD
+========================== */
+
+.download-card {
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+    transition: .35s ease;
+}
+
+.download-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
+}
+
+/* ==========================
+   PDF ICON
+========================== */
+
+.download-icon {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 18px;
+
+    background: rgba(0, 161, 154, .12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+
+    flex-shrink: 0;
+}
+
+/* ==========================
+   CONTENT
+========================== */
+
+.download-content {
+    flex: 1;
+}
+
+.download-content h3 {
+    color: var(--primary);
+
+    font-size: 1.25rem;
+
+    margin-bottom: 10px;
+
+    line-height: 1.4;
+}
+
+.download-content span {
+    color: var(--gray);
+
+    font-size: .92rem;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.download-btn {
+    padding: 12px 24px;
+
+    border-radius: 50px;
+
+    background: var(--highlight);
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+    white-space: nowrap;
+}
+
+.download-btn:hover {
+    background: var(--accent);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px) {
+
+    .downloads-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .downloads-section {
+        padding: 70px 0;
+    }
+
+    .download-card {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .download-content {
+        text-align: center;
+    }
+
+    .download-btn {
+        width: 100%;
+    }
+
+}
+
+@media(max-width:576px) {
+
+    .download-card {
+        padding: 25px 20px;
+    }
+
+    .download-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .download-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 1.8rem;
+    }
+
+}

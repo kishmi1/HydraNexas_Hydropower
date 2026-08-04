@@ -1,0 +1,155 @@
+.company-overview {
+    padding: 100px 0;
+    background: #F7FBFC;
+}
+
+.company-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+
+.company-image {
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.company-image img {
+    width: 100%;
+    display: block;
+    border-radius: 24px;
+    transition: transform 0.5s ease;
+}
+
+.company-image:hover img {
+    transform: scale(1.05);
+}
+
+
+
+.company-content span {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.company-content h2 {
+    font-size: 2.8rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.company-content p {
+    color: var(--gray);
+    line-height: 1.9;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+
+
+
+.company-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 35px;
+}
+
+.company-content li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+
+
+.company-content button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.company-content button:hover {
+    background: #119c8f;
+    transform: translateY(-3px);
+}
+
+
+
+@media (max-width: 992px) {
+
+    .company-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .company-content {
+        text-align: center;
+    }
+
+    .company-content ul {
+        display: inline-block;
+        text-align: left;
+    }
+
+}
+
+.company-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: var(--accent);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.company-btn:hover {
+    background: #119c8f;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+
+    .company-overview {
+        padding: 70px 0;
+    }
+
+    .company-content h2 {
+        font-size: 2rem;
+    }
+
+    .company-content p {
+        font-size: 0.95rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .company-content h2 {
+        font-size: 1.7rem;
+    }
+
+    .company-content button {
+        width: 100%;
+    }
+
+}

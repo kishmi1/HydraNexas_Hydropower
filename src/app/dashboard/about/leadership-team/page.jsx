@@ -2,116 +2,184 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 
 export default function LeadershipPage() {
 
-    const [leaders, setLeaders] = useState([]);
+    const [members, setMembers] = useState([]);
 
-    async function fetchLeadership() {
+    async function loadMembers() {
 
         const res = await fetch("/api/leadership-team");
+
         const data = await res.json();
 
-        setLeaders(data.leadership || []);
+        if (data.success) {
+
+            setMembers(data.leadershipTeam);
+
+        }
 
     }
 
     useEffect(() => {
 
-        fetchLeadership();
+        loadMembers();
 
     }, []);
 
     async function handleDelete(id) {
 
-        if (!confirm("Delete this member?")) return;
+        const confirmDelete = confirm(
+            "Are you sure you want to delete this member?"
+        );
 
-        await fetch(`/api/leadership-team/${id}`, {
+        if (!confirmDelete) return;
+
+        const res = await fetch(`/api/leadership-team/${id}`, {
+
             method: "DELETE",
+
         });
 
-        fetchLeadership();
+        const data = await res.json();
+
+        if (data.success) {
+
+            alert("Deleted Successfully");
+
+            loadMembers();
+
+        } else {
+
+            alert(data.message);
+
+        }
 
     }
 
     return (
 
-        <div>
+        <div className="space-y-6">
 
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between">
 
-                <h1 className="text-3xl font-bold">
-                    Leadership Team
-                </h1>
+                <div>
+
+                    <h1 className="text-3xl font-bold">
+
+                        Leadership Team
+
+                    </h1>
+
+                    <p className="text-gray-500">
+
+                        Manage Leadership Team Members
+
+                    </p>
+
+                </div>
 
                 <Link
                     href="/dashboard/about/leadership-team/create"
-                    className="rounded bg-blue-600 px-4 py-2 text-white"
+                    className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700"
                 >
+                    <Plus size={18} />
                     Add Member
                 </Link>
 
             </div>
 
-            <table className="w-full border">
+            <div className="overflow-hidden rounded-xl border bg-white">
 
-                <thead>
+                <table className="w-full">
 
-                    <tr>
+                    <thead className="bg-slate-100">
 
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <tr>
 
-                    </tr>
+                            <th className="p-4 text-left">Image</th>
 
-                </thead>
+                            <th className="p-4 text-left">Name</th>
 
-                <tbody>
+                            <th className="p-4 text-left">Position</th>
 
-                    {leaders.map((leader) => (
+                            <th className="p-4 text-left">Description</th>
 
-                        <tr key={leader.id}>
-
-                            <td>{leader.name}</td>
-
-                            <td>{leader.position}</td>
-
-                            <td>
-
-                                <img
-                                    src={leader.image}
-                                    className="h-16 w-16 rounded object-cover"
-                                />
-
-                            </td>
-
-                            <td>
-
-                                <Link
-                                    href={`/dashboard/about/leadership-team/edit/${leader.id}`}
-                                    className="mr-3 text-blue-600"
-                                >
-                                    Edit
-                                </Link>
-
-                                <button
-                                    onClick={() => handleDelete(leader.id)}
-                                    className="text-red-600"
-                                >
-                                    Delete
-                                </button>
-
-                            </td>
+                            <th className="p-4 text-center">Actions</th>
 
                         </tr>
 
-                    ))}
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        {members.map((member) => (
+
+                            <tr
+                                key={member.id}
+                                className="border-t"
+                            >
+
+                                <td className="p-4">
+
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="h-16 w-16 rounded-full object-cover"
+                                    />
+
+                                </td>
+
+                                <td className="p-4 font-medium">
+
+                                    {member.name}
+
+                                </td>
+
+                                <td className="p-4">
+
+                                    {member.position}
+
+                                </td>
+
+                                <td className="p-4 max-w-md">
+
+                                    {member.description}
+
+                                </td>
+
+                                <td className="p-4">
+
+                                    <div className="flex justify-center gap-3">
+
+                                        <Link
+                                            href={`/dashboard/about/leadership-team/edit/${member.id}`}
+                                            className="rounded-lg bg-yellow-500 p-2 text-white hover:bg-yellow-600"
+                                        >
+                                            <Pencil size={18} />
+                                        </Link>
+
+                                        <button
+                                            onClick={() => handleDelete(member.id)}
+                                            className="rounded-lg bg-red-600 p-2 text-white hover:bg-red-700"
+                                        >
+                                            <Trash2 size={18} />
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
