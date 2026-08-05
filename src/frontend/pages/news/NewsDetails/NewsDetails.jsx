@@ -114,12 +114,14 @@ export default function NewsDetails({ id }) {
 
               <div className="news-content">
 
-                <p>{news.content}</p>
+                {news.content && (
+                  <div dangerouslySetInnerHTML={{ __html: news.content }} />
+                )}
 
                 {news.highlights?.length > 0 && (
                   <>
                     <h3 className="highlight-title">
-                      Project Highlights
+                      Key Highlights
                     </h3>
 
                     <ul className="highlight-list">
@@ -140,15 +142,31 @@ export default function NewsDetails({ id }) {
 
               <div className="news-info-box">
 
-                <h3>Project Information</h3>
+                <h3>Article Information</h3>
 
                 <div className="info-grid">
 
                   <div>
 
-                    <strong>Sector</strong>
+                    <strong>Category</strong>
 
-                    <p>Hydropower Development</p>
+                    <p>{news.category}</p>
+
+                  </div>
+
+                  <div>
+
+                    <strong>Author</strong>
+
+                    <p>{news.author}</p>
+
+                  </div>
+
+                  <div>
+
+                    <strong>Published Date</strong>
+
+                    <p>{news.date}</p>
 
                   </div>
 
@@ -156,23 +174,7 @@ export default function NewsDetails({ id }) {
 
                     <strong>Status</strong>
 
-                    <p>Ongoing</p>
-
-                  </div>
-
-                  <div>
-
-                    <strong>Location</strong>
-
-                    <p>Nepal</p>
-
-                  </div>
-
-                  <div>
-
-                    <strong>Published</strong>
-
-                    <p>{news.date}</p>
+                    <p>{news.status}</p>
 
                   </div>
 

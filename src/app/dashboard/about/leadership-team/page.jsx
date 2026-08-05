@@ -122,13 +122,17 @@ export default function LeadershipPage() {
                             >
 
                                 <td className="p-4">
-
-                                    <img
-                                        src={member.image}
-                                        alt={member.name}
-                                        className="h-16 w-16 rounded-full object-cover"
-                                    />
-
+                                    {member.image ? (
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="h-16 w-16 rounded-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="h-16 w-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+                                            {member.name.charAt(0)}
+                                        </div>
+                                    )}
                                 </td>
 
                                 <td className="p-4 font-medium">

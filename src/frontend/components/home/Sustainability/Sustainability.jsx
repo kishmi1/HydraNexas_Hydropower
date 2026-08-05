@@ -3,9 +3,31 @@
 import "./Sustainability.css";
 import { sustainabilityData } from "../../../data/homeData";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 
 export default function Sustainability() {
+
+  const [sustainability, setSustainability] = useState({
+    title: "Creating Lasting Value Through Clean Energy",
+    description: "Sustainability is at the heart of HydraNexa. Every project is designed to generate renewable energy while protecting the environment and empowering local communities.",
+  });
+
+  useEffect(() => {
+    fetchContent();
+  }, []);
+
+  const fetchContent = async () => {
+    try {
+      const res = await fetch("/api/home-content");
+      const data = await res.json();
+      if (data.success && data.content.sustainability) {
+        setSustainability(data.content.sustainability);
+      }
+    } catch (error) {
+      console.error("Error fetching sustainability content:", error);
+    }
+  };
 
   return (
 
@@ -47,16 +69,12 @@ export default function Sustainability() {
 
 
           <h2>
-            Creating Lasting Value Through
-            <br />
-            Clean Energy
+            {sustainability.title}
           </h2>
 
 
           <p>
-            Sustainability is at the heart of HydraNexa. Every project is
-            designed to generate renewable energy while protecting the
-            environment and empowering local communities.
+            {sustainability.description}
           </p>
 
 
@@ -105,6 +123,7 @@ export default function Sustainability() {
                   duration: 0.6,
                   delay: index * 0.2
                 }}
+
 
               >
 

@@ -4,22 +4,31 @@ import "./LatestNews.css";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-import { latestNews } from "../../../data/homeData";
-
-const news1 = "/assets/images/news/news1.jpg";
-const news2 = "/assets/images/news/news2.jpg";
-const news3 = "/assets/images/news/news3.jpg";
-
-
-const newsImages = {
-  news1,
-  news2,
-  news3,
-};
-
+import { useState, useEffect } from "react";
 
 export default function LatestNews() {
+
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      const res = await fetch("/api/news");
+      const data = await res.json();
+      if (data.success) {
+        // Get first 3 latest news
+        const latestNews = data.news
+          .filter(n => n.status === "Published")
+          .slice(0, 3);
+        setNews(latestNews);
+      }
+    } catch (error) {
+      console.error("Error fetching news:", error);
+    }
+  };
 
   return (
 
@@ -83,7 +92,7 @@ export default function LatestNews() {
         <div className="news-grid">
 
 
-          {latestNews.map((item, index) => (
+          {news.map((item, index) => (
 
 
             <motion.article
@@ -124,7 +133,7 @@ export default function LatestNews() {
 
                 <img
 
-                  src={newsImages[item.image]}
+                  src={item.image}
 
                   alt={item.title}
 
@@ -165,7 +174,7 @@ export default function LatestNews() {
 
                 <Link
 
-                  href="/news/latest-news"
+                  href={`/news/${item.id}`}
 
                   className="news-btn"
 

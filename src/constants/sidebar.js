@@ -179,11 +179,7 @@ export const SIDEBAR_ITEMS = [
                 icon: BarChart3,
             },
 
-            {
-                title: "Notices",
-                href: "/dashboard/about/notices",
-                icon: Newspaper,
-            },
+           
 
         ],
 

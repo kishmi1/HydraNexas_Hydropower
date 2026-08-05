@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -8,7 +8,8 @@ import { ArrowLeft } from "lucide-react";
 export default function LeadershipForm({ leadership = null }) {
 
     const router = useRouter();
-
+    const [loading, setLoading] = useState(!!leadership?.id && !leadership?.name);
+    const [existingImageUrl, setExistingImageUrl] = useState(leadership?.image || "");
     const [formData, setFormData] = useState({
 
         name: leadership?.name || "",
@@ -20,6 +21,36 @@ export default function LeadershipForm({ leadership = null }) {
         image: null,
 
     });
+
+    useEffect(() => {
+        if (leadership?.id && !leadership?.name) {
+            fetchLeadershipData(leadership.id);
+        }
+    }, [leadership]);
+
+    const fetchLeadershipData = async (id) => {
+        try {
+            console.log("Fetching leadership data for ID:", id);
+            const res = await fetch(`/api/leadership-team/${id}`);
+            const data = await res.json();
+            console.log("API Response:", data);
+            if (data.success && data.leadership) {
+                setFormData({
+                    name: data.leadership.name || "",
+                    position: data.leadership.position || "",
+                    description: data.leadership.description || "",
+                    image: null,
+                });
+                setExistingImageUrl(data.leadership.image || "");
+            } else {
+                console.error("API returned success=false or no leadership data");
+            }
+        } catch (error) {
+            console.error("Error fetching leadership data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     function handleChange(e) {
 
@@ -45,7 +76,7 @@ export default function LeadershipForm({ leadership = null }) {
 
         e.preventDefault();
 
-        let imageUrl = leadership?.image || "";
+        let imageUrl = existingImageUrl || "";
 
         if (formData.image) {
 
@@ -142,16 +173,19 @@ export default function LeadershipForm({ leadership = null }) {
                 Back
             </Link>
 
-            <form
-                onSubmit={handleSubmit}
-                className="space-y-8 rounded-2xl border bg-white p-8 shadow-sm"
-            >
+            {loading ? (
+                <div className="p-8 text-center">Loading...</div>
+            ) : (
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-8 rounded-2xl border bg-white p-8 shadow-sm"
+                >
 
-                <h2 className="text-2xl font-bold">
+                    <h2 className="text-2xl font-bold">
 
-                    {leadership ? "Edit Leadership Member" : "Create Leadership Member"}
+                        {leadership?.id ? "Edit Leadership Member" : "Create Leadership Member"}
 
-                </h2>
+                    </h2>
 
                 <div>
 
@@ -239,6 +273,7 @@ export default function LeadershipForm({ leadership = null }) {
                 </div>
 
             </form>
+            )}
 
         </div>
 

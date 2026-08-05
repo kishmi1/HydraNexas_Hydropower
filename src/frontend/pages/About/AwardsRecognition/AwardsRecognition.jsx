@@ -6,18 +6,59 @@ import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
 
 import {
-  awardsData,
   certificationsData,
-  achievementStats,
 } from "../../../data/aboutData";
 
 const heroImage = "/assets/images/hero/about-hero.jpg";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { FaTrophy, FaAward, FaCertificate, FaMedal, FaStar, FaLeaf } from "react-icons/fa";
 
+const iconMap = {
+  FaTrophy,
+  FaAward,
+  FaCertificate,
+  FaMedal,
+  FaStar,
+  FaLeaf,
+};
 
 export default function AwardsRecognition() {
+  const [awards, setAwards] = useState([]);
+  const [achievementStats, setAchievementStats] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetchAwards();
+    fetchAchievementStats();
+  }, []);
+
+  const fetchAwards = async () => {
+    try {
+      const res = await fetch("/api/awards");
+      const data = await res.json();
+      if (data.success) {
+        setAwards(data.awards);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching awards:", error);
+      setLoading(false);
+    }
+  };
+
+  const fetchAchievementStats = async () => {
+    try {
+      const res = await fetch("/api/achievement-stats");
+      const data = await res.json();
+      if (data.success) {
+        setAchievementStats(data.stats);
+      }
+    } catch (error) {
+      console.error("Error fetching achievement stats:", error);
+    }
+  };
 
   return (
 
@@ -35,7 +76,6 @@ export default function AwardsRecognition() {
         backgroundImage={heroImage}
 
       />
-
 
 
 
@@ -124,93 +164,90 @@ export default function AwardsRecognition() {
           <div className="awards-grid">
 
 
-            {awardsData.map((award,index)=>{
+            {loading ? (
+              <div className="text-center py-12">Loading awards...</div>
+            ) : awards.length === 0 ? (
+              <div className="text-center py-12">No awards found</div>
+            ) : (
+              awards.map((award,index)=>{
 
 
-              const Icon = award.icon;
+                const Icon = iconMap[award.icon] || FaTrophy;
 
 
-              return (
-
-
-
-                <motion.div
-
-
-                  className="award-card"
-
-
-                  key={award.id}
+                return (
 
 
 
-                  initial={{
-                    opacity:0,
-                    y:50
-                  }}
+                  <motion.div
+
+
+                    className="award-card"
+
+
+                    key={award.id}
+
+
+                    initial={{
+                      opacity:0,
+                      y:50
+                    }}
 
 
 
-                  whileInView={{
-                    opacity:1,
-                    y:0
-                  }}
+                    whileInView={{
+                      opacity:1,
+                      y:0
+                    }}
 
 
 
-                  viewport={{
-                    once:true,
-                    amount:0.2
-                  }}
+                    viewport={{
+                      once:true,
+                      amount:0.2
+                    }}
 
 
 
-                  transition={{
-                    duration:0.6,
-                    delay:index * 0.15
-                  }}
+                    transition={{
+                      duration:0.6,
+                      delay:index * 0.15
+                    }}
 
 
 
-                >
+                  >
 
 
-                  <div className="award-icon">
-                    <Icon />
-                  </div>
+                    <div className="award-icon">
+                      <Icon />
+                    </div>
 
 
-
-                  <span>
-                    {award.year}
-                  </span>
-
+                    <span>
+                      {award.year}
+                    </span>
 
 
-                  <h3>
-                    {award.title}
-                  </h3>
+                    <h3>
+                      {award.title}
+                    </h3>
 
 
-
-                  <p>
-                    {award.description}
-                  </p>
-
+                    <p>
+                      {award.description}
+                    </p>
 
 
-                </motion.div>
+                  </motion.div>
 
 
-              );
-
-
-            })}
-
+                );
+              })
+            )}
 
 
           </div>
-
 
 
         </div>
@@ -412,68 +449,72 @@ export default function AwardsRecognition() {
           <div className="achievement-grid">
 
 
-            {achievementStats.map((item,index)=>(
+            {achievementStats.length === 0 ? (
+              <div className="text-center py-12">Loading stats...</div>
+            ) : (
+              achievementStats.map((item,index)=>(
 
 
 
-              <motion.div
+                <motion.div
 
 
-                className="achievement-card"
+                  className="achievement-card"
 
 
-                key={item.id}
-
-
-
-                initial={{
-                  opacity:0,
-                  scale:0.8
-                }}
+                  key={item.id}
 
 
 
-                whileInView={{
-                  opacity:1,
-                  scale:1
-                }}
+                  initial={{
+                    opacity:0,
+                    scale:0.8
+                  }}
 
 
 
-                viewport={{
-                  once:true,
-                  amount:0.3
-                }}
+                  whileInView={{
+                    opacity:1,
+                    scale:1
+                  }}
 
 
 
-                transition={{
-                  duration:0.6,
-                  delay:index * 0.15
-                }}
+                  viewport={{
+                    once:true,
+                    amount:0.3
+                  }}
 
 
 
-              >
-
-
-                <h2>
-                  {item.value}
-                </h2>
-
-
-
-                <p>
-                  {item.label}
-                </p>
+                  transition={{
+                    duration:0.6,
+                    delay:index * 0.15
+                  }}
 
 
 
-              </motion.div>
+                >
+
+
+                  <h2>
+                    {item.value}
+                  </h2>
 
 
 
-            ))}
+                  <p>
+                    {item.label}
+                  </p>
+
+
+
+                </motion.div>
+
+
+
+              ))
+            )}
 
 
 

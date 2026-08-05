@@ -3,19 +3,31 @@
 import "./FeaturedProjects.css";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { featuredProjects } from "../../../data/homeData";
-
-const project1 = "/assets/images/projects/project1.jpg";
-const project2 = "/assets/images/projects/project2.jpg";
-const project3 = "/assets/images/projects/project3.jpg";
-
-const projectImages = {
-  project1,
-  project2,
-  project3,
-};
+import { useState, useEffect } from "react";
 
 export default function FeaturedProjects() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      if (data.success) {
+        // Get first 3 featured projects
+        const featured = data.projects
+          .filter(p => p.featured)
+          .slice(0, 3);
+        setProjects(featured);
+      }
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
+
   return (
     <section className="featured-projects">
 
@@ -40,7 +52,7 @@ export default function FeaturedProjects() {
 
         <div className="projects-grid">
 
-{featuredProjects.map((project, index) => (
+{projects.map((project, index) => (
             <motion.article
 
   className="project-card"
@@ -72,7 +84,7 @@ export default function FeaturedProjects() {
               <div className="project-image">
 
                 <img
-                  src={projectImages[project.image]}
+                  src={project.image}
                   alt={project.name}
                 />
 
@@ -95,7 +107,7 @@ export default function FeaturedProjects() {
                 </p>
 
                 <Link
-                  href="/projects"
+                  href={`/projects/${project.id}`}
                   className="project-btn"
                 >
                   View Project →

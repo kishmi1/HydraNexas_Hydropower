@@ -1,32 +1,8 @@
 import LeadershipForm from "@/components/dashboard/LeadershipForm";
-async function getLeadership(id) {
-
-    const res = await fetch(
-
-        `/api/leadership-team/${id}`,
-
-        {
-
-            cache: "no-store",
-
-        }
-
-    );
-
-    const data = await res.json();
-
-    return data.leadership;
-
-}
 
 export default async function EditLeadershipPage({ params }) {
-
-    const leadership = await getLeadership(params.id);
-
+    const { id } = await params;
     return (
-
-        <LeadershipForm leadership={leadership} />
-
+        <LeadershipForm leadership={{ id }} />
     );
-
 }

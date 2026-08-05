@@ -81,11 +81,17 @@ export default function BoardDirectorsPage() {
               <tr key={director.id} className="border-t">
 
                 <td className="p-4">
-                  <img
-                    src={director.image}
-                    alt={director.name}
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
+                  {director.image ? (
+                    <img
+                      src={director.image}
+                      alt={director.name}
+                      className="h-16 w-16 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-16 w-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+                      {director.name.charAt(0)}
+                    </div>
+                  )}
                 </td>
 
                 <td className="p-4 font-medium">

@@ -2,7 +2,7 @@
 
 import "./CompanyOverview.css";
 
-import { purposeData, companyStats } from "../../../data/aboutData";
+import { purposeData } from "../../../data/aboutData";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
@@ -11,10 +11,57 @@ const heroImage = "/assets/images/hero/about-hero.jpg";
 const companyImage = "/assets/images/about/company-overview.jpg";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 
 export default function CompanyOverview() {
 
+  const [companyStats, setCompanyStats] = useState([
+    {
+      id: 1,
+      value: "850 MW",
+      title: "Installed Capacity",
+    },
+    {
+      id: 2,
+      value: "12+",
+      title: "Hydropower Projects",
+    },
+    {
+      id: 3,
+      value: "30+",
+      title: "Years of Experience",
+    },
+    {
+      id: 4,
+      value: "1.2M+",
+      title: "Homes Powered",
+    },
+  ]);
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      const res = await fetch("/api/achievement-stats");
+      const data = await res.json();
+      
+      if (data.success) {
+        // Map API response to match our component structure
+        const mappedStats = data.stats.map((stat, index) => ({
+          id: index + 1,
+          value: stat.value,
+          title: stat.label,
+        }));
+        
+        setCompanyStats(mappedStats);
+      }
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+    }
+  };
 
   return (
 

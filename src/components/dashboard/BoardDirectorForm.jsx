@@ -1,19 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export default function BoardDirectorForm({ director = null }) {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(!!director?.id && !director?.name);
+  const [existingImageUrl, setExistingImageUrl] = useState(director?.image || "");
   const [formData, setFormData] = useState({
     name: director?.name || "",
     position: director?.position || "",
     image: null,
     description: director?.description || "",
   });
+
+  useEffect(() => {
+    if (director?.id && !director?.name) {
+      fetchDirectorData(director.id);
+    }
+  }, [director]);
+
+  const fetchDirectorData = async (id) => {
+    try {
+      console.log("Fetching director data for ID:", id);
+      const res = await fetch(`/api/board-directors/${id}`);
+      const data = await res.json();
+      console.log("API Response:", data);
+      if (data.success && data.boardDirector) {
+        setFormData({
+          name: data.boardDirector.name || "",
+          position: data.boardDirector.position || "",
+          description: data.boardDirector.description || "",
+          image: null,
+        });
+        setExistingImageUrl(data.boardDirector.image || "");
+      } else {
+        console.error("API returned success=false or no director data");
+      }
+    } catch (error) {
+      console.error("Error fetching director data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   function handleChange(e) {
     setFormData({
@@ -32,7 +63,7 @@ export default function BoardDirectorForm({ director = null }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    let imageUrl = director?.image || "";
+    let imageUrl = existingImageUrl || "";
 
     if (formData.image) {
       const uploadData = new FormData();
@@ -94,13 +125,16 @@ export default function BoardDirectorForm({ director = null }) {
         Back
       </Link>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 rounded-2xl border bg-white p-8 shadow-sm"
-      >
-        <h2 className="text-2xl font-bold">
-          {director ? "Edit Board Director" : "Add Board Director"}
-        </h2>
+      {loading ? (
+        <div className="p-8 text-center">Loading...</div>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 rounded-2xl border bg-white p-8 shadow-sm"
+        >
+          <h2 className="text-2xl font-bold">
+            {director?.id ? "Edit Board Director" : "Add Board Director"}
+          </h2>
 
         <div>
           <label className="mb-2 block font-medium">
@@ -167,6 +201,7 @@ export default function BoardDirectorForm({ director = null }) {
           </button>
         </div>
       </form>
+      )}
     </div>
   );
 }
