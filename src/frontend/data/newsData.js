@@ -225,16 +225,19 @@ export const pressReleases = [
         id: 1,
         title: "HydraNexa Announces New Hydropower Investment",
         date: "July 2026",
+        pdfUrl: "/assets/pdfs/press-release-1.pdf",
     },
     {
         id: 2,
         title: "Corporate Governance Report Published",
         date: "June 2026",
+        pdfUrl: "/assets/pdfs/press-release-2.pdf",
     },
     {
         id: 3,
         title: "Annual Financial Report Released",
         date: "May 2026",
+        pdfUrl: "/assets/pdfs/press-release-3.pdf",
     },
 ];
 

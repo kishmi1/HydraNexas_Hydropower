@@ -6,716 +6,401 @@ import { FaMicrophone } from "react-icons/fa";
 
 import "./ChatBot.css";
 
-import { projects } from "../../../data/projectData";
-
 const logo = "/assets/logo/logo.png";
 
-
-
-export default function ChatBot(){
-
-
+export default function ChatBot() {
     const defaultMessage = [
-
         {
-            sender:"bot",
-            text:"Hello 👋 Welcome to HydraNexa Energy. How can I help you?"
+            sender: "bot",
+            text: "Hello 👋 Welcome to HydraNexa Energy. How can I help you?"
         }
-
     ];
 
-
-
-
-    const [open,setOpen] = useState(false);
-
-    const [input,setInput] = useState("");
-
-    const [typing,setTyping] = useState(false);
-
-
-
-
-    const [messages,setMessages] = useState(defaultMessage);
+    const [open, setOpen] = useState(false);
+    const [input, setInput] = useState("");
+    const [typing, setTyping] = useState(false);
+    const [dbData, setDbData] = useState(null);
+    const [dataLoading, setDataLoading] = useState(true);
+    const [messages, setMessages] = useState(defaultMessage);
 
     // Load chat from localStorage on client side
-    useEffect(()=>{
-        if(typeof window !== 'undefined'){
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
             const savedChat = localStorage.getItem("hydranexa-chat");
-            if(savedChat){
+            if (savedChat) {
                 setMessages(JSON.parse(savedChat));
             }
         }
     }, []);
 
+    // Fetch data from database
+    useEffect(() => {
+        const fetchDbData = async () => {
+            try {
+                const response = await fetch('/api/chatbot-data');
+                const data = await response.json();
+                if (data.success) {
+                    setDbData(data.data);
+                    console.log('Chatbot data loaded from database:', data.data);
+                }
+            } catch (error) {
+                console.error('Error fetching chatbot data:', error);
+            } finally {
+                setDataLoading(false);
+            }
+        };
 
-    const quickQuestions=[
+        fetchDbData();
+    }, []);
 
+    const quickQuestions = [
         "Our Projects",
         "Project Capacity",
         "Location",
         "Career",
         "Contact"
-
     ];
 
-
-
-
-
-
-
-
     // Voice Input
+    const startVoice = () => {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    const startVoice = ()=>{
-
-
-        const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-
-        if(!SpeechRecognition){
-
-            alert(
-            "Voice input is not supported in this browser"
-            );
-
+        if (!SpeechRecognition) {
+            alert("Voice input is not supported in this browser");
             return;
-
         }
 
-
-
-        const recognition =
-        new SpeechRecognition();
-
-
-
-        recognition.lang="en-US";
-
-
+        const recognition = new SpeechRecognition();
+        recognition.lang = "en-US";
         recognition.start();
 
-
-
-        recognition.onresult=(event)=>{
-
-
-            const voiceText =
-            event.results[0][0].transcript;
-
-
+        recognition.onresult = (event) => {
+            const voiceText = event.results[0][0].transcript;
             setInput(voiceText);
-
-
         };
-        const sendMessage = ()=>{
-        // chatbot send logic
-    };
-
-
-
-    return(
-        <div className="chatbot">
-
-            {/* Your chatbot UI */}
-
-        </div>
-    );
-
-
-
-
     };
 
     // Chatbot Knowledge
+    const generateReply = (question) => {
+        const text = question.toLowerCase();
 
+        // Use database data if available, otherwise use fallback
+        const projects = dbData?.projects || [];
+        const news = dbData?.news || [];
+        const careers = dbData?.careers || [];
+        const events = dbData?.events || [];
+        const tenderNotices = dbData?.tenderNotices || [];
+        const pressReleases = dbData?.pressReleases || [];
+        const company = dbData?.company || { 
+            name: "HydraNexa Energy", 
+            contact: "info@hydranexa.com", 
+            phone: "+977-1-XXXXXXX", 
+            address: "Kathmandu, Nepal" 
+        };
 
-    const generateReply=(question)=>{
-
-
-        const text =
-        question.toLowerCase();
-
-
-
-        if(
-            text.includes("hello") ||
-            text.includes("hi") ||
-            text.includes("namaste") ||
-            text.includes("नमस्ते")
-        ){
-
+        if (text.includes("hello") || text.includes("hi") || text.includes("namaste") || text.includes("नमस्ते")) {
             return "नमस्ते 👋 Welcome to HydraNexa Energy. How can I assist you?";
-
         }
 
-        if(
-            text.includes("project")
-        ){
-
-
-            return (
-
-`⚡ Our Hydropower Projects:
-
-
-${projects.map(
-
-(item)=>
-`${item.name} - ${item.capacity}`
-
-).join("\n")}`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("capacity") ||
-            text.includes("mw")
-        ){
-
-
-            return (
-
-`⚡ Project Capacity:
-
-
-${projects.map(
-
-(item)=>
-item.capacity
-
-).join(", ")}`
-
-            );
-
-        }
-
-        if(
-            text.includes("location") ||
-            text.includes("where")
-        ){
-
-
-            return (
-
-`📍 Project Locations:
-
-
-${projects.map(
-
-(item)=>
-item.location
-
-).join("\n")}`
-
-            );
-
-        }
-
-
-
-        if(
-            text.includes("hydropower") ||
-            text.includes("what is hydropower")
-        ){
-
-
-            return (
-
-`Hydropower is renewable energy generated by using flowing water to produce electricity.`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("generation") ||
-            text.includes("electricity")
-        ){
-
-
-            return (
-
-`Electricity is generated by converting water energy into mechanical energy using turbines and generators.`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("turbine")
-        ){
-
-
-            return (
-
-`A turbine converts water energy into mechanical energy which helps produce electricity.`
-
-            );
-
-        }
-
-
-
-        if(
-            text.includes("dam")
-        ){
-
-
-            return (
-
-`A dam stores and controls water flow for efficient electricity generation.`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("renewable") ||
-            text.includes("clean energy")
-        ){
-
-
-            return (
-
-`Hydropower is a clean and renewable energy source with low carbon emissions.`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("environment") ||
-            text.includes("sustainability")
-        ){
-
-
-            return (
-
-`HydraNexa focuses on sustainable hydropower development and environmental responsibility.`
-
-            );
-
-        }
-
-
-
-        if(
-            text.includes("investment")
-        ){
-
-
-            return (
-
-`Hydropower projects require investment in infrastructure, technology and construction.`
-
-            );
-
-        }
-
-        if(
-            text.includes("career") ||
-            text.includes("job") ||
-            text.includes("internship")
-        ){
-
-
-            return (
-
-`You can visit HydraNexa Careers page for internship and job opportunities.`
-
-            );
-
-        }
-
-
-
-        if(
-            text.includes("contact") ||
-            text.includes("email")
-        ){
-
-
-            return (
-
-`You can contact HydraNexa through our Contact page.`
-
-            );
-
-        }
-
-
-        if(
-            text.includes("status") ||
-            text.includes("progress")
-        ){
-
-
-            return (
-
-`You can check project progress from our Projects section.`
-
-            );
-
-        }
-
-        return (
-
-`Sorry, I couldn't understand.
-
-Please ask about:
-Projects, Capacity, Location, Career, Contact or Hydropower.`
-
-        );
-
-
-
-    };
-
-
-
-    // Send Message
-
-
-    const sendMessage=(message=input)=>{
-
-
-        if(!message.trim())
-        return;
-
-
-
-
-        setMessages(prev=>[
-
-            ...prev,
-
-            {
-                sender:"user",
-                text:message
+        if (text.includes("project")) {
+            if (projects.length === 0) {
+                return "Sorry, no project information is currently available in our database.";
             }
 
+            return `⚡ Our Hydropower Projects:
+
+${projects.map((item) => `${item.name} - ${item.capacity} (${item.status})`).join("\n")}`;
+        }
+
+        if (text.includes("capacity") || text.includes("mw")) {
+            if (projects.length === 0) {
+                return "Sorry, no capacity information is currently available.";
+            }
+
+            return `⚡ Project Capacity:
+
+${projects.map((item) => `${item.name}: ${item.capacity}`).join("\n")}
+
+Total: ${projects.reduce((sum, p) => sum + parseInt(p.capacity) || 0, 0)} MW`;
+        }
+
+        if (text.includes("location") || text.includes("where")) {
+            if (projects.length === 0) {
+                return "Sorry, no location information is currently available.";
+            }
+
+            return `📍 Project Locations:
+
+${projects.map((item) => `${item.name}: ${item.location}`).join("\n")}`;
+        }
+
+        if (text.includes("hydropower") || text.includes("what is hydropower")) {
+            return "Hydropower is renewable energy generated by using flowing water to produce electricity.";
+        }
+
+        if (text.includes("generation") || text.includes("electricity")) {
+            return "Electricity is generated by converting water energy into mechanical energy using turbines and generators.";
+        }
+
+        if (text.includes("turbine")) {
+            return "A turbine converts water energy into mechanical energy which helps produce electricity.";
+        }
+
+        if (text.includes("dam")) {
+            return "A dam stores and controls water flow for efficient electricity generation.";
+        }
+
+        if (text.includes("renewable") || text.includes("clean energy")) {
+            return "Hydropower is a clean and renewable energy source with low carbon emissions.";
+        }
+
+        if (text.includes("environment") || text.includes("sustainability")) {
+            return "HydraNexa focuses on sustainable hydropower development and environmental responsibility.";
+        }
+
+        if (text.includes("investment")) {
+            return "Hydropower projects require investment in infrastructure, technology and construction.";
+        }
+
+        if (text.includes("career") || text.includes("job") || text.includes("internship")) {
+            if (careers.length === 0) {
+                return "Sorry, no career opportunities are currently available in our database.";
+            }
+
+            return `💼 Current Career Opportunities:
+
+${careers.map((job) => `${job.position} - ${job.department} (${job.type})
+Location: ${job.location}
+Deadline: ${job.deadline}`).join("\n\n")}
+
+Visit our Careers page for more details and to apply.`;
+        }
+
+        if (text.includes("contact") || text.includes("email")) {
+            return `📞 Contact Information:
+
+Company: ${company.name}
+Email: ${company.contact}
+Phone: ${company.phone}
+Address: ${company.address}
+
+You can also reach us through our Contact page for detailed inquiries.`;
+        }
+
+        if (text.includes("status") || text.includes("progress")) {
+            if (projects.length === 0) {
+                return "Sorry, no project status information is currently available.";
+            }
+
+            return `📊 Project Status:
+
+${projects.map((item) => `${item.name}: ${item.status}`).join("\n")}
+
+You can check detailed project progress from our Projects section.`;
+        }
+
+        if (text.includes("news") || text.includes("latest") || text.includes("update")) {
+            if (news.length === 0) {
+                return "Sorry, no news updates are currently available.";
+            }
+
+            return `📰 Latest News:
+
+${news.slice(0, 5).map((item) => `${item.title}
+Category: ${item.category}
+Date: ${item.date}`).join("\n\n")}`;
+        }
+
+        if (text.includes("event") || text.includes("upcoming")) {
+            if (events.length === 0) {
+                return "Sorry, no upcoming events are currently scheduled.";
+            }
+
+            return `📅 Upcoming Events:
+
+${events.map((event) => `${event.title}
+Date: ${event.date}
+Location: ${event.location}`).join("\n\n")}`;
+        }
+
+        if (text.includes("tender") || text.includes("bid")) {
+            if (tenderNotices.length === 0) {
+                return "Sorry, no tender notices are currently available.";
+            }
+
+            return `📋 Tender Notices:
+
+${tenderNotices.map((tender) => `${tender.title}
+Published: ${tender.publishDate}
+Location: ${tender.location}`).join("\n\n")}`;
+        }
+
+        if (text.includes("press") || text.includes("release")) {
+            if (pressReleases.length === 0) {
+                return "Sorry, no press releases are currently available.";
+            }
+
+            return `📰 Press Releases:
+
+${pressReleases.map((pr) => `${pr.title}
+Category: ${pr.category}
+Published: ${pr.publishedDate}`).join("\n\n")}`;
+        }
+
+        return `Sorry, I couldn't understand.
+
+Please ask about:
+Projects, Capacity, Location, Career, Contact, News, Events, Tenders, or Press Releases.
+
+${dataLoading ? "⏳ Loading database data..." : ""}`;
+    };
+
+    // Send Message
+    const sendMessage = (message = input) => {
+        if (!message.trim()) return;
+
+        setMessages(prev => [
+            ...prev,
+            {
+                sender: "user",
+                text: message
+            }
         ]);
 
-
-
-
         setInput("");
-
         setTyping(true);
 
+        setTimeout(() => {
+            const reply = generateReply(message);
 
-
-
-        setTimeout(()=>{
-
-
-            const reply =
-            generateReply(message);
-
-
-
-            setMessages(prev=>[
-
+            setMessages(prev => [
                 ...prev,
-
                 {
-                    sender:"bot",
-                    text:reply
+                    sender: "bot",
+                    text: reply
                 }
-
             ]);
 
-
-
             setTyping(false);
-
-
-
-        },1000);
-
-
-
+        }, 1000);
     };
 
     // New Chat
-
-
-    const newChat=()=>{
-
-
+    const newChat = () => {
         setMessages(defaultMessage);
-
-
-        localStorage.removeItem(
-            "hydranexa-chat"
-        );
-
-
+        localStorage.removeItem("hydranexa-chat");
     };
 
     // Save Chat History
-
-
-    useEffect(()=>{
-
-
-        localStorage.setItem(
-
-            "hydranexa-chat",
-
-            JSON.stringify(messages)
-
-        );
-
-
-    },[messages]);
-
-    return(
-
-
-<div className="chatbot">
-
-<motion.button
-
-className="chat-toggle"
-
-
-onClick={()=>setOpen(!open)}
-
-
-animate={{
-
-scale:[1,1.1,1]
-
-}}
-
-
-transition={{
-
-duration:2,
-
-repeat:Infinity
-
-}}
-
-
->
-
-💬
-
-</motion.button>
-
-{
-open &&
-
-<motion.div
-
-
-className="chat-window"
-
-
-
-initial={{
-
-opacity:0,
-
-y:40
-
-}}
-
-animate={{
-
-opacity:1,
-
-y:0
-
-}}
-
-
-
->
-<div className="chat-header">
-
-<img
-
-src={logo}
-
-alt="HydraNexa"
-
-className="chat-logo"
-
-/>
-
-<div>
-
-<h4>
-HydraNexa Assistant
-</h4>
-
-
-<span>
-🟢 Online
-</span>
-
-
-</div>
-<button
-
-className="new-chat"
-
-onClick={newChat}
-
->
-
-New Chat
-
-</button>
-
-</div>
-<div className="quick-buttons">
-
-
-{
-
-quickQuestions.map((item,index)=>(
-
-
-<button
-
-key={index}
-
-onClick={()=>sendMessage(item)}
-
->
-
-{item}
-
-</button>
-
-
-))
-
-}
-
-
-
-</div>
-<div className="chat-body">
-
-
-{
-
-messages.map((msg,index)=>(
-
-
-<div
-
-key={index}
-
-className={msg.sender}
-
->
-
-{msg.text}
-
-</div>
-
-
-))
-
-}
-
-{
-
-typing &&
-
-
-<div className="bot">
-
-Typing...
-
-</div>
-
-
-}
-
-
-
-</div>
-
-<div className="chat-footer">
-
-
-<input
-
-type="text"
-
-placeholder="Ask something..."
-
-value={input}
-
-
-onChange={(e)=>setInput(e.target.value)}
-
-
-onKeyDown={(e)=>{
-
-if(e.key==="Enter")
-sendMessage();
-
-}}
-
-/>
-
-<button
-
-className="voice-btn"
-
-onClick={startVoice}
-
->
-
-<FaMicrophone/>
-
-</button>
-
-
-<button
-
-onClick={()=>sendMessage()}
-
->
-
-Send
-
-</button>
-
-
-</div>
-
-
-</motion.div>
-
-
-}
-
-
-
-</div>
-
-
+    useEffect(() => {
+        localStorage.setItem("hydranexa-chat", JSON.stringify(messages));
+    }, [messages]);
+
+    // Handle Enter key
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") sendMessage();
+    };
+
+    return (
+        <div className="chatbot-container">
+            {/* Chat Button */}
+            <motion.button
+                className="chatbot-toggle"
+                onClick={() => setOpen(!open)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                {open ? (
+                    <span className="close-icon">✕</span>
+                ) : (
+                    <span className="chat-icon">💬</span>
+                )}
+            </motion.button>
+
+            {/* Chat Window */}
+            {open && (
+                <motion.div
+                    className="chatbot-window"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                >
+                    {/* Header */}
+                    <div className="chatbot-header">
+                        <div className="header-content">
+                            <img src={logo} alt="Logo" className="chatbot-logo" />
+                            <div>
+                                <h3>HydraNexa Assistant</h3>
+                                <p className="status-text">Online • Ready to help</p>
+                            </div>
+                        </div>
+                        <button className="new-chat-btn" onClick={newChat}>+</button>
+                    </div>
+
+                    {/* Messages */}
+                    <div className="chatbot-messages">
+                        {messages.map((msg, index) => (
+                            <motion.div
+                                key={index}
+                                className={`message ${msg.sender}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                            >
+                                {msg.text}
+                            </motion.div>
+                        ))}
+
+                        {typing && (
+                            <motion.div
+                                className="message bot typing"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                            >
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </motion.div>
+                        )}
+                    </div>
+
+                    {/* Quick Questions */}
+                    <div className="quick-questions">
+                        {quickQuestions.map((q, index) => (
+                            <button
+                                key={index}
+                                onClick={() => sendMessage(q)}
+                                className="quick-btn"
+                            >
+                                {q}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Input */}
+                    <div className="chatbot-input">
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Type your message..."
+                        />
+                        <button
+                            className="voice-btn"
+                            onClick={startVoice}
+                            title="Voice Input"
+                        >
+                            <FaMicrophone />
+                        </button>
+                        <button
+                            className="send-btn"
+                            onClick={() => sendMessage()}
+                        >
+                            Send
+                        </button>
+                    </div>
+                </motion.div>
+            )}
+        </div>
     );
-
 }

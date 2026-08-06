@@ -106,19 +106,48 @@
     overflow: hidden;
 
     height: 260px;
+
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.video-image img {
+.video-thumbnail {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    transition: .5s;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.video-card:hover .video-image img {
-    transform: scale(1.08);
+.play-icon {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: var(--highlight);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.8rem;
+    font-weight: bold;
+
+    transition: .3s;
+    cursor: pointer;
+}
+
+.video-card:hover .play-icon {
+    background: var(--highlight);
+
+    color: #fff;
+
+    transform: scale(1.1);
 }
 
 /* ==========================
@@ -253,6 +282,114 @@
 
     .video-content h3 {
         font-size: 1.15rem;
+    }
+
+}
+
+/* ==========================
+   VIDEO MODAL
+========================== */
+
+.video-modal {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.9);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    padding: 20px;
+}
+
+.video-modal-content {
+    position: relative;
+
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    max-width: 900px;
+    width: 100%;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.1);
+
+    color: #333;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-modal:hover {
+    background: rgba(0, 0, 0, 0.2);
+
+    transform: rotate(90deg);
+}
+
+.modal-video {
+    width: 100%;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.video-modal-content h3 {
+    color: var(--primary);
+
+    font-size: 1.4rem;
+
+    margin: 0;
+
+    text-align: center;
+}
+
+@media (max-width:768px) {
+
+    .video-modal-content {
+        padding: 20px;
+    }
+
+    .modal-video {
+        height: 300px;
+    }
+
+    .video-modal-content h3 {
+        font-size: 1.2rem;
     }
 
 }

@@ -2,7 +2,7 @@
    CHATBOT CONTAINER
 ========================== */
 
-.chatbot {
+.chatbot-container {
 
     position: fixed;
 
@@ -23,7 +23,8 @@
 ========================== */
 
 
-.chat-toggle {
+
+.chatbot-toggle {
 
     width: 65px;
 
@@ -52,25 +53,32 @@
     justify-content: center;
 
 
+
     box-shadow:
 
         0 15px 40px rgba(20, 184, 166, 0.45);
 
 
+
 }
 
 
 
 
-
-
-.chat-toggle:hover {
+.chatbot-toggle:hover {
 
     transform: scale(1.1);
 
 }
 
+.chat-icon {
+    font-size: 28px;
+}
 
+.close-icon {
+    font-size: 24px;
+    font-weight: bold;
+}
 
 
 
@@ -79,40 +87,36 @@
 ========================== */
 
 
-.chat-window {
 
+.chatbot-window {
+
+    position: absolute;
+
+    bottom: 80px;
+
+    right: 0;
 
     width: 380px;
 
     height: 560px;
 
-
     background:
 
         rgba(255, 255, 255, 0.95);
 
-
     backdrop-filter: blur(20px);
-
 
     border-radius: 25px;
 
-
     overflow: hidden;
-
 
     display: flex;
 
     flex-direction: column;
 
-
     box-shadow:
 
         0 25px 60px rgba(0, 0, 0, 0.25);
-
-
-    margin-bottom: 20px;
-
 
 }
 
@@ -120,15 +124,13 @@
 
 
 
-
-
 /* ==========================
- HEADER
+   HEADER
 ========================== */
 
 
-.chat-header {
 
+.chatbot-header {
 
     background:
 
@@ -136,244 +138,106 @@
             #0A2540,
             #1E6FEB);
 
-
     color: white;
-
 
     padding: 18px;
 
-
     display: flex;
-
 
     align-items: center;
 
-
     gap: 12px;
-
 
 }
 
 
 
-.chat-logo {
-
+.chatbot-logo {
 
     width: 45px;
 
     height: 45px;
 
-
     object-fit: contain;
 
-
     background: white;
-
 
     border-radius: 50%;
 
-
     padding: 5px;
 
-
 }
 
-
-
-
-
-.chat-header h4 {
-
-
-    margin: 0;
-
-
-    font-size: 16px;
-
-
-}
-
-
-
-.chat-header span {
-
-
-    font-size: 12px;
-
-    opacity: 0.8;
-
-}
-
-
-
-
-
-.new-chat {
-
-
-    margin-left: auto;
-
-
-    border: none;
-
-
-    background: #14B8A6;
-
-
-    color: white;
-
-
-    padding: 7px 12px;
-
-
-    border-radius: 20px;
-
-
-    cursor: pointer;
-
-
-    font-size: 12px;
-
-
-}
-
-
-
-
-
-
-
-.new-chat:hover {
-
-
-    background: white;
-
-
-    color: #0A2540;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================
- QUICK QUESTIONS
-========================== */
-
-
-.quick-buttons {
-
-
-    padding: 12px;
-
-
+.header-content {
     display: flex;
-
-
-    gap: 8px;
-
-
-    overflow-x: auto;
-
-
-    background: #f5f8fb;
-
-
+    align-items: center;
+    gap: 12px;
 }
 
+.header-content h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
 
-
-
-.quick-buttons button {
-
-
-    border: none;
-
-
-    white-space: nowrap;
-
-
-    padding: 8px 14px;
-
-
-    border-radius: 20px;
-
-
-    cursor: pointer;
-
-
-    background: #0A2540;
-
-
-    color: white;
-
-
+.status-text {
+    margin: 0;
     font-size: 12px;
-
-
+    opacity: 0.8;
 }
 
-
-
-
-.quick-buttons button:hover {
-
-
+.new-chat-btn {
+    margin-left: auto;
+    border: none;
     background: #14B8A6;
-
-
+    color: white;
+    padding: 7px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
 }
 
+.new-chat-btn:hover {
+    background: white;
+    color: #0A2540;
+}
 
 
 
 
 
 /* ==========================
- CHAT BODY
+   MESSAGES
 ========================== */
 
 
-.chat-body {
 
+.chatbot-messages {
 
     flex: 1;
 
-
     padding: 15px;
-
 
     overflow-y: auto;
 
-
     display: flex;
-
 
     flex-direction: column;
 
-
     gap: 12px;
-
 
 }
 
 
 
-
-
-
-.chat-body::-webkit-scrollbar {
+.chatbot-messages::-webkit-scrollbar {
 
     width: 5px;
 
 }
 
-
-.chat-body::-webkit-scrollbar-thumb {
+.chatbot-messages::-webkit-scrollbar-thumb {
 
     background: #14B8A6;
 
@@ -383,54 +247,37 @@
 
 
 
-
-
-
-
-.bot {
-
-
-    align-self: flex-start;
-
+.message {
 
     max-width: 80%;
-
-
-    background: #e9f7f6;
-
-
-    color: #0A2540;
-
 
     padding: 12px 15px;
 
-
-    border-radius: 18px 18px 18px 5px;
-
-
-    white-space: pre-line;
-
+    border-radius: 18px;
 
     font-size: 14px;
 
+    white-space: pre-line;
+
+    line-height: 1.4;
 
 }
 
+.message.bot {
 
+    align-self: flex-start;
 
+    background: #e9f7f6;
 
+    color: #0A2540;
 
+    border-radius: 18px 18px 18px 5px;
 
+}
 
-
-.user {
-
+.message.user {
 
     align-self: flex-end;
-
-
-    max-width: 80%;
-
 
     background:
 
@@ -438,226 +285,268 @@
             #1E6FEB,
             #14B8A6);
 
-
     color: white;
-
-
-    padding: 12px 15px;
-
 
     border-radius: 18px 18px 5px 18px;
 
-
-    font-size: 14px;
-
-
 }
 
-
-
-
-
-
-
-
-
-/* ==========================
- FOOTER
-========================== */
-
-
-.chat-footer {
-
-
-    padding: 12px;
-
+.message.typing {
 
     display: flex;
 
+    gap: 5px;
 
-    gap: 8px;
-
-
-    border-top: 1px solid #ddd;
-
+    padding: 15px;
 
 }
 
+.message.typing span {
 
+    width: 8px;
 
-
-.chat-footer input {
-
-
-    flex: 1;
-
-
-    border: 1px solid #ddd;
-
-
-    padding: 12px;
-
-
-    border-radius: 25px;
-
-
-    outline: none;
-
-
-    font-size: 14px;
-
-
-}
-
-
-
-
-
-
-.chat-footer button {
-
-
-    border: none;
-
+    height: 8px;
 
     background: #14B8A6;
 
+    border-radius: 50%;
 
-    color: white;
-
-
-    padding: 10px 18px;
-
-
-    border-radius: 25px;
-
-
-    cursor: pointer;
-
+    animation: typing 1.4s infinite;
 
 }
 
+.message.typing span:nth-child(2) {
 
-
-
-
-
-
-.chat-footer button:hover {
-
-
-    background: #0A2540;
-
+    animation-delay: 0.2s;
 
 }
 
+.message.typing span:nth-child(3) {
 
+    animation-delay: 0.4s;
+
+}
+
+@keyframes typing {
+
+    0%, 60%, 100% {
+
+        transform: translateY(0);
+
+    }
+
+    30% {
+
+        transform: translateY(-10px);
+
+    }
+
+}
 
 
 
 
 
 /* ==========================
- VOICE BUTTON
+   QUICK QUESTIONS
 ========================== */
 
 
-.voice-btn {
 
+.quick-questions {
 
-    width: 40px;
-
-
-    height: 40px;
-
-
-    border-radius: 50%;
-
+    padding: 12px;
 
     display: flex;
 
+    gap: 8px;
 
-    align-items: center;
+    overflow-x: auto;
 
-
-    justify-content: center;
-
-
-    background: #1E6FEB !important;
-
-
-    padding: 0 !important;
-
+    background: #f5f8fb;
 
 }
 
 
 
+.quick-btn {
 
+    border: none;
 
+    white-space: nowrap;
 
-.voice-btn:hover {
+    padding: 8px 14px;
 
+    border-radius: 20px;
 
-    background: #0A2540 !important;
+    cursor: pointer;
 
+    background: #0A2540;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 500;
 
 }
 
 
 
+.quick-btn:hover {
+
+    background: #14B8A6;
+
+}
 
 
 
 
 
 /* ==========================
- MOBILE RESPONSIVE
+   INPUT
 ========================== */
+
+
+
+.chatbot-input {
+
+    padding: 12px;
+
+    display: flex;
+
+    gap: 8px;
+
+    border-top: 1px solid #ddd;
+
+}
+
+
+
+.chatbot-input input {
+
+    flex: 1;
+
+    border: 1px solid #ddd;
+
+    padding: 12px;
+
+    border-radius: 25px;
+
+    outline: none;
+
+    font-size: 14px;
+
+}
+
+.chatbot-input input:focus {
+
+    border-color: #14B8A6;
+
+}
+
+.voice-btn {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #1E6FEB !important;
+
+    border: none;
+
+    cursor: pointer;
+
+    color: white;
+
+    padding: 0 !important;
+
+}
+
+.voice-btn:hover {
+
+    background: #0A2540 !important;
+
+}
+
+.send-btn {
+
+    border: none;
+
+    background: #14B8A6;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+.send-btn:hover {
+
+    background: #0A2540;
+
+}
+
+
+
+
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+
 
 
 @media(max-width:600px) {
 
 
 
-    .chatbot {
-
+    .chatbot-container {
 
         right: 15px;
 
         bottom: 15px;
 
-
     }
 
 
 
-
-
-    .chat-window {
-
+    .chatbot-window {
 
         width: calc(100vw - 30px);
 
-
         height: 520px;
 
+        bottom: 80px;
 
     }
 
 
 
-
-    .chat-header h4 {
-
+    .header-content h3 {
 
         font-size: 14px;
 
-
     }
 
+    .quick-questions {
 
+        flex-wrap: wrap;
 
-
+    }
 
 }

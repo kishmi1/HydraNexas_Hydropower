@@ -14,11 +14,18 @@ export default function GalleryPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/api/media-gallery")
-            .then((res) => res.json())
+        fetch("/api/gallery")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then((data) => {
                 if (data.success) {
-                    setMediaGallery(data.mediaGallerys || data.mediaGallery || []);
+                    setMediaGallery(data.gallery || []);
+                } else {
+                    console.error("API Error:", data.message);
                 }
                 setLoading(false);
             })
@@ -82,7 +89,7 @@ export default function GalleryPage() {
 
                     <tbody>
 
-                        {gallery.map((item) => (
+                        {mediaGallery.map((item) => (
 
                             <tr
                                 key={item.id}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {motion} from "framer-motion";
+import {useParams} from "next/navigation";
 import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
 import "./EventDetails.css";
@@ -19,7 +20,8 @@ const images = {
 };
 
 
-export default function EventDetails({ params }){
+export default function EventDetails(){
+    const params = useParams();
 
     const event = events.find(
         (item)=> item.id === Number(params.id)
@@ -76,6 +78,16 @@ export default function EventDetails({ params }){
     initial={{opacity:0, x:50}}
     animate={{opacity:1, x:0}}
     transition={{duration:0.8, delay:0.3}}
+    className="event-description"
+>
+    {event.description}
+</motion.p>
+
+
+<motion.p
+    initial={{opacity:0, x:50}}
+    animate={{opacity:1, x:0}}
+    transition={{duration:0.8, delay:0.3}}
 >
     📅 {event.date}
 </motion.p>
@@ -106,7 +118,7 @@ export default function EventDetails({ params }){
 >
 
 <Link
-    href="/events"
+    href="/news/events"
     className="primary-btn"
 >
     Back to Events

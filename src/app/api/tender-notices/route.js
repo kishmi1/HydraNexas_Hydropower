@@ -2,21 +2,30 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
+    try {
+        const notices = await prisma.tenderNotice.findMany({
 
-    const notices = await prisma.tenderNotice.findMany({
+            orderBy: {
+                createdAt: "desc",
+            },
 
-        orderBy: {
-            createdAt: "desc",
-        },
+        });
 
-    });
+        return NextResponse.json({
 
-    return NextResponse.json({
+            success: true,
+            notices,
 
-        success: true,
-        notices,
-
-    });
+        });
+    } catch (error) {
+        console.error("Error fetching tender notices:", error);
+        return NextResponse.json({
+            success: false,
+            message: error.message,
+        }, {
+            status: 500,
+        });
+    }
 
 }
 

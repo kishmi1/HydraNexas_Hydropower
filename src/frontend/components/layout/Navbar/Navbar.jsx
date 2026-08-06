@@ -16,12 +16,66 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const { t, i18n } = useTranslation();
   const pathname = usePathname();
 
   const language = i18n.language;
 const dropdownRef = useRef();
+
+  // Load Google Translate script
+  useEffect(() => {
+    if (!document.getElementById('google_translate_script')) {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.id = 'google_translate_script';
+      script.async = true;
+      document.body.appendChild(script);
+
+      window.googleTranslateElementInit = function() {
+        new window.google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,ne',
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
+        }, 'google_translate_element');
+      };
+    }
+  }, []);
+
+  // Auto-translate function using cookie method
+  const handleLanguageChange = (lang) => {
+    setIsTranslating(true);
+    
+    // Change i18n language
+    i18n.changeLanguage(lang);
+    document.documentElement.lang = lang;
+    
+    // Set Google Translate cookie
+    const date = new Date();
+    date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    
+    if (lang === 'np') {
+      document.cookie = "googtrans=/en/ne; " + expires + "; path=/";
+      document.cookie = "googtrans=/en/ne; " + expires + "; path=/; domain=." + window.location.hostname;
+      
+      // Reload page to apply translation
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    } else {
+      document.cookie = "googtrans=/en/en; " + expires + "; path=/";
+      document.cookie = "googtrans=/en/en; " + expires + "; path=/; domain=." + window.location.hostname;
+      
+      // Reload page to remove translation
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }
+  };
 
 useEffect(() => {
 
@@ -216,20 +270,16 @@ useEffect(() => {
             >
 
               <button
-                onClick={() => {
-                 i18n.changeLanguage("en");
-document.documentElement.lang = "en";
-                }}
+                onClick={() => handleLanguageChange("en")}
+                disabled={isTranslating}
               >
                 {language === "en" ? "✓ " : ""}
                 English
               </button>
 
               <button
-                onClick={() => {
-                 i18n.changeLanguage("np");
-document.documentElement.lang = "np";
-                }}
+                onClick={() => handleLanguageChange("np")}
+                disabled={isTranslating}
               >
                 {language === "np" ? "✓ " : ""}
                 नेपाली

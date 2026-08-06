@@ -12,24 +12,35 @@ import DashboardCard from "@/components/dashboard/DashboardCard";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RecentNews from "@/components/dashboard/RecentNews";
 import RecentActivity from "@/components/dashboard/RecentActivity";
+import LiveDashboard from "@/components/dashboard/LiveDashboard";
 
 export default function DashboardPage() {
     const [totalNews, setTotalNews] = useState(0);
     const [totalProjects, setTotalProjects] = useState(0);
+    const [totalCareers, setTotalCareers] = useState(0);
+    const [totalTenderNotices, setTotalTenderNotices] = useState(0);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Fetch stats from APIs
         Promise.all([
-            fetch("/api/news").then(res => res.json()),
-            fetch("/api/projects").then(res => res.json())
+            fetch("/api/news").then(res => res.json()).catch(() => ({ success: false })),
+            fetch("/api/projects").then(res => res.json()).catch(() => ({ success: false })),
+            fetch("/api/job-openings").then(res => res.json()).catch(() => ({ success: false })),
+            fetch("/api/tender-notices").then(res => res.json()).catch(() => ({ success: false }))
         ])
-        .then(([newsData, projectsData]) => {
+        .then(([newsData, projectsData, careersData, tenderNoticesData]) => {
             if (newsData.success) {
                 setTotalNews(newsData.news?.length || 0);
             }
             if (projectsData.success) {
                 setTotalProjects(projectsData.projects?.length || 0);
+            }
+            if (careersData.success) {
+                setTotalCareers(careersData.jobOpenings?.length || 0);
+            }
+            if (tenderNoticesData.success) {
+                setTotalTenderNotices(tenderNoticesData.notices?.length || 0);
             }
             setLoading(false);
         })
@@ -54,6 +65,9 @@ export default function DashboardPage() {
                 Welcome to HydraNexa Admin Panel.
             </p>
 
+            {/* Live Dashboard */}
+            <LiveDashboard />
+
             <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
                 <DashboardCard
@@ -71,14 +85,14 @@ export default function DashboardPage() {
 
                 <DashboardCard
                     title="Careers"
-                    value="0"
+                    value={totalCareers}
                     icon={Briefcase}
                     color="bg-orange-500"
                 />
 
                 <DashboardCard
                     title="Tender Notices"
-                    value="0"
+                    value={totalTenderNotices}
                     icon={FileText}
                     color="bg-purple-600"
                 />

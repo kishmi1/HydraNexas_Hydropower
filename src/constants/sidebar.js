@@ -25,8 +25,28 @@ export const SIDEBAR_ITEMS = [
     },
     {
         title: "News",
-        href: "/dashboard/news",
         icon: Newspaper,
+
+        children: [
+
+            {
+                title: "News",
+                href: "/dashboard/news",
+                icon: Newspaper,
+            },
+            {
+                title: "Press Releases",
+                href: "/dashboard/press-releases",
+                icon: FileText,
+            },
+            {
+                title: "Events",
+                href: "/dashboard/events",
+                icon: CalendarDays,
+            },
+
+        ],
+
     },
     {
         title: "Projects",
@@ -184,11 +204,7 @@ export const SIDEBAR_ITEMS = [
         ],
 
     },
-    {
-        title: "Events",
-        href: "/dashboard/events",
-        icon: CalendarDays,
-    },
+
     {
         title: "Users",
         href: "/dashboard/users",

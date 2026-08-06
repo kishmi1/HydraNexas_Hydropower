@@ -244,6 +244,23 @@ model Event {
   updatedAt   DateTime @updatedAt
 }
 
+model PressRelease {
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  summary         String
+  content         String
+  featuredImage   String?
+  category        String
+  publishedDate   String
+  author          String
+  pdfUrl          String?
+  tags            String[]
+  status          String   @default("Draft")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String

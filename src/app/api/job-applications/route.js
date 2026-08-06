@@ -5,21 +5,25 @@ import streamifier from "streamifier";
 
 export async function GET() {
     try {
+        console.log("Fetching job applications...");
         const applications = await prisma.jobApplication.findMany({
             orderBy: {
                 createdAt: "desc",
             },
         });
+        console.log("Job applications fetched:", applications.length);
 
         return NextResponse.json({
             success: true,
             applications,
         });
     } catch (error) {
+        console.error("Error fetching job applications:", error);
         return NextResponse.json(
             {
                 success: false,
                 message: error.message,
+                details: error.toString(),
             },
             {
                 status: 500,

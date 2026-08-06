@@ -2,21 +2,30 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
+    try {
+        const jobs = await prisma.jobOpening.findMany({
 
-    const jobs = await prisma.jobOpening.findMany({
+            orderBy: {
+                createdAt: "desc",
+            },
 
-        orderBy: {
-            createdAt: "desc",
-        },
+        });
 
-    });
+        return NextResponse.json({
 
-    return NextResponse.json({
+            success: true,
+            jobOpenings: jobs,
 
-        success: true,
-        jobs,
-
-    });
+        });
+    } catch (error) {
+        console.error("Error fetching job openings:", error);
+        return NextResponse.json({
+            success: false,
+            message: error.message,
+        }, {
+            status: 500,
+        });
+    }
 
 }
 
