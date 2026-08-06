@@ -74,15 +74,15 @@ export default function QuickActions() {
                                 <Icon size={24} />
                             </div>
 
-                            <div>
-                                <h3 className="font-semibold text-slate-800">
-                                    {action.title}
-                                </h3>
+                         <div>
+    <h3 className="text-sm font-semibold text-slate-800">
+        {action.title}
+    </h3>
 
-                                <p className="mt-1 text-sm text-slate-500">
-                                    {action.subtitle}
-                                </p>
-                            </div>
+    <p className="mt-1 text-xs text-slate-500">
+        {action.subtitle}
+    </p>
+</div>
                         </Link>
                     );
                 })}

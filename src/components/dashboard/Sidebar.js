@@ -80,10 +80,9 @@ export default function Sidebar() {
                     />
 
                     <div>
-
-                        <h2 className="text-lg font-bold">
-                            {COMPANY.shortName}
-                        </h2>
+<h2 className="text-xl font-bold text-white drop-shadow-sm">
+    {COMPANY.shortName}
+</h2>
 
                         <p className="text-xs text-slate-400">
                             Admin Panel

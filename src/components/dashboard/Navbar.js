@@ -209,9 +209,9 @@ export default function Navbar() {
 
                     <div className="hidden lg:block">
 
-                        <h3 className="font-semibold text-slate-800">
-                            Super Admin
-                        </h3>
+<h3 className="text-sm font-semibold text-slate-600">
+    Super Admin
+</h3>
 
                         <p className="text-xs text-slate-500">
                             admin@hydranexa.com

@@ -31,7 +31,7 @@ export default function RecentNews() {
 
             <div className="flex items-center justify-between">
 
-                <h2 className="text-xl font-semibold text-slate-800">
+                <h2 className="text-xl font-semibold text-slate-600">
                     Recent News
                 </h2>
 
@@ -64,23 +64,23 @@ export default function RecentNews() {
                                 key={item.id}
                                 className="flex items-center justify-between rounded-xl border border-slate-200 p-4"
                             >
+<div>
+    <h3 className="text-base font-semibold text-slate-800">
+        {item.title}
+    </h3>
 
-                                <div>
-                                    <h3 className="font-semibold text-slate-800">
-                                        {item.title}
-                                    </h3>
+    <p className="mt-1 text-xs text-slate-500">
+        {item.category}
+    </p>
+</div>
+                               <span
 
-                                    <p className="mt-1 text-sm text-slate-500">
-                                        {item.category}
-                                    </p>
-                                </div>
-
-                                <span
-                                    className={`rounded-full px-3 py-1 text-xs font-medium ${item.status === "Published"
-                                            ? "bg-green-100 text-green-700"
-                                            : "bg-yellow-100 text-yellow-700"
-                                        }`}
-                                >
+  className={`rounded-full px-3 py-1 text-[10px] font-medium ${
+    item.status === "Published"
+      ? "bg-green-100 text-green-700"
+      : "bg-yellow-100 text-yellow-700"
+  }`}
+>
                                     {item.status}
                                 </span>
 
