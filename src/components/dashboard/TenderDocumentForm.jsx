@@ -54,7 +54,7 @@ export default function TenderDocumentForm({
 
             uploadData.append("file", formData.file);
 
-            const uploadRes = await fetch("/api/upload", {
+            const uploadRes = await fetch("/api/upload-pdf", {
 
                 method: "POST",
                 body: uploadData,

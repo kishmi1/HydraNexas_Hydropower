@@ -96,6 +96,7 @@ export default function PressReleases() {
           href={item.pdfUrl}
           target="_blank"
           rel="noopener noreferrer"
+          download
           className="read-btn"
         >
           Read PDF →

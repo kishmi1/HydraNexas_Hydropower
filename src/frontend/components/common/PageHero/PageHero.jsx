@@ -12,8 +12,8 @@ export default function PageHero({
       style={{
         backgroundImage: `
           linear-gradient(
-            rgba(6, 35, 64, 0.70),
-            rgba(6, 35, 64, 0.70)
+            rgba(6, 35, 64, 0.85),
+            rgba(6, 35, 64, 0.85)
           ),
           url(${backgroundImage})
         `,

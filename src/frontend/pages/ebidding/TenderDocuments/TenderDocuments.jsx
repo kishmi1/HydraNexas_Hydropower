@@ -96,6 +96,7 @@ useEffect(() => {
     href={doc.file}
     target="_blank"
     rel="noopener noreferrer"
+    download
     className="primary-btn"
   >
     <FaDownload />

@@ -88,6 +88,7 @@ export default function Downloads() {
                       href={file.file}
                       target="_blank"
                       rel="noopener noreferrer"
+                      download
                       className="download-btn"
                     >
                       Download

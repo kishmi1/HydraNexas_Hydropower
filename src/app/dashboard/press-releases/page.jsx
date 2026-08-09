@@ -95,6 +95,7 @@ export default function PressReleasesPage() {
 <th className="p-4 text-left">Author</th>
 <th className="p-4 text-left">Published Date</th>
 <th className="p-4 text-left">Status</th>
+<th className="p-4 text-left">PDF</th>
 <th className="p-4 text-center">Actions</th>
 
 </tr>
@@ -134,6 +135,20 @@ export default function PressReleasesPage() {
                                     }`}>
                                         {item.status}
                                     </span>
+                                </td>
+
+                                <td className="p-4">
+                                    {item.pdfUrl && (
+                                        <a
+                                            href={item.pdfUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            View PDF
+                                        </a>
+                                    )}
                                 </td>
 
                                 <td className="flex justify-center gap-3 p-4">

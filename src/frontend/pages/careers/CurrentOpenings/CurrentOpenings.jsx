@@ -25,7 +25,12 @@ export default function CurrentOpenings(){
     fetch("/api/job-openings")
       .then((res) => res.json())
       .then((data) => {
-        setJobs(data.jobs);
+        setJobs(data.jobOpenings || []);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching jobs:", error);
+        setJobs([]);
         setLoading(false);
       });
   }, []);

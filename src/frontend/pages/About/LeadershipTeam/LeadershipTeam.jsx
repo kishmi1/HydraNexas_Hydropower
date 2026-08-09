@@ -193,10 +193,12 @@ if (leadershipTeam.length === 0) {
             <div className="ceo-image">
 
 
-            <img
-  src={ceoMember.image}
-  alt={ceoMember.name}
-/>
+            {ceoMember.image && (
+              <img
+                src={ceoMember.image}
+                alt={ceoMember.name}
+              />
+            )}
 
 
             </div>
@@ -308,10 +310,12 @@ if (leadershipTeam.length === 0) {
                 <div className="leader-image">
 
 
-              <img
-  src={member.image}
-  alt={member.name}
-/>
+              {member.image && (
+                <img
+                  src={member.image}
+                  alt={member.name}
+                />
+              )}
 
 
                 </div>

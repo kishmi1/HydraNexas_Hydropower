@@ -58,9 +58,8 @@ async function handleSubmit(e) {
         const uploadData = new FormData();
 
         uploadData.append("file", formData.file);
-        uploadData.append("folder", "hydranexa/annual-reports");
 
-        const uploadRes = await fetch("/api/upload", {
+        const uploadRes = await fetch("/api/upload-pdf", {
 
             method: "POST",
             body: uploadData,
@@ -76,7 +75,7 @@ async function handleSubmit(e) {
 
         }
 
-        fileUrl = uploadResult.imageUrl;
+        fileUrl = uploadResult.url;
 
     }
 

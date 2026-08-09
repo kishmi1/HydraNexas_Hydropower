@@ -74,6 +74,7 @@ export default function TenderDocumentsPage() {
                             <th className="p-4 text-left">Type</th>
                             <th className="p-4 text-left">Size</th>
                             <th className="p-4 text-left">Upload Date</th>
+                            <th className="p-4 text-left">File</th>
                             <th className="p-4 text-center">Actions</th>
 
                         </tr>
@@ -93,6 +94,19 @@ export default function TenderDocumentsPage() {
                                 <td className="p-4">{document.type}</td>
                                 <td className="p-4">{document.size}</td>
                                 <td className="p-4">{document.uploadDate}</td>
+                                <td className="p-4">
+                                    {document.file && (
+                                        <a
+                                            href={document.file}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            View File
+                                        </a>
+                                    )}
+                                </td>
 
                                 <td className="flex justify-center gap-3 p-4">
 

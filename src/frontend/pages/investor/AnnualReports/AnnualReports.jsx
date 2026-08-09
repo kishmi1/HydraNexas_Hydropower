@@ -87,6 +87,7 @@ export default function AnnualReports() {
                       href={report.file}
                       target="_blank"
                       rel="noopener noreferrer"
+                      download
                       className="primary-btn"
                     >
                       Download Report

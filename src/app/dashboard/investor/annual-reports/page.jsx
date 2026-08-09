@@ -125,6 +125,8 @@ export default function AnnualReportsPage() {
                                         <a
                                             href={item.file}
                                             target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
                                             className="text-blue-600 hover:underline"
                                         >
                                             View PDF

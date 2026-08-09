@@ -77,6 +77,10 @@ export default function DownloadsPage() {
                             </th>
 
                             <th className="px-6 py-4 text-left">
+                                File
+                            </th>
+
+                            <th className="px-6 py-4 text-left">
                                 Size
                             </th>
 
@@ -100,6 +104,20 @@ export default function DownloadsPage() {
 
                                 <td className="px-6 py-4">
                                     {item.type}
+                                </td>
+
+                                <td className="px-6 py-4">
+                                    {item.file && (
+                                        <a
+                                            href={item.file}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            View File
+                                        </a>
+                                    )}
                                 </td>
 
                                 <td className="px-6 py-4">

@@ -18,7 +18,7 @@ export default function JobOpeningsPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) {
-                    setJobOpenings(data.jobs || []);
+                    setJobOpenings(data.jobOpenings || []);
                 }
                 setLoading(false);
             })
