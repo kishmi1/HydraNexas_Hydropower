@@ -24,16 +24,20 @@ export default function MediaGallery() {
 
  .then(res=> {
     if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+        console.error("API Error - Status:", res.status);
+        setGallery([]); // Set empty array on error
+        setLoading(false);
+        return null;
     }
     return res.json();
  })
 
  .then(data=>{
-    if (data.success) {
+    if (data && data.success) {
         setGallery(data.gallery || []);
     } else {
-        console.error("API Error:", data.message);
+        console.error("API Error:", data?.message || "Unknown error");
+        setGallery([]); // Set empty array on error
     }
     setLoading(false);
 
@@ -41,6 +45,7 @@ export default function MediaGallery() {
 
  .catch(error=>{
     console.error("Error fetching gallery:", error);
+    setGallery([]); // Set empty array on error
     setLoading(false);
  });
 
@@ -157,27 +162,22 @@ const closeVideoModal = () => {
             )
           }
 
+          <div className="section-header video-title">
 
+            <span>Videos</span>
 
+            <h2>Video Gallery</h2>
 
+            <p>
+              Watch our hydropower projects, construction progress,
+              community activities and corporate events.
+            </p>
+
+          </div>
 
           <ScrollAnimation direction="left">
 
-
-            <div className="section-header video-title">
-
-              <span>Videos</span>
-
-              <h2>Video Gallery</h2>
-
-
-            </div>
-
-
-
-
             <div className="video-grid">
-
 
               {
                 videos.map((video)=>(
@@ -189,13 +189,15 @@ const closeVideoModal = () => {
                   >
 
 
-
                    <div className="video-image">
-                    <div className="video-thumbnail">
-                      <div className="play-icon">▶</div>
-                    </div>
+                    {video.image ? (
+                      <img src={video.image} alt={video.title} />
+                    ) : (
+                      <div className="video-thumbnail">
+                        <div className="play-icon">▶</div>
+                      </div>
+                    )}
                   </div>
-
 
 
 
@@ -232,20 +234,16 @@ const closeVideoModal = () => {
               }
 
 
-
             </div>
 
 
-
           </ScrollAnimation>
-
 
 
         </div>
 
 
       </section>
-
 
 
       <CTASection />

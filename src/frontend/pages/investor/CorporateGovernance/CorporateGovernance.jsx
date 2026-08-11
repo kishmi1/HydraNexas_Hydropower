@@ -5,7 +5,6 @@ import "./CorporateGovernance.css";
 import { useEffect, useState } from "react";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/investor/corporate-governance-hero.jpg";
 
@@ -91,8 +90,6 @@ export default function CorporateGovernance() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

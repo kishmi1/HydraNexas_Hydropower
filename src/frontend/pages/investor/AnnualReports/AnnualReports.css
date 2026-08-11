@@ -1,6 +1,10 @@
+/* ==========================
+   PROFESSIONAL REPORTS SECTION
+========================== */
+
 .reports-section {
-    padding: 100px 0;
-    background: #f8fafc;
+    padding: var(--section-padding-lg) 0;
+    background: var(--bg-secondary);
 }
 
 /* ==========================
@@ -8,12 +12,10 @@
 ========================== */
 
 .reports-grid {
-    margin-top: 70px;
-
+    margin-top: 48px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-
-    gap: 35px;
+    gap: 32px;
 }
 
 /* ==========================
@@ -21,24 +23,38 @@
 ========================== */
 
 .report-card {
-    background: #ffffff;
-
-    border-radius: 22px;
-
-    padding: 35px;
-
-    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
-
-    transition: .35s ease;
-
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--medium-gray);
+    transition: var(--transition-base);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.report-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: var(--transition-base);
 }
 
 .report-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
 
-    box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
+.report-card:hover::before {
+    transform: scaleX(1);
 }
 
 /* ==========================
@@ -47,20 +63,13 @@
 
 .report-year {
     width: fit-content;
-
     background: var(--accent);
-
-    color: #fff;
-
+    color: var(--white);
     padding: 8px 18px;
-
-    border-radius: 30px;
-
-    font-size: .9rem;
-
-    font-weight: 700;
-
-    margin-bottom: 20px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-5);
 }
 
 /* ==========================
@@ -69,12 +78,10 @@
 
 .report-card h3 {
     color: var(--primary);
-
-    font-size: 1.5rem;
-
-    margin-bottom: 18px;
-
-    line-height: 1.4;
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-tight);
+    font-weight: var(--font-bold);
 }
 
 /* ==========================
@@ -82,13 +89,11 @@
 ========================== */
 
 .report-card p {
-    color: var(--gray);
-
-    line-height: 1.9;
-
-    margin-bottom: 35px;
-
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
     flex: 1;
+    font-size: var(--text-sm);
 }
 
 /* ==========================
@@ -97,71 +102,61 @@
 
 .report-card .primary-btn {
     width: fit-content;
-
-    padding: 12px 26px;
-
-    border-radius: 50px;
-
-    background: var(--highlight);
-
-    color: #fff;
-
+    padding: 12px 24px;
+    border-radius: var(--radius-lg);
+    background: var(--accent);
+    color: var(--white);
     text-decoration: none;
-
-    font-weight: 600;
-
-    transition: .3s;
+    font-weight: var(--font-semibold);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-sm);
 }
 
 .report-card .primary-btn:hover {
-    background: var(--accent);
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* ==========================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 ========================== */
 
-@media(max-width:992px) {
-
+@media (max-width: 992px) {
     .reports-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
-@media(max-width:768px) {
-
+@media (max-width: 768px) {
     .reports-section {
-        padding: 70px 0;
+        padding: var(--section-padding-md) 0;
     }
 
+    .report-card {
+        padding: 32px;
+    }
+
+    .report-card h3 {
+        font-size: var(--text-lg);
+    }
+}
+
+@media (max-width: 480px) {
     .report-card {
         padding: 28px;
     }
 
-    .report-card h3 {
-        font-size: 1.35rem;
-    }
-
-}
-
-@media(max-width:576px) {
-
-    .report-card {
-        padding: 22px;
-    }
-
     .report-year {
-        font-size: .8rem;
+        font-size: var(--text-xs);
     }
 
     .report-card h3 {
-        font-size: 1.2rem;
+        font-size: var(--text-base);
     }
 
     .report-card .primary-btn {
         width: 100%;
         text-align: center;
     }
-
 }

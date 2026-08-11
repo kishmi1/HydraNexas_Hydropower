@@ -5,7 +5,6 @@ import "./ShareInformation.css";
 import { useEffect, useState } from "react";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/investor/share-information-hero.jpg";
 
@@ -149,8 +148,6 @@ export default function ShareInformation() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

@@ -1,3 +1,5 @@
+@import "../../../styles/variables.css";
+
 /* =====================================================
    INTERNSHIP PROGRAM
 ===================================================== */
@@ -24,16 +26,19 @@
 
     position: absolute;
 
-    width: 380px;
-    height: 380px;
+    width: 500px;
+    height: 500px;
 
-    top: -180px;
-    right: -120px;
+    top: -150px;
+    right: -100px;
 
     border-radius: 50%;
 
-    background: rgba(0, 132, 61, .05);
+    background: rgba(13, 148, 136, .2);
 
+    filter: blur(60px);
+
+    z-index: 0;
 }
 
 .internship-section::after {
@@ -42,16 +47,19 @@
 
     position: absolute;
 
-    width: 280px;
-    height: 280px;
+    width: 400px;
+    height: 400px;
 
-    bottom: -120px;
+    bottom: -100px;
     left: -80px;
 
     border-radius: 50%;
 
-    background: rgba(0, 91, 170, .05);
+    background: rgba(10, 37, 64, .15);
 
+    filter: blur(50px);
+
+    z-index: 0;
 }
 
 /* ==========================
@@ -148,7 +156,7 @@
 
     background: linear-gradient(135deg,
             var(--primary),
-            var(--highlight));
+            var(--accent));
 
     color: #fff;
 
@@ -159,6 +167,13 @@
     box-shadow:
         0 15px 35px rgba(0, 91, 170, .25);
 
+}
+
+.internship-icon svg {
+    color: #fff;
+    font-size: 34px;
+    width: 34px;
+    height: 34px;
 }
 
 .internship-card:hover .internship-icon {

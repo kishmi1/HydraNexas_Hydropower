@@ -3,7 +3,6 @@
 import "./InternshipProgram.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 import { useEffect, useState } from "react";
 const heroImage = "/assets/images/careers/internship-hero.jpg";
 
@@ -150,8 +149,6 @@ useEffect(() => {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

@@ -18,7 +18,7 @@ export default function Home() {
       <Sustainability/>
       <InvestorHighlights/>
       <LatestNews/>
-      <CTASection/>
+       <CTASection/> 
     </>
   );
 }

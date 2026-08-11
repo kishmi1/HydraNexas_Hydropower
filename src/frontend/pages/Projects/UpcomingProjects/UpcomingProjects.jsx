@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 import ScrollAnimation from "../../../components/common/ScrollAnimation/ScrollAnimation";
 
 const heroImage = "/assets/images/hero/project-hero.jpg";
@@ -137,8 +136,6 @@ export default function UpcomingProjects() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
 

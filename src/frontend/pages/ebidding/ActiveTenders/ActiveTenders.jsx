@@ -9,39 +9,39 @@ import {
   FaAward,
 } from "react-icons/fa";
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/ebidding/ebidding-hero.jpg";
 import { useEffect, useState } from "react";
 
 export default function ActiveTenders() {
   const [tenders, setTenders] = useState([]);
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  fetch("/api/active-tenders")
-    .then((res) => {
-      console.log("Response status:", res.status);
-      return res.json();
-    })
-    .then((data) => {
-      console.log("API Response:", data);
-      console.log("Tenders:", data.activeTenders);
+  useEffect(() => {
+    fetch("/api/active-tenders")
+      .then((res) => {
+        console.log("Response status:", res.status);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("API Response:", data);
+        console.log("Tenders:", data.activeTenders);
 
-      if (data.success && data.activeTenders) {
-        setTenders(data.activeTenders);
-      } else {
-        console.error("API returned no tenders or failed");
+        if (data.success && data.activeTenders) {
+          setTenders(data.activeTenders);
+        } else {
+          console.error("API returned no tenders or failed");
+          setTenders([]);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
         setTenders([]);
-      }
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error);
-      setTenders([]);
-      setLoading(false);
-    });
-}, []);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <>
       <PageHero
@@ -56,9 +56,7 @@ useEffect(() => {
         <div className="container">
 
           {/* Header */}
-
-          <div className="section-header">
-
+          <div className="section-header fade-in-up">
             <span>Current Opportunities</span>
 
             <h2>Open Tender Notices</h2>
@@ -68,130 +66,115 @@ useEffect(() => {
               suppliers and consultants to participate in the
               following procurement opportunities.
             </p>
-
           </div>
-          <p>Total Tenders: {tenders.length}</p>
+
+          <p className="tender-count">Total Tenders: {tenders.length}</p>
 
           {/* Tender Cards */}
-
           <div className="tender-grid">
+            {loading ? (
+              <p>Loading tenders...</p>
+            ) : (
+              tenders.map((tender, index) => (
+                <div
+                  className="tender-card fade-in-up"
+                  key={tender.id}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <span className="status open">
+                    {tender.status}
+                  </span>
 
-           {loading ? (
-  <p>Loading tenders...</p>
-) : (
-  tenders.map((tender) => (
-<div
-  className="tender-card"
-  key={tender.id}
->
+                  <h3>{tender.title}</h3>
 
-  <span className="status open">
-    {tender.status}
-  </span>
+                  <div className="tender-info">
+                    <p>
+                      <strong>Tender No:</strong> {tender.tenderNo}
+                    </p>
 
-  <h3>{tender.title}</h3>
+                    <p>
+                      <strong>Closing Date:</strong> {tender.closingDate}
+                    </p>
 
-  <div className="tender-info">
+                    <p>
+                      <strong>Type:</strong> {tender.type}
+                    </p>
 
-    <p>
-      <strong>Tender No:</strong> {tender.tenderNo}
-    </p>
+                    <p>
+                      <strong>Location:</strong> {tender.location}
+                    </p>
+                  </div>
 
-    <p>
-      <strong>Closing Date:</strong> {tender.closingDate}
-    </p>
-
-    <p>
-      <strong>Type:</strong> {tender.type}
-    </p>
-
-    <p>
-      <strong>Location:</strong> {tender.location}
-    </p>
-
-  </div>
-
-<Link href={`/ebidding/active-tenders/${tender.id}`}>
-  View Details
-</Link>
-
-</div>
-
-            )))}
-
+                  <Link
+                    href={`/ebidding/active-tenders/${tender.id}`}
+                    className="primary-btn"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              ))
+            )}
           </div>
 
           {/* Procurement Process */}
-
           <div className="process-section">
 
-            <div className="section-header">
-
+            <div className="section-header fade-in-up">
               <span>How It Works</span>
 
               <h2>Procurement Process</h2>
-
             </div>
 
             <div className="process-grid">
-
-              <div className="process-card">
-<div className="process-icon">
-    <FaUserPlus />
-</div>                <h3>Register</h3>
+              <div className="process-card fade-in-up" style={{ animationDelay: '0s' }}>
+                <div className="process-icon">
+                  <FaUserPlus />
+                </div>
+                <h3>Register</h3>
                 <p>Create your vendor account.</p>
               </div>
 
-              <div className="process-card">
-<div className="process-icon">
-    <FaFileDownload />
-</div>                <h3>Download</h3>
+              <div className="process-card fade-in-up" style={{ animationDelay: '0.1s' }}>
+                <div className="process-icon">
+                  <FaFileDownload />
+                </div>
+                <h3>Download</h3>
                 <p>Download tender documents.</p>
               </div>
 
-              <div className="process-card">
-<div className="process-icon">
-    <FaPaperPlane />
-</div>                <h3>Submit Bid</h3>
+              <div className="process-card fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <div className="process-icon">
+                  <FaPaperPlane />
+                </div>
+                <h3>Submit Bid</h3>
                 <p>Submit your proposal before deadline.</p>
               </div>
 
-              <div className="process-card">
-<div className="process-icon">
-    <FaAward />
-</div>                <h3>Award</h3>
+              <div className="process-card fade-in-up" style={{ animationDelay: '0.3s' }}>
+                <div className="process-icon">
+                  <FaAward />
+                </div>
+                <h3>Award</h3>
                 <p>Evaluation and contract award.</p>
               </div>
-
             </div>
-
           </div>
 
           {/* Notice */}
-
-          <div className="important-notice">
-
+          <div className="important-notice fade-in-up">
             <h3>Important Notice</h3>
 
             <ul>
-
               <li>Read all tender documents carefully before submission.</li>
-
               <li>Late bids will not be accepted.</li>
-
               <li>HydraNexa reserves the right to accept or reject any bid.</li>
-
               <li>Only registered vendors are eligible to participate.</li>
-
             </ul>
-
           </div>
 
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

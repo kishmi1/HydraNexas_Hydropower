@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 import Link from "next/link";
 
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function CompanyOverview() {
@@ -41,59 +40,16 @@ export default function CompanyOverview() {
 
       <div className="container company-grid">
 
-
-
         {/* LEFT IMAGE */}
-
-        <motion.div
-          className="company-image"
-          initial={{
-            opacity: 0,
-            x: -80
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0
-          }}
-          viewport={{
-            once: true,
-            amount: 0.3
-          }}
-          transition={{
-            duration: 0.8
-          }}
-        >
+        <div className="company-image fade-in-up">
           <img
             src={overviewImage}
             alt="HydraNexa"
           />
-        </motion.div>
-
-
-
-
+        </div>
 
         {/* RIGHT CONTENT */}
-
-        <motion.div
-          className="company-content"
-          initial={{
-            opacity: 0,
-            x: 80
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0
-          }}
-          viewport={{
-            once: true,
-            amount: 0.3
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.3
-          }}
-        >
+        <div className="company-content fade-in-up" style={{ animationDelay: '0.2s' }}>
           <span>
             {overview.subtitle}
           </span>
@@ -124,11 +80,9 @@ export default function CompanyOverview() {
           >
             {t("company.button")}
           </Link>
-        </motion.div>
-
+        </div>
 
       </div>
-
 
     </section>
 

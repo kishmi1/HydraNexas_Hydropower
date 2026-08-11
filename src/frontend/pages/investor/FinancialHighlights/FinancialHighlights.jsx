@@ -3,7 +3,6 @@
 import "./FinancialHighlights.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 import ScrollAnimation from "../../../components/common/ScrollAnimation/ScrollAnimation";
 import { useEffect, useState } from "react";
 
@@ -11,31 +10,25 @@ const heroImage = "/assets/images/investor/financial-hero.jpg";
 
 export default function FinancialHighlights() {
   const [financialHighlights, setFinancialHighlights] = useState([]);
-const [financialRatios, setFinancialRatios] = useState([]);
+  const [financialRatios, setFinancialRatios] = useState([]);
 
-useEffect(() => {
+  useEffect(() => {
+    fetch("/api/financial-highlights")
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setFinancialHighlights(result.financialHighlights || []);
+      });
 
-  fetch("/api/financial-highlights")
-    .then((res) => res.json())
-    .then((result) => {
+    fetch("/api/financial-ratios")
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setFinancialRatios(result.ratios || []);
+      });
 
-      console.log(result);
+  }, []);
 
-      setFinancialHighlights(result.financialHighlights || []);
-
-    });
-
-  fetch("/api/financial-ratios")
-    .then((res) => res.json())
-    .then((result) => {
-
-      console.log(result);
-
-      setFinancialRatios(result.ratios || []);
-
-    });
-
-}, []);
   return (
     <>
       <PageHero
@@ -49,8 +42,7 @@ useEffect(() => {
 
         <div className="container">
 
-          <div className="section-header">
-
+          <div className="section-header fade-in-up">
             <span>Financial Performance</span>
 
             <h2>
@@ -64,40 +56,29 @@ useEffect(() => {
               operational excellence, and a strong commitment to
               delivering long-term value to shareholders.
             </p>
-
           </div>
 
           {/* Financial Cards */}
-           <ScrollAnimation direction="left">
-          <div className="financial-grid">
+          <ScrollAnimation direction="left">
+            <div className="financial-grid">
+              {financialHighlights.map((item) => (
+                <div
+                  className="financial-card"
+                  key={item.id}
+                >
+                  <h3>{item.value}</h3>
 
-            {financialHighlights.map((item) => (
+                  <h4>{item.title}</h4>
 
-              <div
-                className="financial-card"
-                key={item.id}
-              >
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollAnimation>
 
-                <h3>{item.value}</h3>
-
-                <h4>{item.title}</h4>
-
-                <p>{item.description}</p>
-
-              </div>
-
-
-            ))}
-
-          </div>
-
-</ScrollAnimation>
           {/* Performance Summary */}
-
-          <div className="performance-summary">
-
+          <div className="performance-summary fade-in-up">
             <div className="summary-content">
-
               <span>Company Performance</span>
 
               <h2>
@@ -114,43 +95,31 @@ useEffect(() => {
                 value for investors while supporting Nepal's clean
                 energy future.
               </p>
-
             </div>
-
           </div>
 
           {/* Financial Ratios */}
-
           <div className="ratios-section">
-
             <h2>Key Financial Ratios</h2>
             <ScrollAnimation direction="left">
-            <div className="ratios-grid">
+              <div className="ratios-grid">
+                {financialRatios.map((ratio, index) => (
+                  <div
+                    className="ratio-card"
+                    key={index}
+                  >
+                    <h3>{ratio.value}</h3>
 
-              {financialRatios.map((ratio, index) => (
-
-                <div
-                  className="ratio-card"
-                  key={index}
-                >
-
-                  <h3>{ratio.value}</h3>
-
-                  <span>{ratio.title}</span>
-
-                </div>
-
-              ))}
-
-            </div>
-</ScrollAnimation>
+                    <span>{ratio.title}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollAnimation>
           </div>
 
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

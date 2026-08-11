@@ -158,25 +158,48 @@
 
     display: inline-block;
 
-    padding: 12px 25px;
+    padding: 16px 24px;
 
     border: none;
 
-    border-radius: 50px;
+    border-radius: var(--radius-lg);
 
-    background: var(--highlight);
+    background: #0A2540 !important;
 
-    color: #fff;
+    color: #FFFFFF !important;
 
     font-weight: 600;
 
     cursor: pointer;
 
     transition: .3s;
+
+    min-height: 52px;
+
+    line-height: 1.2;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    position: relative;
+
+    z-index: 10;
 }
 
 .project-content .primary-btn:hover {
-    background: var(--accent);
+    background: #071829 !important;
+
+    transform: translateY(-2px);
+
+    color: #FFFFFF !important;
+}
+
+/* Ensure button is always visible */
+.project-card .primary-btn {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* ==========================

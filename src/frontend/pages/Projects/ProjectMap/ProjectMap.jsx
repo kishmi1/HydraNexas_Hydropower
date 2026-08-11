@@ -1,7 +1,6 @@
 import "./ProjectMap.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/hero/project-hero.jpg";
 
@@ -135,8 +134,6 @@ export default function ProjectMap() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

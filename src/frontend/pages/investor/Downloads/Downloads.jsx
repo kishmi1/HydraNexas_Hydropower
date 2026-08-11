@@ -4,7 +4,6 @@ import "./Downloads.css";
 import { useEffect, useState } from "react";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/investor/downloads-hero.jpg";
 
@@ -110,8 +109,6 @@ export default function Downloads() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import "./TenderDetails.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/ebidding/ebidding-hero.jpg";
 
@@ -82,26 +81,26 @@ export default function TenderDetails({ id }) {
 
               <div className="info-item">
                 <FaHashtag />
-                <span>{tender.tenderNo}</span>
+                <span>{tender.tenderNo || "N/A"}</span>
               </div>
 
               <div className="info-item">
                 <FaCalendarAlt />
-                <span>{tender.closingDate}</span>
+                <span>{tender.closingDate || "TBD"}</span>
               </div>
 
               <div className="info-item">
                 <FaFileContract />
-                <span>{tender.type}</span>
+                <span>{tender.type || "General"}</span>
               </div>
 
               <div className="info-item">
                 <FaMapMarkerAlt />
-                <span>{tender.location}</span>
+                <span>{tender.location || "Various"}</span>
               </div>
 
               <div className="status open">
-                {tender.status}
+                {tender.status || "Open"}
               </div>
 
               <button className="primary-btn">
@@ -117,10 +116,10 @@ export default function TenderDetails({ id }) {
 
           <div className="tender-content">
 
-            <h2>{tender.title}</h2>
+            <h2>{tender.title || "Tender Details"}</h2>
 
             <p>
-              {tender.content}
+              {tender.content || "No detailed content available for this tender."}
             </p>
 
             {/* Scope */}
@@ -131,14 +130,14 @@ export default function TenderDetails({ id }) {
 
               <ul>
 
-                {tender.scope.map((item, index) => (
+                {tender.scope?.map((item, index) => (
 
                   <li key={index}>
                     <FaCheckCircle />
                     {item}
                   </li>
 
-                ))}
+                )) || <li>No scope information available</li>}
 
               </ul>
 
@@ -152,14 +151,14 @@ export default function TenderDetails({ id }) {
 
               <ul>
 
-                {tender.eligibility.map((item, index) => (
+                {tender.eligibility?.map((item, index) => (
 
                   <li key={index}>
                     <FaCheckCircle />
                     {item}
                   </li>
 
-                ))}
+                )) || <li>No eligibility criteria available</li>}
 
               </ul>
 
@@ -176,7 +175,7 @@ export default function TenderDetails({ id }) {
                 <FaUserTie />
 
                 <span>
-                  {tender.contact.officer}
+                  {tender.contact?.officer || "Contact Officer"}
                 </span>
 
               </div>
@@ -186,7 +185,7 @@ export default function TenderDetails({ id }) {
                 <FaEnvelope />
 
                 <span>
-                  {tender.contact.email}
+                  {tender.contact?.email || "contact@hydranexa.com"}
                 </span>
 
               </div>
@@ -196,7 +195,7 @@ export default function TenderDetails({ id }) {
                 <FaPhone />
 
                 <span>
-                  {tender.contact.phone}
+                  {tender.contact?.phone || "+977-1-1234567"}
                 </span>
 
               </div>
@@ -208,8 +207,6 @@ export default function TenderDetails({ id }) {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

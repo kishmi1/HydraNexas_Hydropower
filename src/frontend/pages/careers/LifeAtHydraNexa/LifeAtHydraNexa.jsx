@@ -1,7 +1,6 @@
 import "./LifeAtHydraNexa.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/careers/careers-hero.jpg";
 const cultureImage = "/assets/images/careers/work-culture.jpg";
@@ -244,8 +243,6 @@ export default function LifeAtHydraNexa() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

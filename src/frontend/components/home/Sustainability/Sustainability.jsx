@@ -2,9 +2,7 @@
 
 import "./Sustainability.css";
 import { sustainabilityData } from "../../../data/homeData";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-
 
 export default function Sustainability() {
 
@@ -35,131 +33,58 @@ export default function Sustainability() {
 
       <div className="container">
 
-
         {/* SECTION HEADER */}
-
-        <motion.div
-
-          className="section-header light"
-
-          initial={{
-            opacity: 0,
-            y: 50
-          }}
-
-          whileInView={{
-            opacity: 1,
-            y: 0
-          }}
-
-          viewport={{
-            once: true,
-            amount: 0.3
-          }}
-
-          transition={{
-            duration: 0.8
-          }}
-
-        >
+        <div className="section-header light fade-in-up">
 
           <span>
             Sustainability
           </span>
 
-
           <h2>
             {sustainability.title}
           </h2>
-
 
           <p>
             {sustainability.description}
           </p>
 
-
-        </motion.div>
-
-
+        </div>
 
         {/* CARDS */}
-
         <div className="sustainability-grid">
-
 
           {sustainabilityData.map((item, index) => {
 
             const Icon = item.icon;
 
-
             return (
 
-              <motion.div
-
-                className="sustainability-card"
-
+              <div
+                className="sustainability-card fade-in-up"
                 key={item.id}
-
-
-                initial={{
-                  opacity: 0,
-                  y: 60
-                }}
-
-
-                whileInView={{
-                  opacity: 1,
-                  y: 0
-                }}
-
-
-                viewport={{
-                  once: true,
-                  amount: 0.2
-                }}
-
-
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.2
-                }}
-
-
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
 
-
                 <div className="icon">
-
                   <Icon />
-
                 </div>
-
-
 
                 <h3>
                   {item.title}
                 </h3>
 
-
-
                 <p>
                   {item.description}
                 </p>
 
-
-
-              </motion.div>
+              </div>
 
             );
-
           })}
-
 
         </div>
 
-
       </div>
-
 
     </section>
 

@@ -1,195 +1,226 @@
 /* ==========================
-   AWARDS SECTION
+   PROFESSIONAL AWARDS SECTION
 ========================== */
 
 .awards-section {
-    padding: 100px 0;
-    background: #ffffff;
+    padding: var(--section-padding-lg) 0;
+    background: var(--bg-primary);
 }
 
 .awards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+    gap: 32px;
+    margin-top: 48px;
 }
 
 .award-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 40px 30px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
     text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--medium-gray);
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-
-    transition: .35s ease;
+.award-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: var(--transition-base);
 }
 
 .award-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
+
+.award-card:hover::before {
+    transform: scaleX(1);
 }
 
 .award-icon {
-    width: 80px;
-    height: 80px;
-
-    margin: auto;
-    margin-bottom: 25px;
-
+    width: 72px;
+    height: 72px;
+    margin: 0 auto var(--space-6);
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(0, 161, 154, .12);
-
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
     color: var(--accent);
+    font-size: 32px;
+    transition: var(--transition-base);
+}
 
-    font-size: 34px;
+.award-card:hover .award-icon {
+    background: var(--accent);
+    color: var(--white);
+    transform: scale(1.05);
 }
 
 .award-card span {
     display: inline-block;
-
     color: var(--accent);
-
-    font-weight: 700;
-
-    margin-bottom: 15px;
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-sm);
 }
 
 .award-card h3 {
     color: var(--primary);
-
-    margin-bottom: 15px;
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
 }
 
 .award-card p {
-    color: var(--gray);
-
-    line-height: 1.8;
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-sm);
 }
-
 
 /* ==========================
    CERTIFICATIONS
 ========================== */
 
 .certifications-section {
-    padding: 100px 0;
-    background: #f8fafc;
+    padding: var(--section-padding-lg) 0;
+    background: var(--bg-secondary);
 }
 
 .certifications-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+    gap: 32px;
+    margin-top: 48px;
 }
 
 .certificate-card {
-    background: #fff;
-
-    border-radius: 20px;
-
-    padding: 40px 30px;
-
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
     text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--medium-gray);
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-
-    transition: .35s;
+.certificate-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: var(--transition-base);
 }
 
 .certificate-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+}
+
+.certificate-card:hover::before {
+    transform: scaleX(1);
 }
 
 .certificate-icon {
-    width: 75px;
-    height: 75px;
-
-    margin: auto;
-    margin-bottom: 20px;
-
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-5);
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(0, 161, 154, .12);
-
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
     color: var(--accent);
+    font-size: 28px;
+    transition: var(--transition-base);
+}
 
-    font-size: 30px;
+.certificate-card:hover .certificate-icon {
+    background: var(--accent);
+    color: var(--white);
+    transform: scale(1.05);
 }
 
 .certificate-card h3 {
     color: var(--primary);
-
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
 }
 
 .certificate-card p {
-    color: var(--gray);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-sm);
 }
-
 
 /* ==========================
    ACHIEVEMENTS
 ========================== */
 
 .achievement-section {
-    padding: 100px 0;
-    background: #ffffff;
+    padding: var(--section-padding-md) 0;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--medium-gray);
 }
 
 .achievement-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 32px;
 }
 
 .achievement-card {
-    background: linear-gradient(135deg,
-            var(--primary),
-            #0f4c75);
-
-    color: #fff;
-
-    padding: 40px 20px;
-
-    border-radius: 20px;
-
+    background: var(--primary);
+    color: var(--white);
+    padding: 40px 24px;
+    border-radius: var(--radius-xl);
     text-align: center;
-
-    transition: .35s;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-md);
 }
 
 .achievement-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .achievement-card h2 {
-    font-size: 2.7rem;
-
-    margin-bottom: 10px;
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-2);
+    font-weight: var(--font-extrabold);
+    line-height: var(--leading-tight);
 }
 
 .achievement-card p {
-    opacity: .9;
+    opacity: 0.9;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
 }
 
-
 /* ==========================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 ========================== */
 
-@media(max-width:992px) {
-
+@media (max-width: 992px) {
     .awards-grid,
     .certifications-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -198,29 +229,30 @@
     .achievement-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-@media(max-width:768px) {
-
+@media (max-width: 768px) {
     .awards-section,
     .certifications-section,
     .achievement-section {
-        padding: 70px 0;
+        padding: var(--section-padding-md) 0;
     }
 
+    .award-card,
+    .certificate-card {
+        padding: 32px 24px;
+    }
 }
 
-@media(max-width:576px) {
-
+@media (max-width: 576px) {
     .awards-grid,
     .certifications-grid,
     .achievement-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
     }
 
     .achievement-card h2 {
-        font-size: 2.2rem;
+        font-size: var(--text-3xl);
     }
-
 }

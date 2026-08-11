@@ -1,131 +1,205 @@
+/* ==========================
+   INVESTOR HIGHLIGHTS SECTION
+========================== */
+
 .investor-highlights {
-    padding: 100px 0;
-    background: #ffffff;
+    padding: var(--section-padding-lg) 0;
+    background: var(--bg-primary);
 }
 
+/* ==========================
+   SECTION HEADER
+========================== */
 
+.section-header {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+.section-header span {
+    display: inline-block;
+    color: var(--accent);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    font-size: var(--text-4xl);
+    color: var(--primary);
+    line-height: var(--leading-tight);
+    margin-bottom: 20px;
+    font-weight: var(--font-bold);
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-base);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================
+   INVESTOR GRID
+========================== */
 
 .investor-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+    gap: 32px;
+    margin-top: 48px;
 }
 
-
+/* ==========================
+   INVESTOR CARD
+========================== */
 
 .investor-card {
-    background: #ffffff;
-    padding: 35px 30px;
-    border-radius: 20px;
+    background: var(--bg-primary);
+    padding: 40px 32px;
+    border-radius: var(--radius-xl);
     text-align: center;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-    transition: all 0.35s ease;
-    border: 1px solid #eef2f7;
+    border: 1px solid var(--medium-gray);
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.investor-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: var(--transition-base);
 }
 
 .investor-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
 }
 
+.investor-card:hover::before {
+    transform: scaleX(1);
+}
 
+/* ==========================
+   INVESTOR ICON
+========================== */
 
 .investor-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 25px;
-    border-radius: 50%;
-    background: rgba(20, 184, 166, 0.12);
-
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: var(--accent);
-    font-size: 1.8rem;
-
-    transition: all 0.35s ease;
+    font-size: 1.5rem;
+    transition: var(--transition-base);
 }
 
 .investor-card:hover .investor-icon {
     background: var(--accent);
-    color: #ffffff;
-    transform: rotate(8deg) scale(1.05);
+    color: var(--white);
+    transform: scale(1.05);
 }
 
-
+/* ==========================
+   CARD CONTENT
+========================== */
 
 .investor-card h3 {
     color: var(--primary);
-    font-size: 1.3rem;
-    margin-bottom: 15px;
+    font-size: var(--text-xl);
+    margin-bottom: 12px;
+    font-weight: var(--font-bold);
 }
 
 .investor-card p {
-    color: var(--gray);
-    line-height: 1.8;
-    font-size: 0.97rem;
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    font-size: var(--text-sm);
 }
 
-
+/* ==========================
+   BUTTON WRAPPER
+========================== */
 
 .investor-btn-wrapper {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 48px;
 }
 
 .investor-btn-wrapper .primary-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    padding: 15px 35px;
-
-    border-radius: 50px;
-
+    padding: 14px 32px;
+    border-radius: var(--radius-lg);
     background: var(--primary);
-
-    color: #ffffff;
-
+    color: var(--text-inverse);
     text-decoration: none;
-
-    font-weight: 600;
-
-    transition: 0.3s ease;
+    font-weight: var(--font-semibold);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-md);
 }
 
 .investor-btn-wrapper .primary-btn:hover {
-    background: var(--accent);
-    transform: translateY(-3px);
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
+/* ==========================
+   RESPONSIVE DESIGN
+========================== */
 
-
-@media (max-width: 992px) {
-
+@media (max-width: 1200px) {
     .investor-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
 @media (max-width: 768px) {
-
     .investor-highlights {
-        padding: 70px 0;
+        padding: var(--section-padding-md) 0;
+    }
+
+    .section-header h2 {
+        font-size: var(--text-3xl);
     }
 
     .investor-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
     }
 
+    .investor-card {
+        padding: 32px 24px;
+    }
 }
 
 @media (max-width: 480px) {
-
-    .investor-card {
-        padding: 30px 25px;
+    .section-header {
+        margin-bottom: 40px;
     }
 
+    .section-header h2 {
+        font-size: var(--text-2xl);
+    }
+
+    .investor-card {
+        padding: 28px 20px;
+    }
 }

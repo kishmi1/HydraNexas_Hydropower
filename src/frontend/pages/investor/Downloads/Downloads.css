@@ -98,13 +98,13 @@
 ========================== */
 
 .download-btn {
-    padding: 12px 24px;
+    padding: 14px 24px;
 
-    border-radius: 50px;
+    border-radius: var(--radius-lg);
 
-    background: var(--highlight);
+    background: #0A2540 !important;
 
-    color: #fff;
+    color: #FFFFFF !important;
 
     text-decoration: none;
 
@@ -113,10 +113,33 @@
     transition: .3s;
 
     white-space: nowrap;
+
+    min-height: 48px;
+
+    line-height: 1.2;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    position: relative;
+
+    z-index: 10;
 }
 
 .download-btn:hover {
-    background: var(--accent);
+    background: #071829 !important;
+
+    transform: translateY(-2px);
+
+    color: #FFFFFF !important;
+}
+
+/* Ensure button is always visible */
+.download-card .download-btn {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* ==========================

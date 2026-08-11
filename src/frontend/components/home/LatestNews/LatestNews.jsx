@@ -3,7 +3,6 @@
 import "./LatestNews.css";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function LatestNews() {
@@ -34,41 +33,14 @@ export default function LatestNews() {
 
     <section className="latest-news">
 
-
       <div className="container">
 
-
         {/* SECTION HEADER */}
-
-        <motion.div
-
-          className="section-header"
-
-          initial={{
-            opacity: 0,
-            y: 50
-          }}
-
-          whileInView={{
-            opacity: 1,
-            y: 0
-          }}
-
-          viewport={{
-            once: true,
-            amount: 0.3
-          }}
-
-          transition={{
-            duration: 0.8
-          }}
-
-        >
+        <div className="section-header fade-in-up">
 
           <span>
             News & Events
           </span>
-
 
           <h2>
             Latest News &
@@ -76,130 +48,63 @@ export default function LatestNews() {
             Company Updates
           </h2>
 
-
           <p>
             Stay informed with the latest developments, sustainability
             initiatives and corporate announcements from HydraNexa.
           </p>
 
-
-        </motion.div>
-
-
+        </div>
 
         {/* NEWS CARDS */}
-
         <div className="news-grid">
-
 
           {news.map((item, index) => (
 
-
-            <motion.article
-
-              className="news-card"
-
+            <article
+              className="news-card fade-in-up"
               key={item.id}
-
-
-              initial={{
-                opacity: 0,
-                y: 60
-              }}
-
-
-              whileInView={{
-                opacity: 1,
-                y: 0
-              }}
-
-
-              viewport={{
-                once: true,
-                amount: 0.2
-              }}
-
-
-              transition={{
-                duration: 0.6,
-                delay: index * 0.2
-              }}
-
+              style={{ animationDelay: `${index * 0.15}s` }}
             >
 
-
               <div className="news-image">
-
-
                 <img
-
                   src={item.image}
-
                   alt={item.title}
-
                 />
-
-
                 <span className="news-category">
-
                   {item.category}
-
                 </span>
-
-
               </div>
 
-
-
               <div className="news-content">
-
-
                 <small>
                   {item.date}
                 </small>
-
-
 
                 <h3>
                   {item.title}
                 </h3>
 
-
-
                 <p>
                   {item.description}
                 </p>
 
-
-
                 <Link
-
                   href={`/news/${item.id}`}
-
                   className="news-btn"
-
                 >
-
                   Read More →
-
                 </Link>
-
 
               </div>
 
-
-
-            </motion.article>
-
+            </article>
 
           ))}
 
-
         </div>
 
-
       </div>
-
 
     </section>
 

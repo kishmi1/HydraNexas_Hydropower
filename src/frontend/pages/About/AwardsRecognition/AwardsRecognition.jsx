@@ -3,7 +3,6 @@
 import "./AwardsRecognition.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 import {
   certificationsData,
@@ -11,7 +10,6 @@ import {
 
 const heroImage = "/assets/images/hero/about-hero.jpg";
 
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FaTrophy, FaAward, FaCertificate, FaMedal, FaStar, FaLeaf } from "react-icons/fa";
 
@@ -64,79 +62,22 @@ export default function AwardsRecognition() {
 
     <>
 
-
       <PageHero
-
         subtitle="About HydraNexa"
-
         title="Awards & Recognition"
-
         description="Celebrating our achievements, certifications and commitment to excellence in renewable energy."
-
         backgroundImage={heroImage}
-
       />
 
-
-
-
-
-
       {/* Awards */}
-
-
-
       <section className="awards-section">
-
 
         <div className="container">
 
-
-
-
-
-          <motion.div
-
-
-            className="section-header"
-
-
-
-            initial={{
-              opacity:0,
-              y:50
-            }}
-
-
-
-            whileInView={{
-              opacity:1,
-              y:0
-            }}
-
-
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-
-
-            transition={{
-              duration:0.7
-            }}
-
-
-
-          >
-
-
+          <div className="section-header fade-in-up">
             <span>
               Achievements
             </span>
-
-
 
             <h2>
               Awards &
@@ -144,395 +85,128 @@ export default function AwardsRecognition() {
               Recognition
             </h2>
 
-
-
             <p>
               Our achievements reflect our commitment to innovation,
               sustainability and excellence in hydropower development.
             </p>
-
-
-
-          </motion.div>
-
-
-
-
-
-
+          </div>
 
           <div className="awards-grid">
-
-
             {loading ? (
               <div className="text-center py-12">Loading awards...</div>
             ) : awards.length === 0 ? (
               <div className="text-center py-12">No awards found</div>
             ) : (
-              awards.map((award,index)=>{
-
-
+              awards.map((award, index) => {
                 const Icon = iconMap[award.icon] || FaTrophy;
 
-
                 return (
-
-
-
-                  <motion.div
-
-
-                    className="award-card"
-
-
+                  <div
+                    className="award-card fade-in-up"
                     key={award.id}
-
-
-                    initial={{
-                      opacity:0,
-                      y:50
-                    }}
-
-
-
-                    whileInView={{
-                      opacity:1,
-                      y:0
-                    }}
-
-
-
-                    viewport={{
-                      once:true,
-                      amount:0.2
-                    }}
-
-
-
-                    transition={{
-                      duration:0.6,
-                      delay:index * 0.15
-                    }}
-
-
-
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-
-
                     <div className="award-icon">
                       <Icon />
                     </div>
-
 
                     <span>
                       {award.year}
                     </span>
 
-
                     <h3>
                       {award.title}
                     </h3>
-
 
                     <p>
                       {award.description}
                     </p>
 
-
-                  </motion.div>
-
-
+                  </div>
                 );
               })
             )}
-
-
           </div>
-
 
         </div>
 
-
       </section>
 
-
-
-
-
-
-
-
-
       {/* Certifications */}
-
-
-
       <section className="certifications-section">
-
 
         <div className="container">
 
-
-
-
-
-          <motion.div
-
-
-            className="section-header"
-
-
-
-            initial={{
-              opacity:0,
-              y:50
-            }}
-
-
-
-            whileInView={{
-              opacity:1,
-              y:0
-            }}
-
-
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-
-
-            transition={{
-              duration:0.7
-            }}
-
-
-
-          >
-
-
+          <div className="section-header fade-in-up">
             <span>
               Certifications
             </span>
 
-
-
             <h2>
               International Standards
             </h2>
-
-
-
-          </motion.div>
-
-
-
-
-
-
-
-
+          </div>
 
           <div className="certifications-grid">
-
-
-            {certificationsData.map((item,index)=>{
-
-
+            {certificationsData.map((item, index) => {
               const Icon = item.icon;
 
-
-
               return (
-
-
-
-                <motion.div
-
-
-                  className="certificate-card"
-
-
+                <div
+                  className="certificate-card fade-in-up"
                   key={item.id}
-
-
-
-                  initial={{
-                    opacity:0,
-                    y:50
-                  }}
-
-
-
-                  whileInView={{
-                    opacity:1,
-                    y:0
-                  }}
-
-
-
-                  viewport={{
-                    once:true,
-                    amount:0.2
-                  }}
-
-
-
-                  transition={{
-                    duration:0.6,
-                    delay:index * 0.15
-                  }}
-
-
-
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-
-
                   <div className="certificate-icon">
                     <Icon />
                   </div>
-
-
 
                   <h3>
                     {item.title}
                   </h3>
 
-
-
                   <p>
                     {item.description}
                   </p>
 
-
-
-                </motion.div>
-
-
-
+                </div>
               );
-
-
             })}
-
-
-
           </div>
-
-
 
         </div>
 
-
       </section>
 
-
-
-
-
-
-
-
-
       {/* Statistics */}
-
-
-
       <section className="achievement-section">
 
-
         <div className="container">
-
-
           <div className="achievement-grid">
-
-
             {achievementStats.length === 0 ? (
               <div className="text-center py-12">Loading stats...</div>
             ) : (
-              achievementStats.map((item,index)=>(
-
-
-
-                <motion.div
-
-
-                  className="achievement-card"
-
-
+              achievementStats.map((item, index) => (
+                <div
+                  className="achievement-card fade-in-up"
                   key={item.id}
-
-
-
-                  initial={{
-                    opacity:0,
-                    scale:0.8
-                  }}
-
-
-
-                  whileInView={{
-                    opacity:1,
-                    scale:1
-                  }}
-
-
-
-                  viewport={{
-                    once:true,
-                    amount:0.3
-                  }}
-
-
-
-                  transition={{
-                    duration:0.6,
-                    delay:index * 0.15
-                  }}
-
-
-
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-
-
                   <h2>
                     {item.value}
                   </h2>
 
-
-
                   <p>
                     {item.label}
                   </p>
-
-
-
-                </motion.div>
-
-
-
+                </div>
               ))
             )}
-
-
-
           </div>
-
 
         </div>
 
-
       </section>
-
-
-
-
-
-
-      <CTASection />
-
 
     </>
 

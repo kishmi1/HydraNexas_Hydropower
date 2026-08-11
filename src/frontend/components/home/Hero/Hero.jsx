@@ -4,7 +4,6 @@ import "./Hero.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import "swiper/css";
@@ -23,10 +22,11 @@ export default function Hero() {
       modules={[Autoplay, EffectFade]}
       effect="fade"
       autoplay={{
-        delay: 3000,
+        delay: 5000,
         disableOnInteraction: false,
       }}
       loop={true}
+      speed={1000}
       className="hero-slider"
     >
       {slides.map((image, index) => (
@@ -41,49 +41,32 @@ export default function Hero() {
 
             <div className="container hero-content">
 
-             <motion.span
-  className="hero-subtitle"
-  initial={{ opacity: 0, y: 40 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
->
-{t("hero.subtitle")}</motion.span>
+             <span className="hero-subtitle">
+              {t("hero.subtitle")}
+             </span>
 
-             <motion.h1
-  initial={{ opacity: 0, y: 60 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1, delay: 0.2 }}
->
-{t("hero.title")}
-<br />
-{t("hero.title2")}
-</motion.h1>
+             <h1>
+              {t("hero.title")}
+              <br />
+              {t("hero.title2")}
+             </h1>
 
-             <motion.p
-  initial={{ opacity: 0, y: 60 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1, delay: 0.4 }}
->
-{t("hero.description")}
-</motion.p>
+             <p>
+              {t("hero.description")}
+             </p>
 
-             <motion.div
-  className="hero-buttons"
-  initial={{ opacity: 0, y: 60 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1, delay: 0.6 }}
->
- <Link href="/projects" className="primary-btn">
- {t("hero.explore")}
-</Link>
+             <div className="hero-buttons">
+              <Link href="/projects" className="primary-btn">
+               {t("hero.explore")}
+              </Link>
 
-  <Link
-  href="/investor/financial-highlights"
-  className="secondary-btn"
->
-  {t("hero.investor")}
-</Link>
-</motion.div>
+              <Link
+               href="/investor/financial-highlights"
+               className="secondary-btn"
+              >
+               {t("hero.investor")}
+              </Link>
+             </div>
 
             </div>
 

@@ -5,14 +5,11 @@ import "./CompanyOverview.css";
 import { purposeData } from "../../../data/aboutData";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/hero/about-hero.jpg";
 const companyImage = "/assets/images/about/company-overview.jpg";
 
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-
 
 export default function CompanyOverview() {
 
@@ -70,118 +67,37 @@ export default function CompanyOverview() {
       {/* Page Hero */}
 
       <PageHero
-
         subtitle="About HydraNexa"
-
         title="Company Overview"
-
         description="Delivering reliable renewable energy through innovation, sustainability, and responsible hydropower development."
-
         backgroundImage={heroImage}
-
       />
-
-
-
 
       {/* Company Introduction */}
 
-
       <section className="company-intro">
-
 
         <div className="container intro-grid">
 
-
-
           {/* Image */}
-
-
-          <motion.div
-
-            className="intro-image"
-
-            initial={{
-              opacity:0,
-              x:-80
-            }}
-
-            whileInView={{
-              opacity:1,
-              x:0
-            }}
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-            transition={{
-              duration:0.8
-            }}
-
-          >
-
-
+          <div className="intro-image fade-in-up">
             <img
-
               src={companyImage}
-
               alt="HydraNexa Company Overview"
-
             />
-
-
-          </motion.div>
-
-
-
-
-
+          </div>
 
           {/* Content */}
-
-
-          <motion.div
-
-            className="intro-content"
-
-
-            initial={{
-              opacity:0,
-              x:80
-            }}
-
-            whileInView={{
-              opacity:1,
-              x:0
-            }}
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-            transition={{
-              duration:0.8,
-              delay:0.3
-            }}
-
-          >
-
-
+          <div className="intro-content fade-in-up" style={{ animationDelay: '0.2s' }}>
             <span>
               WHO WE ARE
             </span>
-
 
             <h2>
               Building Nepal's Sustainable
               <br />
               Energy Future
             </h2>
-
-
 
             <p>
               HydraNexa Energy is a modern hydropower company
@@ -191,8 +107,6 @@ export default function CompanyOverview() {
               environmental practices.
             </p>
 
-
-
             <p>
               We believe renewable energy is the foundation of
               a sustainable future. Our projects are designed
@@ -201,102 +115,44 @@ export default function CompanyOverview() {
               natural resources.
             </p>
 
-
-
             <ul>
-
               <li>
                 Renewable Hydropower Solutions
               </li>
-
               <li>
                 Environmental Responsibility
               </li>
-
               <li>
                 Community Development
               </li>
-
               <li>
                 Reliable Energy Infrastructure
               </li>
-
-
             </ul>
 
-
-
-
             <a
-
               href="/projects"
-
               className="primary-btn"
-
             >
-
               Explore Projects
-
             </a>
 
-
-
-          </motion.div>
-
-
+          </div>
 
         </div>
 
-
       </section>
-
-
-
-
-
-
-
 
       {/* Our Purpose */}
 
-
       <section className="our-purpose">
-
 
         <div className="container">
 
-
-
-          <motion.div
-
-            className="section-header"
-
-            initial={{
-              opacity:0,
-              y:50
-            }}
-
-            whileInView={{
-              opacity:1,
-              y:0
-            }}
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-            transition={{
-              duration:0.7
-            }}
-
-          >
-
-
+          <div className="section-header fade-in-up">
             <span>
               Our Purpose
             </span>
-
 
             <h2>
               Driven by Innovation,
@@ -304,280 +160,85 @@ export default function CompanyOverview() {
               Powered by Sustainability
             </h2>
 
-
-
             <p>
               Our purpose is to generate clean energy while
               creating long-term value for communities,
               the environment and future generations.
             </p>
-
-
-
-          </motion.div>
-
-
-
-
+          </div>
 
           <div className="purpose-grid">
-
-
-            {purposeData.map((item,index)=>{
-
-
+            {purposeData.map((item, index) => {
               const Icon = item.icon;
 
-
               return (
-
-
-                <motion.div
-
-
-                  className="purpose-card"
-
+                <div
+                  className="purpose-card fade-in-up"
                   key={item.id}
-
-
-
-                  initial={{
-                    opacity:0,
-                    y:50
-                  }}
-
-
-
-                  whileInView={{
-                    opacity:1,
-                    y:0
-                  }}
-
-
-
-                  viewport={{
-                    once:true,
-                    amount:0.2
-                  }}
-
-
-
-                  transition={{
-                    duration:0.6,
-                    delay:index * 0.2
-                  }}
-
-
-
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-
-
-
                   <div className="purpose-icon">
-
                     <Icon />
-
                   </div>
-
-
 
                   <h3>
                     {item.title}
                   </h3>
 
-
-
                   <p>
                     {item.description}
                   </p>
-
-
-
-                </motion.div>
-
-
+                </div>
               );
-
-
             })}
-
-
           </div>
-
-
 
         </div>
 
-
       </section>
-
-
-
-
-
-
-
-
 
       {/* Company Statistics */}
 
-
-
       <section className="company-stats">
-
 
         <div className="container">
 
-
-
-          <motion.div
-
-
-            className="section-header"
-
-
-            initial={{
-              opacity:0,
-              y:40
-            }}
-
-
-            whileInView={{
-              opacity:1,
-              y:0
-            }}
-
-
-            viewport={{
-              once:true,
-              amount:0.3
-            }}
-
-
-            transition={{
-              duration:0.7
-            }}
-
-
-          >
-
-
-
+          <div className="section-header fade-in-up">
             <span>
-              Company Statistics
+              Our Impact
             </span>
 
-
-
             <h2>
-              Our Growth at a Glance
+              Key Achievements
             </h2>
 
-
-
             <p>
-              Numbers that reflect our commitment to delivering clean,
-              reliable and sustainable energy.
+              Measuring our success through tangible
+              contributions to Nepal's energy landscape.
             </p>
-
-
-
-          </motion.div>
-
-
-
-
-
-
-          <div className="stats-grid">
-
-
-            {companyStats.map((item,index)=>(
-
-
-              <motion.div
-
-
-                className="stats-card"
-
-                key={item.id}
-
-
-
-                initial={{
-                  opacity:0,
-                  y:40,
-                  scale:0.95
-                }}
-
-
-
-                whileInView={{
-                  opacity:1,
-                  y:0,
-                  scale:1
-                }}
-
-
-
-                viewport={{
-                  once:true,
-                  amount:0.2
-                }}
-
-
-
-                transition={{
-                  duration:0.6,
-                  delay:index * 0.15
-                }}
-
-
-
-              >
-
-
-
-                <h3>
-                  {item.value}
-                </h3>
-
-
-
-                <p>
-                  {item.title}
-                </p>
-
-
-
-              </motion.div>
-
-
-
-            ))}
-
-
           </div>
 
+          <div className="stats-grid">
+            {companyStats.map((stat, index) => (
+              <div
+                className="stat-card fade-in-up"
+                key={stat.id}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <h3>
+                  {stat.value}
+                </h3>
 
+                <p>
+                  {stat.title}
+                </p>
+              </div>
+            ))}
+          </div>
 
         </div>
 
-
       </section>
-
-
-
-
-
-
-
-      {/* CTA */}
-
-
-      <CTASection />
-
-
 
     </>
 

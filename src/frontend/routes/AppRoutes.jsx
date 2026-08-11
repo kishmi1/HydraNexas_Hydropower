@@ -151,7 +151,7 @@ export default function AppRoutes() {
   element={<Events />}
 />
   <Route
-        path="/events/:id"
+        path="/news/events/:id"
         element={<EventDetails />}
     />
 
@@ -170,7 +170,7 @@ export default function AppRoutes() {
   element={<ActiveTenders/>}
   />
   <Route
-    path="/tenders/:id"
+    path="/ebidding/active-tenders/:id"
     element={<TenderDetails />}
 />
 <Route

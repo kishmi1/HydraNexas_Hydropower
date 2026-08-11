@@ -2,7 +2,6 @@
 
 import "./FeaturedProjects.css";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function FeaturedProjects() {
@@ -52,71 +51,38 @@ export default function FeaturedProjects() {
 
         <div className="projects-grid">
 
-{projects.map((project, index) => (
-            <motion.article
-
-  className="project-card"
-
-  key={project.id}
-
-  initial={{
-    opacity: 0,
-    y: 80
-  }}
-
-  whileInView={{
-    opacity: 1,
-    y: 0
-  }}
-
-  viewport={{
-    once: true,
-    amount: 0.3
-  }}
-
-  transition={{
-    duration: 0.8,
-    delay: index * 0.25
-  }}
-
->
-
+          {projects.map((project, index) => (
+            <article
+              className="project-card fade-in-up"
+              key={project.id}
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
               <div className="project-image">
-
                 <img
                   src={project.image}
                   alt={project.name}
                 />
-
                 <div className="capacity-badge">
                   {project.capacity}
                 </div>
-
               </div>
 
               <div className="project-content">
-
                 <h3>{project.name}</h3>
-
                 <p className="location">
                   📍 {project.location}
                 </p>
-
                 <p className="description">
                   {project.description}
                 </p>
-
                 <Link
                   href={`/projects/${project.id}`}
                   className="project-btn"
                 >
                   View Project →
                 </Link>
-
               </div>
-
-            </motion.article>
-
+            </article>
           ))}
 
         </div>

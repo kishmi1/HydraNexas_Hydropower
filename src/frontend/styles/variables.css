@@ -1,46 +1,171 @@
 :root {
 
-    /* Brand Colors */
+    /* ========================================
+       PROFESSIONAL COLOR PALETTE
+       ======================================== */
 
+    /* Primary Brand Colors */
     --primary: #0A2540;
+    --primary-dark: #071829;
+    --primary-light: #143652;
+
+    /* Secondary Accent */
     --secondary: #1E6FEB;
-    --accent: #14B8A6;
-    --highlight: #F5A623;
+    --secondary-dark: #1557B0;
+    --secondary-light: #4A89F4;
 
-    /* Neutral */
+    /* Energy Accent (Subtle Teal) */
+    --accent: #0D9488;
+    --accent-dark: #0F766E;
+    --accent-light: #14B8A6;
 
+    /* Neutral Colors */
     --white: #FFFFFF;
-    --light: #F8FAFC;
-    --gray: #475569;
-    --dark: #081B2E;
+    --off-white: #FAFAFA;
+    --light-gray: #F1F5F9;
+    --medium-gray: #E2E8F0;
+    --gray: #64748B;
+    --dark-gray: #334155;
+    --charcoal: #1E293B;
 
-    /* Text */
+    /* Text Colors */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --text-inverse: #FFFFFF;
 
-    --text-dark: #1E293B;
-    --text-light: #94A3B8;
+    /* Background Colors */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --bg-tertiary: #F1F5F9;
+    --bg-dark: #0A2540;
 
-    /* Background */
+    /* Status Colors */
+    --success: #059669;
+    --success-light: #D1FAE5;
+    --warning: #D97706;
+    --warning-light: #FEF3C7;
+    --error: #DC2626;
+    --error-light: #FEE2E2;
 
-    --bg: #FFFFFF;
-    --bg-light: #F8FAFC;
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
 
-    /* Radius */
+    /* Font Family */
+    --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 18px;
-    --radius-xl: 28px;
+    /* Typography Scale */
 
-    /* Shadow */
+    /* Font Sizes */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
 
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, .08);
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
 
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, .12);
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
 
-    --shadow-lg: 0 18px 40px rgba(0, 0, 0, .15);
+    /* Letter Spacing */
+    --tracking-tight: -0.025em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
 
-    /* Transition */
+    /* ========================================
+       SPACING SCALE
+       ======================================== */
 
-    --transition: .35s ease;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+
+    /* Section Spacing */
+    --section-padding-sm: 4rem;
+    --section-padding-md: 6rem;
+    --section-padding-lg: 8rem;
+    --section-padding-xl: 10rem;
+
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    /* ========================================
+       SHADOWS (Subtle & Professional)
+       ======================================== */
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+    /* ========================================
+       TRANSITIONS
+       ======================================== */
+
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+    --transition-slower: 500ms ease;
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+
+    --container-sm: 640px;
+    --container-md: 768px;
+    --container-lg: 1024px;
+    --container-xl: 1280px;
+    --container-2xl: 1536px;
+
+    --max-content: 1200px;
+
+    /* ========================================
+       Z-INDEX SCALE
+       ======================================== */
+
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
 
 }

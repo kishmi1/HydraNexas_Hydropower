@@ -4,7 +4,6 @@ import { useState } from "react";
 import "./ApplyNow.css";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 const heroImage = "/assets/images/careers/apply-now-hero.jpg";
 
@@ -492,8 +491,6 @@ const handleSubmit = async (e) => {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
   );

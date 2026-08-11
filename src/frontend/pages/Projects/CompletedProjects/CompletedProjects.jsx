@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 
 
 const heroImage = "/assets/images/hero/project-hero.jpg";
@@ -210,10 +209,6 @@ fetch("/api/projects?status=Completed")      .then((res) => res.json())
       </section>
 
 
-
-
-
-      <CTASection />
 
 
 

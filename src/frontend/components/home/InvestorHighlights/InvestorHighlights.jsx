@@ -29,11 +29,11 @@ export default function InvestorHighlights() {
 
         <div className="investor-grid">
 
-          {investorHighlights.map((item) => {
+          {investorHighlights.map((item, index) => {
             const Icon = item.icon;
 
             return (
-              <div className="investor-card" key={item.id}>
+              <div className="investor-card fade-in-up" key={item.id} style={{ animationDelay: `${index * 0.1}s` }}>
 
                 <div className="investor-icon">
                   <Icon />
