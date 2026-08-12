@@ -1,6 +1,6 @@
 /* ==========================
    PRESS RELEASES
-========================== */
+   =========================== */
 
 .press-section {
     padding: 100px 0;
@@ -18,7 +18,7 @@
 
 /* ==========================
    ITEM
-========================== */
+   =========================== */
 
 .press-item {
 
@@ -49,7 +49,7 @@
 
 /* ==========================
    INFO
-========================== */
+   =========================== */
 
 .press-info {
 
@@ -109,6 +109,15 @@
 
 }
 
+.press-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    object-fit: cover;
+}
+
 .press-summary {
 
     color: #64748b;
@@ -119,6 +128,19 @@
 
     margin-bottom: 8px;
 
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+}
+
+.press-summary.expanded {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    display: block;
 }
 
 .press-author {
@@ -132,44 +154,82 @@
 }
 
 /* ==========================
-   BUTTON
-========================== */
+   PRESS ACTIONS
+   =========================== */
 
-.read-btn {
-
-    background: none;
-
-    border: none;
-
-    color: var(--accent);
-
-    font-size: 1rem;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: .3s;
-
-    white-space: nowrap;
-
-    text-decoration: none;
-
-    display: inline-block;
-
+.press-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+    min-width: 200px;
 }
 
-.read-btn:hover {
+.read-more-btn {
+    padding: 8px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
-    color: var(--highlight);
+.read-more-btn:hover {
+    background: #f1f5f9;
+    border-color: var(--accent);
+}
 
-    transform: translateX(5px);
+.pdf-actions {
+    display: flex;
+    gap: 8px;
+}
 
+.read-pdf-btn,
+.download-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.read-pdf-btn {
+    background: #f1f5f9;
+    color: var(--primary);
+    border: 1px solid #cbd5e1;
+}
+
+.read-pdf-btn:hover {
+    background: #e2e8f0;
+    border-color: var(--primary);
+}
+
+.download-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+}
+
+.download-btn:hover {
+    background: var(--highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ==========================
    RESPONSIVE
-========================== */
+   =========================== */
 
 @media(max-width:768px) {
 
@@ -185,6 +245,21 @@
 
         align-items: flex-start;
 
+    }
+
+    .press-actions {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .pdf-actions {
+        width: 100%;
+    }
+
+    .read-pdf-btn,
+    .download-btn {
+        flex: 1;
+        justify-content: center;
     }
 
 }

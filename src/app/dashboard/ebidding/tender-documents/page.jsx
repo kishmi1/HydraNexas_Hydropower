@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { Plus, Pencil } from "lucide-react";
+import { Plus } from "lucide-react";
+
+import IconButton from "@/components/dashboard/IconButton";
+import { Pencil } from "lucide-react";
 
 import DeleteTenderDocumentButton from "@/components/dashboard/DeleteTenderDocumentButton";
 
@@ -100,7 +103,6 @@ export default function TenderDocumentsPage() {
                                             href={document.file}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            download
                                             className="text-blue-600 hover:underline"
                                         >
                                             View File
@@ -108,15 +110,10 @@ export default function TenderDocumentsPage() {
                                     )}
                                 </td>
 
-                                <td className="flex justify-center gap-3 p-4">
+                                <td className="flex justify-center gap-2 p-4">
 
-                                    <Link
-                                        href={`/dashboard/ebidding/tender-documents/edit/${document.id}`}
-                                    >
-                                        <Pencil
-                                            size={18}
-                                            className="text-blue-600"
-                                        />
+                                    <Link href={`/dashboard/ebidding/tender-documents/edit/${document.id}`}>
+                                        <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
                                     </Link>
 
                                     <DeleteTenderDocumentButton id={document.id} />

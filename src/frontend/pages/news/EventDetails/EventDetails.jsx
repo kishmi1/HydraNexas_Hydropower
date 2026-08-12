@@ -6,36 +6,39 @@ import {useParams} from "next/navigation";
 import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
 import "./EventDetails.css";
-import { events } from "../../../data/newsData";
-
-const event1 = "/assets/images/news/event1.jpg";
-const event2 = "/assets/images/news/event2.jpg";
-const event3 = "/assets/images/news/event3.jpg";
-
-
-const images = {
-    event1,
-    event2,
-    event3,
-};
-
+import { useEffect, useState } from "react";
 
 export default function EventDetails(){
     const params = useParams();
+    const [event, setEvent] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const event = events.find(
-        (item)=> item.id === Number(params.id)
-    );
+    useEffect(() => {
+        fetch(`/api/events/${params.id}`)
+            .then((res) => res.json())
+            .then((result) => {
+                console.log("EVENT DETAILS:", result);
+                if (result.success) {
+                    setEvent(result.event);
+                }
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setLoading(false);
+            });
+    }, [params.id]);
 
+    if(loading) {
+        return <div className="p-8">Loading...</div>;
+    }
 
     if(!event){
-
         return (
             <h2>
                 Event Not Found
             </h2>
         );
-
     }
 
 
@@ -47,7 +50,7 @@ export default function EventDetails(){
                 subtitle="News & Events"
                 title={event.title}
                 description={event.description}
-                backgroundImage={images[event.image]}
+                backgroundImage={event.image}
             />
 
 
@@ -57,7 +60,7 @@ export default function EventDetails(){
 
 
                  <motion.img
-    src={images[event.image]}
+    src={event.image}
     alt={event.title}
     initial={{opacity:0, scale:0.9}}
     animate={{opacity:1, scale:1}}

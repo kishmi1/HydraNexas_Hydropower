@@ -1,6 +1,8 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import IconButton from "./IconButton";
 
 export default function DeleteAnnualReportButton({ id }) {
 
@@ -37,14 +39,12 @@ export default function DeleteAnnualReportButton({ id }) {
     }
 
     return (
-
-        <button
+        <IconButton 
+            icon={Trash2} 
+            variant="delete" 
+            tooltip="Delete annual report"
             onClick={handleDelete}
-            className="text-red-600 hover:underline"
-        >
-            Delete
-        </button>
-
+        />
     );
 
 }

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import PageHero from "../../../components/common/PageHero/PageHero";
-import CTASection from "../../../components/home/CTASection/CTASection";
 import ScrollAnimation from "../../../components/common/ScrollAnimation/ScrollAnimation";
 
 const heroImage = "/assets/images/news/events-hero.jpg";
@@ -106,7 +105,7 @@ export default function Events() {
                         </p>
 
                         <Link
-                          href={`/events/${item.id}`}
+                          href={`/news/events/${item.id}`}
                           className="primary-btn"
                         >
                           View Details
@@ -133,8 +132,6 @@ export default function Events() {
         </div>
 
       </section>
-
-      <CTASection />
 
     </>
 

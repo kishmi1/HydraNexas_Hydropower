@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 export default function LeadershipPage() {
 
@@ -154,25 +155,16 @@ export default function LeadershipPage() {
                                 </td>
 
                                 <td className="p-4">
-
-                                    <div className="flex justify-center gap-3">
-
-                                        <Link
-                                            href={`/dashboard/about/leadership-team/edit/${member.id}`}
-                                            className="rounded-lg bg-yellow-500 p-2 text-white hover:bg-yellow-600"
-                                        >
-                                            <Pencil size={18} />
+                                    <div className="flex justify-center gap-2">
+                                        <Link href={`/dashboard/about/leadership-team/edit/${member.id}`}>
+                                            <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
                                         </Link>
-
-                                        <button
+                                        <IconButton
                                             onClick={() => handleDelete(member.id)}
-                                            className="rounded-lg bg-red-600 p-2 text-white hover:bg-red-700"
-                                        >
-                                            <Trash2 size={18} />
-                                        </button>
-
+                                            variant="delete"
+                                            tooltip="Delete"
+                                        />
                                     </div>
-
                                 </td>
 
                             </tr>

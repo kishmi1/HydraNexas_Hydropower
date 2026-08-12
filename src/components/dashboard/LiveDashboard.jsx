@@ -261,7 +261,7 @@ export default function LiveDashboard() {
           <h3>📈 Power Generation Trend</h3>
           <FaChartLine />
         </div>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={200}>
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="time" />

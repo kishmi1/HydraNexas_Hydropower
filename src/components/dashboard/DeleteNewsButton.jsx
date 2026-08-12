@@ -2,6 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import IconButton from "./IconButton";
 
 export default function DeleteNewsButton({ id }) {
 
@@ -34,16 +35,12 @@ export default function DeleteNewsButton({ id }) {
     }
 
     return (
-
-        <button onClick={handleDelete}>
-
-            <Trash2
-                size={18}
-                className="text-red-600 hover:text-red-800"
-            />
-
-        </button>
-
+        <IconButton 
+            icon={Trash2} 
+            variant="delete" 
+            tooltip="Delete news"
+            onClick={handleDelete}
+        />
     );
 
 }

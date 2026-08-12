@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-
+import { Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 import DeleteAnnualReportButton from "@/components/dashboard/DeleteAnnualReportButton";
 
@@ -126,7 +127,6 @@ export default function AnnualReportsPage() {
                                             href={item.file}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            download
                                             className="text-blue-600 hover:underline"
                                         >
                                             View PDF
@@ -136,14 +136,15 @@ export default function AnnualReportsPage() {
 
                                     <td className="px-6 py-4 text-center">
 
-                                        <Link
-                                            href={`/dashboard/investor/annual-reports/edit/${item.id}`}
-                                            className="mr-4 text-blue-600 hover:underline"
-                                        >
-                                            Edit
-                                        </Link>
+                                        <div className="flex items-center justify-center gap-2">
 
-                                        <DeleteAnnualReportButton id={item.id} />
+                                            <Link href={`/dashboard/investor/annual-reports/edit/${item.id}`}>
+                                                <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                                            </Link>
+
+                                            <DeleteAnnualReportButton id={item.id} />
+
+                                        </div>
 
                                     </td>
 

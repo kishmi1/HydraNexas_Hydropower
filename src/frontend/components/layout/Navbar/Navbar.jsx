@@ -19,43 +19,41 @@ export default function Navbar() {
   const { t } = useTranslation();
   const pathname = usePathname();
 
-  const dropdownRef = useRef();
+  const navbarRef = useRef(null);
 
-useEffect(() => {
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    };
 
-  const handleClickOutside = (event) => {
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target)
-    ) {
-      setActiveDropdown(null);
-    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
 
+  // Handle dropdown toggle
+  const handleDropdownToggle = (index, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setActiveDropdown(activeDropdown === index ? null : index);
   };
 
-
-  document.addEventListener(
-    "mousedown",
-    handleClickOutside
-  );
-
-
-  return () => {
-
-    document.removeEventListener(
-      "mousedown",
-      handleClickOutside
-    );
-
+  // Close menu when clicking a link
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+    setActiveDropdown(null);
   };
-
-
-}, []);
 
   return (
 
-    <header className="navbar">
+    <header className="navbar" ref={navbarRef}>
 
       <div className="container navbar-container">
 
@@ -64,7 +62,7 @@ useEffect(() => {
         <Link
           href="/"
           className="logo"
-          onClick={() => setMenuOpen(false)}
+          onClick={handleLinkClick}
         >
 
           <img
@@ -87,11 +85,21 @@ useEffect(() => {
         <button
           className="mobile-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
         >
 
           {menuOpen ? <FaTimes /> : <FaBars />}
 
         </button>
+
+        {/* Mobile Menu Overlay */}
+        {menuOpen && (
+          <div
+            className="mobile-overlay"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
 
         {/* Right Side */}
 
@@ -111,16 +119,13 @@ useEffect(() => {
     <div
  className="nav-dropdown"
  key={item.key}
- ref={dropdownRef}
 >
 
-    <span
+    <button
  className="dropdown-title"
- onClick={() =>
-   setActiveDropdown(
-     activeDropdown === index ? null : index
-   )
- }
+ onClick={(e) => handleDropdownToggle(index, e)}
+ aria-expanded={activeDropdown === index}
+ aria-haspopup="true"
 >
 
         {t(`navbar.${item.key}`)}
@@ -133,7 +138,7 @@ useEffect(() => {
           }
         />
 
-      </span>
+      </button>
 
      <div
  className={
@@ -148,10 +153,7 @@ useEffect(() => {
           <Link
             key={child.key}
             href={child.path}
-            onClick={() => {
-              setMenuOpen(false);
-              setActiveDropdown(null);
-            }}
+            onClick={handleLinkClick}
             className={pathname === child.path ? "active-link" : ""}
           >
 
@@ -170,7 +172,7 @@ useEffect(() => {
     <Link
       key={item.key}
       href={item.path}
-      onClick={() => setMenuOpen(false)}
+      onClick={handleLinkClick}
       className={pathname === item.path ? "active-link" : ""}
     >
 

@@ -2,6 +2,8 @@
 import DeleteFinancialHighlightButton from "@/components/dashboard/DeleteFinancialHighlightButton";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 export default function FinancialHighlightsPage() {
 
@@ -138,14 +140,12 @@ export default function FinancialHighlightsPage() {
 
                                         <td className="px-6 py-4 text-center">
 
-                                            <Link
-                                                href={`/dashboard/investor/financial-highlights/edit/${item.id}`}
-                                                className="mr-4 text-blue-600 hover:underline"
-                                            >
-                                                Edit
-                                            </Link>
-
-                                           <DeleteFinancialHighlightButton id={item.id} />
+                                            <div className="flex justify-center gap-2">
+                                                <Link href={`/dashboard/investor/financial-highlights/edit/${item.id}`}>
+                                                    <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                                                </Link>
+                                                <DeleteFinancialHighlightButton id={item.id} />
+                                            </div>
 
                                         </td>
 

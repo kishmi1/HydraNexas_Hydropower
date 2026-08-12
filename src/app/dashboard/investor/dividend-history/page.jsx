@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 import DeleteDividendHistoryButton from "@/components/dashboard/DeleteDividendHistoryButton";
 
@@ -99,14 +101,15 @@ export default function DividendHistoryPage() {
 
                                 <td className="px-6 py-4 text-center">
 
-                                    <Link
-                                        href={`/dashboard/investor/dividend-history/edit/${item.id}`}
-                                        className="mr-4 text-blue-600 hover:underline"
-                                    >
-                                        Edit
-                                    </Link>
+                                    <div className="flex items-center justify-center gap-2">
 
-                                    <DeleteDividendHistoryButton id={item.id} />
+                                        <Link href={`/dashboard/investor/dividend-history/edit/${item.id}`}>
+                                            <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                                        </Link>
+
+                                        <DeleteDividendHistoryButton id={item.id} />
+
+                                    </div>
 
                                 </td>
 

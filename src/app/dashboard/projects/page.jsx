@@ -5,6 +5,12 @@ import { Plus, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import DeleteProjectButton from "@/components/dashboard/DeleteProjectButton";
+import PageHeader from "@/components/dashboard/PageHeader";
+import Table from "@/components/dashboard/Table";
+import StatusBadge from "@/components/dashboard/StatusBadge";
+import IconButton from "@/components/dashboard/IconButton";
+import LoadingState from "@/components/dashboard/LoadingState";
+import { TableEmpty } from "@/components/dashboard/EmptyState";
 
 export default function ProjectsPage() {
     const [projects, setProjects] = useState([]);
@@ -32,143 +38,83 @@ export default function ProjectsPage() {
     }, []);
 
     if (loading) {
-        return <div className="p-8">Loading...</div>;
+        return <LoadingState message="Loading projects..." />;
     }
 
     return (
-
         <div>
+            <PageHeader
+                title="Project Management"
+                description="Manage Hydropower Projects"
+                action={
+                    <Link href="/dashboard/projects/create" className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md">
+                        <Plus size={18} />
+                        Add Project
+                    </Link>
+                }
+            />
 
-
-
-            <div className="mb-8 flex items-center justify-between">
-
-                <div>
-
-                    <h1 className="text-3xl font-bold">
-                        Project Management
-                    </h1>
-
-                    <p className="text-slate-500">
-                        Manage Hydropower Projects
-                    </p>
-
-                </div>
-
-                <Link
-                    href="/dashboard/projects/create"
-                    className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-white"
-                >
-
-                    <Plus size={18} />
-
-                    Add Project
-
-                </Link>
-
-            </div>
-
-            <div className="overflow-x-auto rounded-2xl border bg-white">
-
-                <table className="w-full">
-
-                    <thead className="bg-slate-100">
-
-                        <tr>
-
-                            <th className="p-4 text-left">Image</th>
-                            <th className="p-4 text-left">Project</th>
-                            <th className="p-4 text-left">Location</th>
-                            <th className="p-4 text-left">Status</th>
-                            <th className="p-4 text-left">Capacity</th>
-                            <th className="p-4 text-center">Featured</th>
-                            <th className="p-4 text-center">Actions</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {projects.map((project) => (
-
-                            <tr
-                                key={project.id}
-                                className="border-b hover:bg-slate-50"
-                            >
-
-                                <td className="p-4">
-
-                                    <img
-                                        src={project.image}
-                                        alt={project.name}
-                                        className="h-16 w-24 rounded-lg object-cover"
-                                    />
-
-                                </td>
-
-                                <td className="p-4 font-medium">
-                                    {project.name}
-                                </td>
-
-                                <td className="p-4">
-                                    {project.location}
-                                </td>
-
-                                <td className="p-4">
-                                    {project.status}
-                                </td>
-
-                                <td className="p-4">
-                                    {project.capacity}
-                                </td>
-<td className="p-4 text-center">
-
-    <span
-        className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-            project.featured
-                ? "bg-green-100 text-green-700"
-                : "bg-slate-100 text-slate-600"
-        }`}
-    >
-        {project.featured ? "Featured" : "Normal"}
-    </span>
-
-</td>
-
-                                <td className="p-4">
-
-                                    <div className="flex justify-center gap-3">
-
-                                        <Link
-                                            href={`/dashboard/projects/edit/${project.id}`}
-                                        >
-
-                                            <Pencil
-                                                size={18}
-                                                className="text-blue-600"
+            <Table.Container>
+                <Table>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.Head>Image</Table.Head>
+                            <Table.Head>Project</Table.Head>
+                            <Table.Head>Location</Table.Head>
+                            <Table.Head>Status</Table.Head>
+                            <Table.Head>Capacity</Table.Head>
+                            <Table.Head align="center">Featured</Table.Head>
+                            <Table.Head align="center">Actions</Table.Head>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {projects.length === 0 ? (
+                            <Table.TableEmpty colSpan={7} message="No projects found" description="Create your first project to get started" />
+                        ) : (
+                            projects.map((project) => (
+                                <Table.Row key={project.id}>
+                                    <Table.Cell>
+                                        {project.image ? (
+                                            <img
+                                                src={project.image}
+                                                alt={project.name}
+                                                className="h-16 w-24 rounded-lg object-cover"
                                             />
-
-                                        </Link>
-
-                                        <DeleteProjectButton id={project.id} />
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-                        ))}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
+                                        ) : (
+                                            <div className="flex h-16 w-24 items-center justify-center rounded-lg bg-slate-100 text-xs text-slate-500">
+                                                No Image
+                                            </div>
+                                        )}
+                                    </Table.Cell>
+                                    <Table.Cell className="font-medium">
+                                        {project.name}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {project.location}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {project.status}
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {project.capacity}
+                                    </Table.Cell>
+                                    <Table.Cell align="center">
+                                        {project.featured ? "Yes" : "No"}
+                                    </Table.Cell>
+                                    <Table.Cell align="center">
+                                        <div className="flex justify-center gap-2">
+                                            <Link href={`/dashboard/projects/edit/${project.id}`}>
+                                                <IconButton icon={Pencil} variant="edit" tooltip="Edit project" />
+                                            </Link>
+                                            <DeleteProjectButton id={project.id} />
+                                        </div>
+                                    </Table.Cell>
+                                </Table.Row>
+                            ))
+                        )}
+                    </Table.Body>
+                </Table>
+            </Table.Container>
         </div>
-
     );
-
 }

@@ -206,8 +206,8 @@ select:focus {
   border: 0;
 }
 
-/* Focus visible for keyboard navigation */
-*:focus-visible {
+/* Focus visible for keyboard navigation - exempt navbar */
+*:focus-visible:not(.nav-menu > a):not(.dropdown-title):not(.mobile-toggle) {
   outline: 2px solid var(--secondary-color);
   outline-offset: 2px;
 }

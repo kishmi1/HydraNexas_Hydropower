@@ -1,6 +1,8 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import IconButton from "./IconButton";
 
 export default function DeleteDividendHistoryButton({ id }) {
 
@@ -33,14 +35,12 @@ export default function DeleteDividendHistoryButton({ id }) {
     }
 
     return (
-
-        <button
+        <IconButton 
+            icon={Trash2} 
+            variant="delete" 
+            tooltip="Delete dividend history"
             onClick={handleDelete}
-            className="text-red-600 hover:underline"
-        >
-            Delete
-        </button>
-
+        />
     );
 
 }

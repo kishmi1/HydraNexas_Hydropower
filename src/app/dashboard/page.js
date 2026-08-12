@@ -13,6 +13,7 @@ import QuickActions from "@/components/dashboard/QuickActions";
 import RecentNews from "@/components/dashboard/RecentNews";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 import LiveDashboard from "@/components/dashboard/LiveDashboard";
+import LoadingState from "@/components/dashboard/LoadingState";
 
 export default function DashboardPage() {
     const [totalNews, setTotalNews] = useState(0);
@@ -51,12 +52,11 @@ export default function DashboardPage() {
     }, []);
 
     if (loading) {
-        return <div className="p-8">Loading...</div>;
+        return <LoadingState message="Loading dashboard..." />;
     }
 
     return (
         <div>
-
             <h1 className="text-3xl font-bold text-slate-800">
                 Dashboard
             </h1>

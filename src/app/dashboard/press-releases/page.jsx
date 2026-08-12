@@ -143,7 +143,6 @@ export default function PressReleasesPage() {
                                             href={item.pdfUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            download
                                             className="text-blue-600 hover:underline"
                                         >
                                             View PDF

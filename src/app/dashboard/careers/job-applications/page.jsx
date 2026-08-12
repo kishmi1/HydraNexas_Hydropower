@@ -68,63 +68,63 @@ export default function JobApplicationsPage() {
             {/* CV View Modal */}
             {selectedApplication && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                        <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-                            <h2 className="text-2xl font-bold">Application Details</h2>
+                    <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto text-sm">
+                        <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
+                            <h2 className="text-xl font-bold">Application Details</h2>
                             <button
                                 onClick={closeCVModal}
-                                className="text-gray-500 hover:text-gray-700 text-3xl font-bold"
+                                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
                             >
                                 ×
                             </button>
                         </div>
 
-                        <div className="p-6">
+                        <div className="p-4">
                             {/* Applicant Information */}
-                            <div className="grid grid-cols-2 gap-6 mb-6">
+                            <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Full Name</h3>
-                                    <p className="text-lg">{selectedApplication.fullName}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Full Name</h3>
+                                    <p className="text-sm">{selectedApplication.fullName}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Email</h3>
-                                    <p className="text-lg">{selectedApplication.email}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Email</h3>
+                                    <p className="text-sm">{selectedApplication.email}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Phone</h3>
-                                    <p className="text-lg">{selectedApplication.phone}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Phone</h3>
+                                    <p className="text-sm">{selectedApplication.phone}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Address</h3>
-                                    <p className="text-lg">{selectedApplication.address}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Address</h3>
+                                    <p className="text-sm">{selectedApplication.address}</p>
                                 </div>
                             </div>
 
                             {/* Position Details */}
-                            <div className="grid grid-cols-2 gap-6 mb-6">
+                            <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Position Applied</h3>
-                                    <p className="text-lg">{selectedApplication.position}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Position Applied</h3>
+                                    <p className="text-sm">{selectedApplication.position}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Qualification</h3>
-                                    <p className="text-lg">{selectedApplication.qualification}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Qualification</h3>
+                                    <p className="text-sm">{selectedApplication.qualification}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Experience</h3>
-                                    <p className="text-lg">{selectedApplication.experience}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Experience</h3>
+                                    <p className="text-sm">{selectedApplication.experience}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Current Company</h3>
-                                    <p className="text-lg">{selectedApplication.company || 'N/A'}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Current Company</h3>
+                                    <p className="text-sm">{selectedApplication.company || 'N/A'}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Expected Salary</h3>
-                                    <p className="text-lg">{selectedApplication.salary || 'N/A'}</p>
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Expected Salary</h3>
+                                    <p className="text-sm">{selectedApplication.salary || 'N/A'}</p>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-600 mb-2">Status</h3>
-                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Status</h3>
+                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                                         selectedApplication.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
                                         selectedApplication.status === 'Approved' ? 'bg-green-100 text-green-800' :
                                         selectedApplication.status === 'Rejected' ? 'bg-red-100 text-red-800' :
@@ -137,35 +137,36 @@ export default function JobApplicationsPage() {
 
                             {/* Cover Letter */}
                             {selectedApplication.coverLetter && (
-                                <div className="mb-6">
-                                    <h3 className="font-semibold text-slate-600 mb-2">Cover Letter</h3>
-                                    <div className="bg-slate-50 p-4 rounded-lg">
-                                        <p className="text-slate-700 whitespace-pre-wrap">{selectedApplication.coverLetter}</p>
+                                <div className="mb-4">
+                                    <h3 className="font-semibold text-slate-600 mb-1 text-xs">Cover Letter</h3>
+                                    <div className="bg-slate-50 p-3 rounded-lg">
+                                        <p className="text-slate-700 whitespace-pre-wrap text-xs">{selectedApplication.coverLetter}</p>
                                     </div>
                                 </div>
                             )}
 
                             {/* CV Preview */}
-                            <div className="mb-6">
-                                <h3 className="font-semibold text-slate-600 mb-2">CV/Resume</h3>
+                            <div className="mb-4">
+                                <h3 className="font-semibold text-slate-600 mb-1 text-xs">CV/Resume</h3>
                                 {selectedApplication.cv ? (
-                                    <div className="space-y-4">
-                                        <div className="flex gap-4">
+                                    <div className="space-y-3">
+                                        <div className="flex gap-3">
                                             <a
                                                 href={selectedApplication.cv}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+                                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2 text-xs"
                                             >
-                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
-                                                Download CV
+                                                View CV
                                             </a>
                                         </div>
 
                                         {/* CV Preview iframe */}
-                                        <div className="border rounded-lg overflow-hidden" style={{ height: '500px' }}>
+                                        <div className="border rounded-lg overflow-hidden" style={{ height: '400px' }}>
                                             <iframe
                                                 src={selectedApplication.cv}
                                                 className="w-full h-full"
@@ -174,7 +175,7 @@ export default function JobApplicationsPage() {
                                         </div>
                                     </div>
                                 ) : (
-                                    <p className="text-slate-500">No CV uploaded</p>
+                                    <p className="text-slate-500 text-xs">No CV uploaded</p>
                                 )}
                             </div>
 

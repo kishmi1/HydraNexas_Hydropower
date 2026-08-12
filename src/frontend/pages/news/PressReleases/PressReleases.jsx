@@ -6,12 +6,14 @@ import PageHero from "../../../components/common/PageHero/PageHero";
 import CTASection from "../../../components/home/CTASection/CTASection";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Download, FileText, ChevronDown, ChevronUp } from "lucide-react";
 
 const heroImage = "/assets/images/news/press-hero.jpg";
 
 export default function PressReleases() {
 
   const [pressReleases, setPressReleases] = useState([]);
+  const [expandedCards, setExpandedCards] = useState({});
 
   useEffect(() => {
 
@@ -32,6 +34,13 @@ export default function PressReleases() {
       });
 
   }, []);
+
+  const toggleExpand = (id) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   return (
     <>
@@ -81,8 +90,16 @@ export default function PressReleases() {
 
         <h3>{item.title}</h3>
 
-        <p className="press-summary">
-          {item.summary}
+        {item.featuredImage && (
+          <img
+            src={item.featuredImage}
+            alt={item.title}
+            className="press-image"
+          />
+        )}
+
+        <p className={`press-summary ${expandedCards[item.id] ? 'expanded' : ''}`}>
+          {expandedCards[item.id] ? item.content : item.summary}
         </p>
 
         <p className="press-author">
@@ -91,17 +108,48 @@ export default function PressReleases() {
 
       </div>
 
-      {item.pdfUrl && (
-        <Link
-          href={item.pdfUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-          className="read-btn"
+      <div className="press-actions">
+        <button 
+          onClick={() => toggleExpand(item.id)}
+          className="read-more-btn"
         >
-          Read PDF →
-        </Link>
-      )}
+          {expandedCards[item.id] ? (
+            <>
+              Show Less <ChevronUp size={16} />
+            </>
+          ) : (
+            <>
+              Read More <ChevronDown size={16} />
+            </>
+          )}
+        </button>
+
+        {item.pdfUrl && (
+          <div className="pdf-actions">
+            <Link
+              href={item.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="read-pdf-btn"
+            >
+              <FileText size={16} />
+              Read PDF
+            </Link>
+
+            <Link
+              href={item.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="download-btn"
+            >
+              <Download size={16} />
+              Download
+            </Link>
+          </div>
+        )}
+
+      </div>
 
     </div>
 

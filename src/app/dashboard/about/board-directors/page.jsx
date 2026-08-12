@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 export default function BoardDirectorsPage() {
   const [directors, setDirectors] = useState([]);
@@ -106,22 +108,17 @@ export default function BoardDirectorsPage() {
                   {director.description}
                 </td>
 
-                <td className="p-4 text-center space-x-3">
-
-                  <Link
-                    href={`/dashboard/about/board-directors/edit/${director.id}`}
-                    className="text-blue-600 hover:underline"
-                  >
-                    Edit
-                  </Link>
-
-                  <button
-                    onClick={() => handleDelete(director.id)}
-                    className="text-red-600 hover:underline"
-                  >
-                    Delete
-                  </button>
-
+                <td className="p-4 text-center">
+                  <div className="flex justify-center gap-2">
+                    <Link href={`/dashboard/about/board-directors/edit/${director.id}`}>
+                      <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                    </Link>
+                    <IconButton
+                      onClick={() => handleDelete(director.id)}
+                      variant="delete"
+                      tooltip="Delete"
+                    />
+                  </div>
                 </td>
 
               </tr>

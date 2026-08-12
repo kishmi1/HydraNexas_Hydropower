@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-
+import { Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 import DeleteDownloadButton from "@/components/dashboard/DeleteDownloadButton";
 
@@ -112,7 +113,6 @@ export default function DownloadsPage() {
                                             href={item.file}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            download
                                             className="text-blue-600 hover:underline"
                                         >
                                             View File
@@ -126,14 +126,15 @@ export default function DownloadsPage() {
 
                                 <td className="px-6 py-4 text-center">
 
-                                    <Link
-                                        href={`/dashboard/investor/downloads/edit/${item.id}`}
-                                        className="mr-4 text-blue-600"
-                                    >
-                                        Edit
-                                    </Link>
+                                    <div className="flex items-center justify-center gap-2">
 
-                                    <DeleteDownloadButton id={item.id} />
+                                        <Link href={`/dashboard/investor/downloads/edit/${item.id}`}>
+                                            <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                                        </Link>
+
+                                        <DeleteDownloadButton id={item.id} />
+
+                                    </div>
 
                                 </td>
 

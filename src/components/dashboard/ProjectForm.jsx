@@ -414,16 +414,17 @@ export default function ProjectForm({ project = null }) {
 
         {/* Featured */}
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 p-4 border border-slate-200 rounded-xl hover:border-blue-300 transition-colors bg-slate-50">
 
             <input
                 type="checkbox"
                 name="featured"
                 checked={formData.featured}
                 onChange={handleChange}
+                className="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-blue-500 focus:ring-2"
             />
 
-            <label>
+            <label className="text-sm font-medium text-slate-700 cursor-pointer">
                 Featured Project
             </label>
 

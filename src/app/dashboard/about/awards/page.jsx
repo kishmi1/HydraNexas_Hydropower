@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil } from "lucide-react";
+import IconButton from "@/components/dashboard/IconButton";
 
 export default function AwardsPage() {
   const [awards, setAwards] = useState([]);
@@ -129,24 +130,17 @@ export default function AwardsPage() {
                     {award.icon}
                   </td>
 
-                  <td className="p-4 text-center space-x-3">
-
-                    <Link
-                      href={`/dashboard/about/awards/edit/${award.id}`}
-                      className="inline-flex items-center gap-1 text-blue-600 hover:underline"
-                    >
-                      <Pencil size={16} />
-                      Edit
-                    </Link>
-
-                    <button
-                      onClick={() => handleDelete(award.id)}
-                      className="inline-flex items-center gap-1 text-red-600 hover:underline"
-                    >
-                      <Trash2 size={16} />
-                      Delete
-                    </button>
-
+                  <td className="p-4 text-center">
+                    <div className="flex justify-center gap-2">
+                      <Link href={`/dashboard/about/awards/edit/${award.id}`}>
+                        <IconButton icon={Pencil} variant="edit" tooltip="Edit" />
+                      </Link>
+                      <IconButton
+                        onClick={() => handleDelete(award.id)}
+                        variant="delete"
+                        tooltip="Delete"
+                      />
+                    </div>
                   </td>
 
                 </tr>

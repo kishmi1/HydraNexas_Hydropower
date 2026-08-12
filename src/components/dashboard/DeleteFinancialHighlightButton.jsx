@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import IconButton from "./IconButton";
 
 export default function DeleteFinancialHighlightButton({ id }) {
 
@@ -35,14 +36,7 @@ export default function DeleteFinancialHighlightButton({ id }) {
     }
 
     return (
-
-        <button
-            onClick={handleDelete}
-            className="text-red-600 hover:underline"
-        >
-            Delete
-        </button>
-
+        <IconButton variant="delete" tooltip="Delete" onClick={handleDelete} />
     );
 
 }
