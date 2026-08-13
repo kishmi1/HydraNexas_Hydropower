@@ -4,46 +4,8 @@ import { verifyToken } from "./lib/auth";
 export function middleware(request) {
     const { pathname } = request.nextUrl;
 
-    // Allow public routes
-    if (
-        pathname === "/login" ||
-        pathname.startsWith("/api/auth") ||
-        pathname.startsWith("/_next") ||
-        pathname.startsWith("/static") ||
-        pathname.includes(".") || // static files
-        // Public API routes (accessible without authentication)
-        pathname.startsWith("/api/news") ||
-        pathname.startsWith("/api/projects") ||
-        pathname.startsWith("/api/job-openings") ||
-        pathname.startsWith("/api/job-applications") ||
-        pathname.startsWith("/api/tender-notices") ||
-        pathname.startsWith("/api/leadership-team") ||
-        pathname.startsWith("/api/board-directors") ||
-        pathname.startsWith("/api/financial-highlights") ||
-        pathname.startsWith("/api/financial-ratios") ||
-        pathname.startsWith("/api/annual-reports") ||
-        pathname.startsWith("/api/share-information") ||
-        pathname.startsWith("/api/dividend-history") ||
-        pathname.startsWith("/api/governance") ||
-        pathname.startsWith("/api/downloads") ||
-        pathname.startsWith("/api/active-tenders") ||
-        pathname.startsWith("/api/award-notices") ||
-        pathname.startsWith("/api/tender-documents") ||
-        pathname.startsWith("/api/awards") ||
-        pathname.startsWith("/api/events") ||
-        pathname.startsWith("/api/gallery") ||
-        pathname.startsWith("/api/press-releases") ||
-        pathname.startsWith("/api/home-content") ||
-        pathname.startsWith("/api/internships") ||
-        pathname.startsWith("/api/weather") ||
-        pathname.startsWith("/api/chatbot-data") ||
-        pathname.startsWith("/api/vendor-registrations") ||
-        pathname.startsWith("/api/vendor-login") ||
-        pathname.startsWith("/api/contact") ||
-        pathname.startsWith("/api/settings") ||
-        pathname.startsWith("/api/notifications") ||
-        pathname.startsWith("/api/achievement-stats")
-    ) {
+    // Allow auth API routes (login, logout)
+    if (pathname.startsWith("/api/auth")) {
         return NextResponse.next();
     }
 
@@ -64,6 +26,50 @@ export function middleware(request) {
 
     // Protect admin API routes (require authentication)
     if (pathname.startsWith("/api/")) {
+        // Public API routes (accessible without authentication)
+        const publicRoutes = [
+            "/api/news",
+            "/api/projects", 
+            "/api/job-openings",
+            "/api/job-applications",
+            "/api/tender-notices",
+            "/api/leadership-team",
+            "/api/board-directors",
+            "/api/financial-highlights",
+            "/api/financial-ratios",
+            "/api/annual-reports",
+            "/api/share-information",
+            "/api/dividend-history",
+            "/api/governance",
+            "/api/downloads",
+            "/api/active-tenders",
+            "/api/award-notices",
+            "/api/tender-documents",
+            "/api/awards",
+            "/api/events",
+            "/api/gallery",
+            "/api/press-releases",
+            "/api/home-content",
+            "/api/internships",
+            "/api/weather",
+            "/api/chatbot-data",
+            "/api/vendor-registrations",
+            "/api/vendor-login",
+            "/api/contact",
+            "/api/settings",
+            "/api/notifications",
+            "/api/achievement-stats",
+            "/api/upload",
+            "/api/upload-pdf",
+            "/api/view-pdf"
+        ];
+
+        const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
+        
+        if (isPublicRoute) {
+            return NextResponse.next();
+        }
+
         const token = request.cookies.get("token")?.value;
 
         if (!token) {
