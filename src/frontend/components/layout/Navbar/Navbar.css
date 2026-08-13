@@ -279,6 +279,7 @@
     .mobile-toggle {
         display: block;
         z-index: 10000;
+        margin-left: auto;
     }
 
     .navbar-phone {
