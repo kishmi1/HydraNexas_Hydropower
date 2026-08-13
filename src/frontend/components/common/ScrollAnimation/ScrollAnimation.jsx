@@ -67,7 +67,7 @@ export default function ScrollAnimation({
       }}
 
       transition={{
-        duration:0.7,
+        duration:0.4,
         delay
       }}
 
