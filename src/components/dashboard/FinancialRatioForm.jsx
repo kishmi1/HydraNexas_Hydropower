@@ -82,14 +82,7 @@ console.log("FormData:", formData);
     return (
         <div>
 
-        <Link
-            href="/dashboard/investor/financial-ratios"
-            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
-        >
-            <ArrowLeft size={18} />
-            Back to Dashboard
-        </Link>
-
+       
 
         <form
             onSubmit={handleSubmit}
