@@ -280,6 +280,7 @@
         display: block;
         z-index: 10000;
         margin-left: auto;
+        margin-right: 8px;
     }
 
     .navbar-phone {
