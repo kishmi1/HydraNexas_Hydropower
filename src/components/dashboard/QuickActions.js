@@ -24,13 +24,13 @@ const actions = [
     {
         title: "Add Tender",
         subtitle: "Create tender",
-        href: "/dashboard/ebidding/create",
+        href: "/dashboard/ebidding/tender-notices/create",
         icon: FileText,
     },
     {
         title: "Add Career",
         subtitle: "Create vacancy",
-        href: "/dashboard/careers/create",
+        href: "/dashboard/careers/job-openings/create",
         icon: Briefcase,
     },
     {

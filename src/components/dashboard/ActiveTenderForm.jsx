@@ -102,13 +102,7 @@ export default function ActiveTenderForm({ tender = null }) {
 
         <div>
 
-        <Link
-            href="/dashboard/ebidding/active-tenders"
-            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
-        >
-            <ArrowLeft size={18} />
-            Back to Dashboard
-        </Link>
+        
 
         <form onSubmit={handleSubmit}>
            <div className="grid gap-6">

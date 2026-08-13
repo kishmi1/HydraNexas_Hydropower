@@ -33,6 +33,7 @@ export default function LoginForm() {
         setError("");
 
         try {
+            console.log("Attempting login with:", formData.email);
             const response = await fetch("/api/auth/login", {
                 method: "POST",
                 headers: {
@@ -41,22 +42,28 @@ export default function LoginForm() {
                 body: JSON.stringify(formData),
             });
 
-            const data = await response.json();
-
+            console.log("Response status:", response.status);
+            
             if (!response.ok) {
-                setError(data.message);
+                const data = await response.json();
+                console.log("Error response:", data);
+                setError(data.message || "Login failed");
                 setLoading(false);
                 return;
             }
 
-            router.push("/dashboard");
-            router.refresh();
+            const data = await response.json();
+            console.log("Response data:", data);
+
+            console.log("Login successful, redirecting to dashboard");
+            // Force a full page navigation to ensure middleware runs with the new cookie
+            window.location.href = "/dashboard";
 
         } catch (err) {
-            setError("Something went wrong.");
+            console.error("Login error:", err);
+            setError("Network error. Please check your connection and try again.");
+            setLoading(false);
         }
-
-        setLoading(false);
     }
 
     return (
