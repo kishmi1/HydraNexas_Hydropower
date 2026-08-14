@@ -12,8 +12,8 @@ export default function SubmitButton({
         w-full
         items-center
         justify-center
-        rounded-xl
-        bg-blue-600
+        rounded-lg
+        bg-blue-900
         px-4
         py-3
         text-sm
@@ -21,12 +21,12 @@ export default function SubmitButton({
         text-white
         transition
         duration-200
-        hover:bg-blue-700
+        hover:bg-blue-800
         focus:outline-none
-        focus:ring-4
-        focus:ring-blue-200
+        focus:ring-2
+        focus:ring-blue-900/10
         disabled:cursor-not-allowed
-        disabled:bg-blue-400
+        disabled:bg-blue-700
       "
         >
             {loading ? "Signing In..." : text}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search, X, LogOut } from "lucide-react";
+import { Bell, Search, X, LogOut, FolderKanban, Newspaper, Calendar, FileText, Users, Loader2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +10,12 @@ export default function Navbar() {
     const [unreadCount, setUnreadCount] = useState(0);
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [searchResults, setSearchResults] = useState(null);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const dropdownRef = useRef(null);
+    const searchRef = useRef(null);
+    const searchTimeoutRef = useRef(null);
 
     useEffect(() => {
         fetchNotifications();
@@ -59,7 +64,58 @@ export default function Navbar() {
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            window.location.href = `/dashboard/search?q=${encodeURIComponent(searchQuery)}`;
+            router.push(`/dashboard/search?q=${encodeURIComponent(searchQuery)}`);
+            setShowSearchDropdown(false);
+        }
+    };
+
+    const handleSearchInputChange = (value) => {
+        setSearchQuery(value);
+        
+        // Clear previous timeout
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+
+        if (value.trim().length >= 2) {
+            // Debounce search with 300ms delay
+            searchTimeoutRef.current = setTimeout(() => {
+                performSearch(value);
+            }, 300);
+        } else {
+            setSearchResults(null);
+            setShowSearchDropdown(false);
+        }
+    };
+
+    const performSearch = async (query) => {
+        setSearchLoading(true);
+        try {
+            const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            const data = await res.json();
+            if (data.success) {
+                setSearchResults(data.results);
+                setShowSearchDropdown(true);
+            }
+        } catch (error) {
+            console.error("Search error:", error);
+        } finally {
+            setSearchLoading(false);
+        }
+    };
+
+    const handleSearchResultClick = (route) => {
+        router.push(route);
+        setShowSearchDropdown(false);
+        setSearchQuery("");
+    };
+
+    const clearSearch = () => {
+        setSearchQuery("");
+        setSearchResults(null);
+        setShowSearchDropdown(false);
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
         }
     };
 
@@ -82,6 +138,9 @@ export default function Navbar() {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setShowDropdown(false);
+            }
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setShowSearchDropdown(false);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
@@ -111,32 +170,224 @@ export default function Navbar() {
             <div className="flex items-center gap-3 lg:gap-6">
 
                 {/* Search - Desktop */}
-                <form onSubmit={handleSearch} className="relative hidden md:block">
+                <div className="relative hidden md:block" ref={searchRef}>
+                    <form onSubmit={handleSearch} className="relative">
 
-                    <Search
-                        size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-                    />
+                        <Search
+                            size={18}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                        />
 
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-48 lg:w-72 rounded-xl border border-slate-300 bg-slate-50 py-2 lg:py-3 pl-11 pr-10 outline-none transition focus:border-blue-600 text-sm"
-                    />
+                        <input
+                            type="text"
+                            placeholder="Search Projects, News, Events..."
+                            value={searchQuery}
+                            onChange={(e) => handleSearchInputChange(e.target.value)}
+                            className="w-48 lg:w-72 rounded-xl border border-slate-300 bg-slate-50 py-2 lg:py-3 pl-11 pr-10 outline-none transition focus:border-blue-600 text-sm"
+                        />
 
-                    {searchQuery && (
-                        <button
-                            type="button"
-                            onClick={() => setSearchQuery("")}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                        >
-                            <X size={16} />
-                        </button>
+                        {searchQuery && (
+                            <button
+                                type="button"
+                                onClick={clearSearch}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                            >
+                                <X size={16} />
+                            </button>
+                        )}
+
+                    </form>
+
+                    {/* Search Results Dropdown */}
+                    {showSearchDropdown && (
+                        <div className="absolute right-0 top-full mt-2 w-96 rounded-xl border border-slate-200 bg-white shadow-lg z-50 max-h-96 overflow-y-auto">
+                            
+                            {searchLoading ? (
+                                <div className="flex items-center justify-center p-6">
+                                    <Loader2 className="animate-spin text-blue-600" size={24} />
+                                </div>
+                            ) : searchResults ? (
+                                <div>
+                                    {/* Projects */}
+                                    {searchResults.projects.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <FolderKanban size={14} className="text-blue-600" />
+                                                    PROJECTS
+                                                </span>
+                                            </div>
+                                            {searchResults.projects.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <FolderKanban size={16} className="text-blue-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* News */}
+                                    {searchResults.news.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <Newspaper size={14} className="text-green-600" />
+                                                    NEWS
+                                                </span>
+                                            </div>
+                                            {searchResults.news.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <Newspaper size={16} className="text-green-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Events */}
+                                    {searchResults.events.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <Calendar size={14} className="text-purple-600" />
+                                                    EVENTS
+                                                </span>
+                                            </div>
+                                            {searchResults.events.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <Calendar size={16} className="text-purple-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Tender Notices */}
+                                    {searchResults.tenderNotices.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <FileText size={14} className="text-orange-600" />
+                                                    TENDER NOTICES
+                                                </span>
+                                            </div>
+                                            {searchResults.tenderNotices.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <FileText size={16} className="text-orange-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Users */}
+                                    {searchResults.users.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <Users size={14} className="text-indigo-600" />
+                                                    USERS
+                                                </span>
+                                            </div>
+                                            {searchResults.users.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <Users size={16} className="text-indigo-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* No Results */}
+                                    {!searchResults.projects.length && 
+                                     !searchResults.news.length && 
+                                     !searchResults.events.length && 
+                                     !searchResults.tenderNotices.length && 
+                                     !searchResults.users.length && (
+                                        <div className="p-6 text-center text-slate-500 text-sm">
+                                            No results found
+                                        </div>
+                                    )}
+
+                                    {/* View All Results */}
+                                    <div className="border-t border-slate-100 p-3">
+                                        <button
+                                            onClick={handleSearch}
+                                            className="w-full text-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                                        >
+                                            View all results
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : null}
+                        </div>
                     )}
-
-                </form>
+                </div>
 
                 {/* Notification */}
 

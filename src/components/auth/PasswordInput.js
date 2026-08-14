@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Lock } from "lucide-react";
 
 export default function PasswordInput({
     label,
@@ -16,12 +16,15 @@ export default function PasswordInput({
         <div className="space-y-2">
             <label
                 htmlFor={name}
-                className="block text-sm font-semibold text-slate-700"
+                className="block text-sm font-medium text-slate-700"
             >
                 {label}
             </label>
 
             <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                    <Lock size={20} />
+                </div>
                 <input
                     id={name}
                     name={name}
@@ -31,27 +34,28 @@ export default function PasswordInput({
                     onChange={onChange}
                     className="
             w-full
-            rounded-xl
+            rounded-lg
             border
             border-slate-300
             bg-white
-            px-4
-            py-3
+            pl-12
             pr-12
+            py-3
             text-slate-900
+            placeholder-slate-400
             outline-none
             transition
             duration-200
-            focus:border-blue-600
-            focus:ring-4
-            focus:ring-blue-100
+            focus:border-blue-900
+            focus:ring-2
+            focus:ring-blue-900/10
           "
                 />
 
                 <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition-colors"
                 >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>

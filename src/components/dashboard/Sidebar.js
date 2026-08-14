@@ -82,8 +82,8 @@ export default function Sidebar() {
             )}
 
             {/* Sidebar */}
-            <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-72 flex-col bg-slate-900 text-white transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-                    isMobileOpen ? 'translate-x-0' : '-translate-x-full'
+            <aside className={`fixed inset-y-0 left-0 z-50 w-72 flex-col bg-slate-900 text-white transform transition-transform duration-300 ease-in-out ${
+                    isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                 } lg:flex`}>
                 
                 {/* Mobile Close Button */}
@@ -158,7 +158,7 @@ export default function Sidebar() {
 
                                                 <Icon size={20} />
 
-                                                <span>{item.title}</span>
+                                                <span className="whitespace-nowrap">{item.title}</span>
 
                                             </div>
 
@@ -194,7 +194,7 @@ export default function Sidebar() {
 
                                                                 <ChildIcon size={16} />
 
-                                                                <span>{child.title}</span>
+                                                                <span className="whitespace-nowrap">{child.title}</span>
 
                                                             </Link>
 
@@ -229,7 +229,7 @@ export default function Sidebar() {
 
                                             <Icon size={20} />
 
-                                            <span>{item.title}</span>
+                                            <span className="whitespace-nowrap">{item.title}</span>
 
                                         </button>
 
@@ -259,7 +259,7 @@ export default function Sidebar() {
 
                                         <Icon size={20} />
 
-                                        <span>{item.title}</span>
+                                        <span className="whitespace-nowrap">{item.title}</span>
 
                                     </Link>
 

@@ -16,6 +16,8 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
+  AreaChart,
+  Area,
 } from "recharts";
 
 import "./LiveDashboard.css";
@@ -36,15 +38,19 @@ export default function LiveDashboard() {
   const [turbineEfficiency, setTurbineEfficiency] = useState(96);
   const [reservoirLevel, setReservoirLevel] = useState(78);
   const [isWeatherLoading, setIsWeatherLoading] = useState(true);
+  const [dailyGeneration, setDailyGeneration] = useState(4320);
+  const [co2Saved, setCo2Saved] = useState(2840);
+  const [homesPowered, setHomesPowered] = useState(28500);
 
   const dashboardData = [
     {
       id: 1,
-      title: "Power Generation",
+      title: "Current Generation",
       value: generation,
       suffix: "MW",
       status: "Active",
-      icon: FaBolt
+      icon: FaBolt,
+      trend: "+2.4%"
     },
     {
       id: 2,
@@ -52,7 +58,8 @@ export default function LiveDashboard() {
       value: reservoirLevel,
       suffix: "%",
       status: "Normal",
-      icon: FaWater
+      icon: FaWater,
+      trend: "+0.8%"
     },
     {
       id: 3,
@@ -60,15 +67,18 @@ export default function LiveDashboard() {
       value: turbineEfficiency,
       suffix: "%",
       status: "Optimal",
-      icon: FaCogs
+      icon: FaCogs,
+      showGauge: true,
+      trend: "+0.3%"
     },
     {
       id: 4,
-      title: "Environmental Impact",
-      value: "CO₂",
-      suffix: "Reduced",
-      status: "Compliant",
-      icon: FaLeaf
+      title: "Daily Generation",
+      value: dailyGeneration,
+      suffix: "MWh",
+      status: "On Track",
+      icon: FaChartLine,
+      trend: "+5.2%"
     }
   ];
 
@@ -168,6 +178,42 @@ export default function LiveDashboard() {
     return () => clearInterval(reservoirTimer);
   }, []);
 
+  // Daily generation simulation
+  useEffect(() => {
+    const dailyTimer = setInterval(() => {
+      setDailyGeneration((prev) => {
+        const change = Math.floor(Math.random() * 20) - 8;
+        return Math.max(4000, Math.min(4800, prev + change));
+      });
+    }, 15000);
+
+    return () => clearInterval(dailyTimer);
+  }, []);
+
+  // CO2 saved simulation
+  useEffect(() => {
+    const co2Timer = setInterval(() => {
+      setCo2Saved((prev) => {
+        const change = Math.floor(Math.random() * 15) - 5;
+        return Math.max(2500, Math.min(3200, prev + change));
+      });
+    }, 20000);
+
+    return () => clearInterval(co2Timer);
+  }, []);
+
+  // Homes powered simulation
+  useEffect(() => {
+    const homesTimer = setInterval(() => {
+      setHomesPowered((prev) => {
+        const change = Math.floor(Math.random() * 200) - 80;
+        return Math.max(25000, Math.min(32000, prev + change));
+      });
+    }, 25000);
+
+    return () => clearInterval(homesTimer);
+  }, []);
+
   // Chart Data with realistic trend
   const chartData = [
     { time: "08:00", generation: 170 },
@@ -200,6 +246,12 @@ export default function LiveDashboard() {
       <div className="dashboard-grid">
         {dashboardData.map((item) => {
           const Icon = item.icon;
+          const displayValue = item.title === "Current Generation" ? Math.round(generation) : 
+                              item.title === "Reservoir Level" ? Math.round(reservoirLevel) : 
+                              item.title === "Turbine Efficiency" ? Math.round(turbineEfficiency) :
+                              item.title === "Daily Generation" ? Math.round(dailyGeneration) :
+                              item.value;
+          
           return (
             <div className="dashboard-card" key={item.id}>
               <div className="card-icon">
@@ -207,13 +259,15 @@ export default function LiveDashboard() {
               </div>
               <div className="card-content">
                 <h3>
-                  {item.title === "Power Generation" ? Math.round(generation) : 
-                   item.title === "Reservoir Level" ? Math.round(reservoirLevel) : 
-                   item.title === "Turbine Efficiency" ? Math.round(turbineEfficiency) :
-                   item.value}
+                  {displayValue}
                   {item.suffix}
                 </h3>
                 <p>{item.title}</p>
+                {item.trend && (
+                  <span className="trend-badge">
+                    {item.trend}
+                  </span>
+                )}
                 <span className="status-badge">
                   {item.status}
                 </span>
@@ -224,6 +278,30 @@ export default function LiveDashboard() {
                     className="progress-fill"
                     style={{ width: `${reservoirLevel}%` }}
                   ></div>
+                </div>
+              )}
+              {item.showGauge && (
+                <div className="gauge-container">
+                  <svg className="gauge" viewBox="0 0 100 100">
+                    <circle
+                      className="gauge-bg"
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      fill="none"
+                      strokeWidth="8"
+                    />
+                    <circle
+                      className="gauge-fill"
+                      cx="50"
+                      cy="50"
+                      r="40"
+                      fill="none"
+                      strokeWidth="8"
+                      strokeDasharray={`${(displayValue / 100) * 251.2} 251.2`}
+                      transform="rotate(-90 50 50)"
+                    />
+                  </svg>
                 </div>
               )}
             </div>
@@ -237,21 +315,37 @@ export default function LiveDashboard() {
           <h4>🌤 Weather</h4>
           <span>{weather.temperature}°C | {weather.condition}</span>
           <small>{isWeatherLoading ? "Loading..." : weather.description}</small>
+          <div className="mini-indicator">
+            <div className="indicator-fill" style={{ width: `${weather.humidity}%` }}></div>
+          </div>
+          <small>Humidity: {weather.humidity}%</small>
         </div>
 
         <div className="info-card">
           <h4>💧 Water Inflow</h4>
           <span>{waterInflow} m³/s</span>
+          <div className="mini-indicator">
+            <div className="indicator-fill" style={{ width: `${((waterInflow - 200) / 100) * 100}%` }}></div>
+          </div>
+          <small>Flow Rate</small>
         </div>
 
         <div className="info-card">
-          <h4>⚡ Grid Status</h4>
-          <span>Connected</span>
+          <h4>🌱 CO₂ Saved</h4>
+          <span>{co2Saved.toLocaleString()} tons</span>
+          <div className="mini-indicator">
+            <div className="indicator-fill green" style={{ width: `${((co2Saved - 2500) / 700) * 100}%` }}></div>
+          </div>
+          <small>Environmental Impact</small>
         </div>
 
         <div className="info-card">
-          <h4>🏭 Plant Status</h4>
-          <span>Operational</span>
+          <h4>� Homes Powered</h4>
+          <span>{homesPowered.toLocaleString()}</span>
+          <div className="mini-indicator">
+            <div className="indicator-fill blue" style={{ width: `${((homesPowered - 25000) / 7000) * 100}%` }}></div>
+          </div>
+          <small>Community Impact</small>
         </div>
       </div>
 
@@ -261,21 +355,47 @@ export default function LiveDashboard() {
           <h3>📈 Power Generation Trend</h3>
           <FaChartLine />
         </div>
-        <ResponsiveContainer width="100%" height={200}>
-          <LineChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis />
-            <Tooltip />
-            <Line
+        <ResponsiveContainer width="100%" height={250}>
+          <AreaChart data={chartData}>
+            <defs>
+              <linearGradient id="colorGeneration" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#1e3a8a" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#1e3a8a" stopOpacity={0.1}/>
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <XAxis 
+              dataKey="time" 
+              stroke="#6b7280"
+              style={{ fontSize: '12px' }}
+            />
+            <YAxis 
+              stroke="#6b7280"
+              style={{ fontSize: '12px' }}
+              label={{ value: 'MW', angle: -90, position: 'insideLeft' }}
+            />
+            <Tooltip 
+              contentStyle={{
+                backgroundColor: '#1e3a8a',
+                color: 'white',
+                borderRadius: '8px',
+                border: 'none',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+              }}
+              itemStyle={{ color: 'white' }}
+              labelStyle={{ color: '#60a5fa', fontWeight: 'bold' }}
+            />
+            <Area
               type="monotone"
               dataKey="generation"
-              stroke="#0ea5e9"
+              stroke="#1e3a8a"
               strokeWidth={3}
-              dot={{ r: 5 }}
-              activeDot={{ r: 8 }}
+              fillOpacity={1}
+              fill="url(#colorGeneration)"
+              dot={{ r: 4, fill: '#1e3a8a', stroke: '#fff', strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: '#1e3a8a', stroke: '#fff', strokeWidth: 2 }}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
 
@@ -285,15 +405,24 @@ export default function LiveDashboard() {
         <div className="alerts-list">
           <div className="alert-item info">
             <span>ℹ️</span>
-            <p>Routine maintenance scheduled for next week</p>
+            <div className="alert-content">
+              <p>Routine maintenance scheduled for next week</p>
+              <small>Information</small>
+            </div>
           </div>
           <div className="alert-item success">
             <span>✅</span>
-            <p>All systems operating within normal parameters</p>
+            <div className="alert-content">
+              <p>All systems operating within normal parameters</p>
+              <small>System Normal</small>
+            </div>
           </div>
           <div className="alert-item warning">
             <span>⚠️</span>
-            <p>Water level monitoring - attention required</p>
+            <div className="alert-content">
+              <p>Water level monitoring - attention required</p>
+              <small>Attention Required</small>
+            </div>
           </div>
         </div>
       </div>

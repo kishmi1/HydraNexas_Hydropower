@@ -82,7 +82,7 @@
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
     color: rgba(255, 255, 255, 0.90);
-    margin-bottom: 36px;
+    margin-bottom: 32px;
     font-weight: var(--font-normal);
 }
 
@@ -94,7 +94,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    flex-wrap: wrap;
+    margin-top: 16px;
 }
 
 /* ==========================
@@ -106,23 +106,29 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 32px;
-    border-radius: var(--radius-lg);
+    padding: 0 30px;
+    height: 50px;
+    border-radius: 9px;
     border: none;
-    background: var(--accent);
-    color: var(--text-inverse);
-    font-size: var(--text-base);
-    font-weight: var(--font-semibold);
+    background: #0a2540;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-md);
+    transition: all 250ms ease;
+    box-shadow: 0 2px 8px rgba(10, 37, 64, 0.15);
 }
 
 .primary-btn:hover {
-    background: var(--accent-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: #0d2f52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 37, 64, 0.25);
+}
+
+.primary-btn:focus {
+    outline: 2px solid #0a2540;
+    outline-offset: 2px;
 }
 
 .primary-btn svg {
@@ -141,25 +147,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 32px;
-    border-radius: var(--radius-lg);
-    border: 2px solid rgba(255, 255, 255, 0.50);
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    color: var(--text-inverse);
-    font-size: var(--text-base);
-    font-weight: var(--font-semibold);
+    padding: 0 30px;
+    height: 50px;
+    border-radius: 9px;
+    border: 1.5px solid #0a2540;
+    background: #ffffff;
+    color: #0a2540;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    transition: var(--transition-base);
+    transition: all 250ms ease;
 }
 
 .secondary-btn:hover {
-    background: var(--white);
-    color: var(--primary);
-    border-color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: #f8f9fa;
+    color: #0d2f52;
+    border-color: #0d2f52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 37, 64, 0.15);
+}
+
+.secondary-btn:focus {
+    outline: 2px solid #0a2540;
+    outline-offset: 2px;
 }
 
 /* ==========================
@@ -193,6 +204,17 @@
     .hero-content p {
         font-size: var(--text-base);
     }
+
+    .hero-buttons {
+        gap: 12px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        padding: 0 26px;
+        height: 48px;
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -217,11 +239,15 @@
     .hero-buttons {
         flex-direction: column;
         width: 100%;
+        gap: 12px;
     }
 
     .primary-btn,
     .secondary-btn {
         width: 100%;
+        padding: 0 26px;
+        height: 48px;
+        font-size: 15px;
     }
 
     .hero-overlay {
@@ -243,7 +269,8 @@
 
     .primary-btn,
     .secondary-btn {
-        padding: 12px 24px;
-        font-size: var(--text-sm);
+        padding: 0 24px;
+        height: 48px;
+        font-size: 15px;
     }
 }

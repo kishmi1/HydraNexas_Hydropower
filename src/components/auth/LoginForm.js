@@ -69,7 +69,7 @@ export default function LoginForm() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="space-y-4"
         >
             <AuthInput
                 label="Email Address"
@@ -88,15 +88,15 @@ export default function LoginForm() {
                 onChange={handleChange}
             />
 
-            <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-sm text-slate-600">
-                    <input type="checkbox" />
+            <div className="flex items-center">
+                <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer whitespace-nowrap">
+                    <input type="checkbox" className="rounded border-slate-300 text-blue-900 focus:ring-blue-900/10" />
                     Remember Me
                 </label>
             </div>
 
             {error && (
-                <div className="rounded-lg bg-red-100 p-3 text-sm text-red-600">
+                <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
                     {error}
                 </div>
             )}

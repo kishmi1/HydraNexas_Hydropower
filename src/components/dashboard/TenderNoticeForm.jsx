@@ -79,14 +79,7 @@ export default function TenderNoticeForm({
     return (
         <div>
 
-        <Link
-            href="/dashboard/ebidding/tender-notices"
-            className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:underline"
-        >
-            <ArrowLeft size={18} />
-            Back to Dashboard
-        </Link>
-
+       
 
         <form
             onSubmit={handleSubmit}
