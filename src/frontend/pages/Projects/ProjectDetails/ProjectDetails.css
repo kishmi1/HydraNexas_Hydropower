@@ -944,3 +944,41 @@
 
 
 }
+
+/* =====================================
+   TIMELINE CONTENT STYLES
+===================================== */
+
+.timeline-item .timeline-content {
+
+    margin: 0;
+
+}
+
+.timeline-item .timeline-content h4 {
+
+    margin: 0 0 10px 0;
+
+    font-size: 18px;
+
+    color: #334155;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+}
+
+.timeline-item .timeline-content p {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    color: #64748b;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+}

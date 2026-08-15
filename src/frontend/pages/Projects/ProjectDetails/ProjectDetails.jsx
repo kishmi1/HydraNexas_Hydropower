@@ -128,35 +128,18 @@ export default function ProjectDetails({ id}) {
 
               <tbody>
 
-                <tr>
-                  <td>Developer</td>
-                  <td>{project.specifications?.developer}</td>
-                </tr>
-
-                <tr>
-                  <td>River</td>
-                  <td>{project.specifications?.river}</td>
-                </tr>
-
-                <tr>
-                  <td>Project Type</td>
-                  <td>{project.specifications?.projectType}</td>
-                </tr>
-
-                <tr>
-                  <td>Annual Energy</td>
-                  <td>{project.specifications?.annualEnergy}</td>
-                </tr>
-
-                <tr>
-                  <td>Investment</td>
-                  <td>{project.specifications?.investment}</td>
-                </tr>
-
-                <tr>
-                  <td>Construction Period</td>
-                  <td>{project.specifications?.constructionPeriod}</td>
-                </tr>
+                {project.specifications && typeof project.specifications === 'object' ? (
+                  Object.entries(project.specifications).map(([label, value], index) => (
+                    <tr key={index}>
+                      <td>{label}</td>
+                      <td>{value}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2">No specifications available.</td>
+                  </tr>
+                )}
 
               </tbody>
 
@@ -210,7 +193,10 @@ export default function ProjectDetails({ id}) {
 
                   <span>{item.year}</span>
 
-                  <p>{item.title}</p>
+                  <div className="timeline-content">
+                    <h4>{item.title}</h4>
+                    {item.description && <p>{item.description}</p>}
+                  </div>
 
                 </div>
 
