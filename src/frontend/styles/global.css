@@ -50,6 +50,10 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    /* Improve image rendering quality */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 /* Links */
@@ -124,7 +128,7 @@ button {
 
 /* Fade In Up */
 .fade-in-up {
-    animation: fadeIn 0.6s ease forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Staggered Animation Delays */
@@ -132,6 +136,22 @@ button {
 .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
 .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
 .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+
+/* Smooth Reveal Animation */
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-up {
+    animation: revealUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 
 /* Smooth Hover Transitions */
 .hover-lift {

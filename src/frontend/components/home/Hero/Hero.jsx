@@ -39,35 +39,37 @@ export default function Hero() {
           >
             <div className="hero-overlay"></div>
 
-            <div className="container hero-content">
+            <div className="container">
+              <div className="hero-content">
 
-             <span className="hero-subtitle">
-              {t("hero.subtitle")}
-             </span>
+               <span className="hero-subtitle">
+                {t("hero.subtitle")}
+               </span>
 
-             <h1>
-              {t("hero.title")}
-              <br />
-              {t("hero.title2")}
-             </h1>
+               <h1>
+                {t("hero.title")}
+                <br />
+                {t("hero.title2")}
+               </h1>
 
-             <p>
-              {t("hero.description")}
-             </p>
+               <p>
+                {t("hero.description")}
+               </p>
 
-             <div className="hero-buttons">
-              <Link href="/projects" className="primary-btn">
-               {t("hero.explore")}
-              </Link>
+               <div className="hero-buttons">
+                <Link href="/projects" className="primary-btn">
+                 {t("hero.explore")}
+                </Link>
 
-              <Link
-               href="/investor/financial-highlights"
-               className="secondary-btn"
-              >
-               {t("hero.investor")}
-              </Link>
-             </div>
+                <Link
+                 href="/investor/financial-highlights"
+                 className="secondary-btn"
+                >
+                 {t("hero.investor")}
+                </Link>
+               </div>
 
+              </div>
             </div>
 
           </section>
