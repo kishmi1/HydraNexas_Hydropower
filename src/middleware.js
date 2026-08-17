@@ -43,7 +43,8 @@ export async function middleware(request) {
         pathname.startsWith("/api/contact") ||
         pathname.startsWith("/api/settings") ||
         pathname.startsWith("/api/notifications") ||
-        pathname.startsWith("/api/achievement-stats")
+        pathname.startsWith("/api/achievement-stats") ||
+        pathname.startsWith("/api/search")
     ) {
         return NextResponse.next();
     }

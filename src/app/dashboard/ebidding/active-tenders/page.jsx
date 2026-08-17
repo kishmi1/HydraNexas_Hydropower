@@ -10,6 +10,8 @@ export default function ActiveTendersPage() {
 
         const [activeTenders, setActiveTenders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [statusFilter, setStatusFilter] = useState("All");
 
     useEffect(() => {
         fetch("/api/active-tenders")
@@ -25,6 +27,19 @@ export default function ActiveTendersPage() {
                 setLoading(false);
             });
     }, []);
+
+    const filteredTenders = activeTenders.filter((tender) => {
+        const matchesSearch = 
+            tender.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tender.tenderNo?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tender.location?.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        const matchesStatus = 
+            statusFilter === "All" || 
+            tender.status === statusFilter;
+        
+        return matchesSearch && matchesStatus;
+    });
 
     if (loading) {
         return <div className="p-8">Loading...</div>;
@@ -60,20 +75,26 @@ export default function ActiveTendersPage() {
 
             </div>
 
-            <div className="mb-6 flex items-center justify-between">
+            <div className="mb-6 flex items-center justify-between gap-4">
 
     <input
         type="text"
         placeholder="Search Tender..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         className="w-80 rounded-xl border border-slate-300 px-4 py-3"
     />
 
-    <select className="rounded-xl border border-slate-300 px-4 py-3">
+    <select 
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
+        className="rounded-xl border border-slate-300 px-4 py-3"
+    >
 
-        <option>All Status</option>
-        <option>Open</option>
-        <option>Closed</option>
-        <option>Awarded</option>
+        <option value="All">All Status</option>
+        <option value="Open">Open</option>
+        <option value="Closed">Closed</option>
+        <option value="Awarded">Awarded</option>
 
     </select>
 
@@ -99,7 +120,7 @@ export default function ActiveTendersPage() {
 
                     <tbody>
 
-                        {activeTenders.map((tender) => (
+                        {filteredTenders.map((tender) => (
 
                             <tr
                                 key={tender.id}

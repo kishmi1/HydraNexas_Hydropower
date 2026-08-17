@@ -68,7 +68,7 @@ export default function Sidebar() {
             {/* Mobile Menu Button */}
             <button
                 onClick={() => setIsMobileOpen(true)}
-                className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg"
+                className="lg:hidden fixed top-6 left-4 z-50 p-2 bg-slate-900 text-white rounded-lg shadow-lg"
             >
                 <Menu size={24} />
             </button>
@@ -96,7 +96,7 @@ export default function Sidebar() {
 
                 {/* Logo */}
 
-                <div className="border-b border-slate-800 p-6 mt-12 lg:mt-0">
+                <div className="border-b border-slate-800 p-6 mt-16 lg:mt-0">
 
                     <div className="flex items-center gap-4">
 

@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 export default function ActiveTenders() {
   const [tenders, setTenders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("/api/active-tenders")
@@ -41,6 +42,19 @@ export default function ActiveTenders() {
         setLoading(false);
       });
   }, []);
+
+  const filteredTenders = tenders.filter((tender) => {
+    if (!searchQuery.trim()) return true;
+    
+    const searchLower = searchQuery.toLowerCase().trim();
+    const titleLower = (tender.title || "").toLowerCase().trim();
+    const tenderNoLower = (tender.tenderNo || "").toLowerCase().trim();
+    const locationLower = (tender.location || "").toLowerCase().trim();
+    
+    return titleLower.includes(searchLower) || 
+           tenderNoLower.includes(searchLower) || 
+           locationLower.includes(searchLower);
+  });
 
   return (
     <>
@@ -68,14 +82,27 @@ export default function ActiveTenders() {
             </p>
           </div>
 
-          <p className="tender-count">Total Tenders: {tenders.length}</p>
+          {/* Search Bar */}
+          <div className="search-bar fade-in-up">
+            <input
+              type="text"
+              placeholder="Search tenders by title, tender number, or location..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
+
+          <p className="tender-count">Total Tenders: {filteredTenders.length}</p>
 
           {/* Tender Cards */}
           <div className="tender-grid">
             {loading ? (
               <p>Loading tenders...</p>
+            ) : filteredTenders.length === 0 ? (
+              <p>No tenders found matching your search.</p>
             ) : (
-              tenders.map((tender, index) => (
+              filteredTenders.map((tender, index) => (
                 <div
                   className="tender-card fade-in-up"
                   key={tender.id}

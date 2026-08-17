@@ -14,7 +14,13 @@ export async function GET(request) {
                     news: [],
                     events: [],
                     tenderNotices: [],
-                    users: []
+                    users: [],
+                    pressReleases: [],
+                    leadershipTeam: [],
+                    boardDirectors: [],
+                    jobOpenings: [],
+                    activeTenders: [],
+                    mediaGallery: []
                 }
             });
         }
@@ -31,7 +37,13 @@ export async function GET(request) {
                     news: [],
                     events: [],
                     tenderNotices: [],
-                    users: []
+                    users: [],
+                    pressReleases: [],
+                    leadershipTeam: [],
+                    boardDirectors: [],
+                    jobOpenings: [],
+                    activeTenders: [],
+                    mediaGallery: []
                 }
             });
         }
@@ -48,7 +60,6 @@ export async function GET(request) {
                     { details: { contains: searchTerm, mode: 'insensitive' } }
                 ]
             },
-            take: 5,
             orderBy: { createdAt: 'desc' }
         });
         console.log("Projects found:", projects.length);
@@ -65,7 +76,6 @@ export async function GET(request) {
                     { tags: { has: searchTerm } }
                 ]
             },
-            take: 5,
             orderBy: { createdAt: 'desc' }
         });
         console.log("News found:", news.length);
@@ -80,7 +90,6 @@ export async function GET(request) {
                     { date: { contains: searchTerm, mode: 'insensitive' } }
                 ]
             },
-            take: 5,
             orderBy: { createdAt: 'desc' }
         });
         console.log("Events found:", events.length);
@@ -95,7 +104,6 @@ export async function GET(request) {
                     { publishDate: { contains: searchTerm, mode: 'insensitive' } }
                 ]
             },
-            take: 5,
             orderBy: { createdAt: 'desc' }
         });
         console.log("Tender notices found:", tenderNotices.length);
@@ -110,10 +118,94 @@ export async function GET(request) {
                     { status: { contains: searchTerm, mode: 'insensitive' } }
                 ]
             },
-            take: 5,
             orderBy: { createdAt: 'desc' }
         });
         console.log("Users found:", users.length);
+
+        // Search Press Releases
+        const pressReleases = await prisma.pressRelease.findMany({
+            where: {
+                OR: [
+                    { title: { contains: searchTerm, mode: 'insensitive' } },
+                    { summary: { contains: searchTerm, mode: 'insensitive' } },
+                    { content: { contains: searchTerm, mode: 'insensitive' } },
+                    { category: { contains: searchTerm, mode: 'insensitive' } },
+                    { author: { contains: searchTerm, mode: 'insensitive' } },
+                    { tags: { has: searchTerm } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Press releases found:", pressReleases.length);
+
+        // Search Leadership Team
+        const leadershipTeam = await prisma.leadershipTeam.findMany({
+            where: {
+                OR: [
+                    { name: { contains: searchTerm, mode: 'insensitive' } },
+                    { position: { contains: searchTerm, mode: 'insensitive' } },
+                    { description: { contains: searchTerm, mode: 'insensitive' } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Leadership team found:", leadershipTeam.length);
+
+        // Search Board Directors
+        const boardDirectors = await prisma.boardDirector.findMany({
+            where: {
+                OR: [
+                    { name: { contains: searchTerm, mode: 'insensitive' } },
+                    { position: { contains: searchTerm, mode: 'insensitive' } },
+                    { description: { contains: searchTerm, mode: 'insensitive' } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Board directors found:", boardDirectors.length);
+
+        // Search Job Openings
+        const jobOpenings = await prisma.jobOpening.findMany({
+            where: {
+                OR: [
+                    { position: { contains: searchTerm, mode: 'insensitive' } },
+                    { department: { contains: searchTerm, mode: 'insensitive' } },
+                    { location: { contains: searchTerm, mode: 'insensitive' } },
+                    { type: { contains: searchTerm, mode: 'insensitive' } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Job openings found:", jobOpenings.length);
+
+        // Search Active Tenders
+        const activeTenders = await prisma.activeTender.findMany({
+            where: {
+                OR: [
+                    { title: { contains: searchTerm, mode: 'insensitive' } },
+                    { tenderNo: { contains: searchTerm, mode: 'insensitive' } },
+                    { location: { contains: searchTerm, mode: 'insensitive' } },
+                    { description: { contains: searchTerm, mode: 'insensitive' } },
+                    { type: { contains: searchTerm, mode: 'insensitive' } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Active tenders found:", activeTenders.length);
+
+        // Search Media Gallery
+        const mediaGallery = await prisma.mediaGallery.findMany({
+            where: {
+                OR: [
+                    { title: { contains: searchTerm, mode: 'insensitive' } },
+                    { category: { contains: searchTerm, mode: 'insensitive' } },
+                    { type: { contains: searchTerm, mode: 'insensitive' } },
+                    { description: { contains: searchTerm, mode: 'insensitive' } }
+                ]
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+        console.log("Media gallery found:", mediaGallery.length);
 
         return NextResponse.json({
             success: true,
@@ -152,6 +244,48 @@ export async function GET(request) {
                     subtitle: u.email,
                     type: 'user',
                     route: `/dashboard/users/edit/${u.id}`
+                })),
+                pressReleases: pressReleases.map(pr => ({
+                    id: pr.id,
+                    title: pr.title,
+                    subtitle: pr.category,
+                    type: 'press',
+                    route: `/dashboard/press-releases/edit/${pr.id}`
+                })),
+                leadershipTeam: leadershipTeam.map(lt => ({
+                    id: lt.id,
+                    title: lt.name,
+                    subtitle: lt.position,
+                    type: 'leadership',
+                    route: `/dashboard/about/leadership-team/edit/${lt.id}`
+                })),
+                boardDirectors: boardDirectors.map(bd => ({
+                    id: bd.id,
+                    title: bd.name,
+                    subtitle: bd.position,
+                    type: 'board',
+                    route: `/dashboard/about/board-directors/edit/${bd.id}`
+                })),
+                jobOpenings: jobOpenings.map(jo => ({
+                    id: jo.id,
+                    title: jo.position,
+                    subtitle: jo.department,
+                    type: 'job',
+                    route: `/dashboard/careers/job-openings/edit/${jo.id}`
+                })),
+                activeTenders: activeTenders.map(at => ({
+                    id: at.id,
+                    title: at.title,
+                    subtitle: at.location,
+                    type: 'active-tender',
+                    route: `/dashboard/ebidding/active-tenders/edit/${at.id}`
+                })),
+                mediaGallery: mediaGallery.map(mg => ({
+                    id: mg.id,
+                    title: mg.title,
+                    subtitle: mg.category,
+                    type: 'media',
+                    route: `/dashboard/gallery/edit/${mg.id}`
                 }))
             }
         });
@@ -166,7 +300,13 @@ export async function GET(request) {
                 news: [],
                 events: [],
                 tenderNotices: [],
-                users: []
+                users: [],
+                pressReleases: [],
+                leadershipTeam: [],
+                boardDirectors: [],
+                jobOpenings: [],
+                activeTenders: [],
+                mediaGallery: []
             }
         }, {
             status: 500,

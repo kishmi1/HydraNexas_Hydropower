@@ -26,6 +26,37 @@
 }
 
 /* ==========================
+   SEARCH BAR
+========================== */
+
+.search-bar {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-4);
+}
+
+.search-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 20px;
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: var(--transition-base);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* ==========================
    TENDER CARD
 ========================== */
 

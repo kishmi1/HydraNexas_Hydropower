@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search, X, LogOut, FolderKanban, Newspaper, Calendar, FileText, Users, Loader2 } from "lucide-react";
+import { Bell, Search, X, LogOut, FolderKanban, Newspaper, Calendar, FileText, Users, Loader2, FileText as PressIcon, User as LeadershipIcon, Building2 as BoardIcon, Briefcase as JobIcon, FileText as ActiveTenderIcon, Image as MediaIcon } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
@@ -180,10 +180,10 @@ export default function Navbar() {
 
                         <input
                             type="text"
-                            placeholder="Search Projects, News, Events..."
+                            placeholder="Search everything..."
                             value={searchQuery}
                             onChange={(e) => handleSearchInputChange(e.target.value)}
-                            className="w-48 lg:w-72 rounded-xl border border-slate-300 bg-slate-50 py-2 lg:py-3 pl-11 pr-10 outline-none transition focus:border-blue-600 text-sm"
+                            className="w-48 lg:w-64 rounded-xl border border-slate-300 bg-slate-50 py-2 lg:py-2 pl-11 pr-10 outline-none transition focus:border-blue-600 text-sm"
                         />
 
                         {searchQuery && (
@@ -200,7 +200,7 @@ export default function Navbar() {
 
                     {/* Search Results Dropdown */}
                     {showSearchDropdown && (
-                        <div className="absolute right-0 top-full mt-2 w-96 rounded-xl border border-slate-200 bg-white shadow-lg z-50 max-h-96 overflow-y-auto">
+                        <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-slate-200 bg-white shadow-lg z-50 max-h-80 overflow-y-auto">
                             
                             {searchLoading ? (
                                 <div className="flex items-center justify-center p-6">
@@ -213,7 +213,7 @@ export default function Navbar() {
                                         <div className="border-b border-slate-100">
                                             <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
                                                 <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
-                                                    <FolderKanban size={14} className="text-blue-600" />
+                                                    <FolderKanban size={12} className="text-blue-600" />
                                                     PROJECTS
                                                 </span>
                                             </div>
@@ -221,10 +221,10 @@ export default function Navbar() {
                                                 <div
                                                     key={item.id}
                                                     onClick={() => handleSearchResultClick(item.route)}
-                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
                                                 >
                                                     <div className="flex items-start gap-3">
-                                                        <FolderKanban size={16} className="text-blue-600 mt-1 flex-shrink-0" />
+                                                        <FolderKanban size={14} className="text-blue-600 mt-1 flex-shrink-0" />
                                                         <div className="flex-1 min-w-0">
                                                             <p className="font-medium text-slate-800 text-sm truncate">
                                                                 {item.title}
@@ -244,7 +244,7 @@ export default function Navbar() {
                                         <div className="border-b border-slate-100">
                                             <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
                                                 <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
-                                                    <Newspaper size={14} className="text-green-600" />
+                                                    <Newspaper size={12} className="text-green-600" />
                                                     NEWS
                                                 </span>
                                             </div>
@@ -252,10 +252,10 @@ export default function Navbar() {
                                                 <div
                                                     key={item.id}
                                                     onClick={() => handleSearchResultClick(item.route)}
-                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
                                                 >
                                                     <div className="flex items-start gap-3">
-                                                        <Newspaper size={16} className="text-green-600 mt-1 flex-shrink-0" />
+                                                        <Newspaper size={14} className="text-green-600 mt-1 flex-shrink-0" />
                                                         <div className="flex-1 min-w-0">
                                                             <p className="font-medium text-slate-800 text-sm truncate">
                                                                 {item.title}
@@ -275,7 +275,7 @@ export default function Navbar() {
                                         <div className="border-b border-slate-100">
                                             <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
                                                 <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
-                                                    <Calendar size={14} className="text-purple-600" />
+                                                    <Calendar size={12} className="text-purple-600" />
                                                     EVENTS
                                                 </span>
                                             </div>
@@ -283,10 +283,10 @@ export default function Navbar() {
                                                 <div
                                                     key={item.id}
                                                     onClick={() => handleSearchResultClick(item.route)}
-                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
                                                 >
                                                     <div className="flex items-start gap-3">
-                                                        <Calendar size={16} className="text-purple-600 mt-1 flex-shrink-0" />
+                                                        <Calendar size={14} className="text-purple-600 mt-1 flex-shrink-0" />
                                                         <div className="flex-1 min-w-0">
                                                             <p className="font-medium text-slate-800 text-sm truncate">
                                                                 {item.title}
@@ -306,7 +306,7 @@ export default function Navbar() {
                                         <div className="border-b border-slate-100">
                                             <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
                                                 <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
-                                                    <FileText size={14} className="text-orange-600" />
+                                                    <FileText size={12} className="text-orange-600" />
                                                     TENDER NOTICES
                                                 </span>
                                             </div>
@@ -314,10 +314,10 @@ export default function Navbar() {
                                                 <div
                                                     key={item.id}
                                                     onClick={() => handleSearchResultClick(item.route)}
-                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
                                                 >
                                                     <div className="flex items-start gap-3">
-                                                        <FileText size={16} className="text-orange-600 mt-1 flex-shrink-0" />
+                                                        <FileText size={14} className="text-orange-600 mt-1 flex-shrink-0" />
                                                         <div className="flex-1 min-w-0">
                                                             <p className="font-medium text-slate-800 text-sm truncate">
                                                                 {item.title}
@@ -337,7 +337,7 @@ export default function Navbar() {
                                         <div className="border-b border-slate-100">
                                             <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
                                                 <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
-                                                    <Users size={14} className="text-indigo-600" />
+                                                    <Users size={12} className="text-indigo-600" />
                                                     USERS
                                                 </span>
                                             </div>
@@ -345,10 +345,196 @@ export default function Navbar() {
                                                 <div
                                                     key={item.id}
                                                     onClick={() => handleSearchResultClick(item.route)}
-                                                    className="px-4 py-3 hover:bg-slate-50 cursor-pointer transition"
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
                                                 >
                                                     <div className="flex items-start gap-3">
-                                                        <Users size={16} className="text-indigo-600 mt-1 flex-shrink-0" />
+                                                        <Users size={14} className="text-indigo-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Press Releases */}
+                                    {searchResults.pressReleases && searchResults.pressReleases.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <PressIcon size={12} className="text-cyan-600" />
+                                                    PRESS RELEASES
+                                                </span>
+                                            </div>
+                                            {searchResults.pressReleases.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <PressIcon size={14} className="text-cyan-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Leadership Team */}
+                                    {searchResults.leadershipTeam && searchResults.leadershipTeam.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <LeadershipIcon size={12} className="text-teal-600" />
+                                                    LEADERSHIP TEAM
+                                                </span>
+                                            </div>
+                                            {searchResults.leadershipTeam.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <LeadershipIcon size={14} className="text-teal-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Board Directors */}
+                                    {searchResults.boardDirectors && searchResults.boardDirectors.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <BoardIcon size={12} className="text-amber-600" />
+                                                    BOARD DIRECTORS
+                                                </span>
+                                            </div>
+                                            {searchResults.boardDirectors.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <BoardIcon size={14} className="text-amber-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Job Openings */}
+                                    {searchResults.jobOpenings && searchResults.jobOpenings.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <JobIcon size={12} className="text-rose-600" />
+                                                    JOB OPENINGS
+                                                </span>
+                                            </div>
+                                            {searchResults.jobOpenings.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <JobIcon size={14} className="text-rose-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Active Tenders */}
+                                    {searchResults.activeTenders && searchResults.activeTenders.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <ActiveTenderIcon size={12} className="text-lime-600" />
+                                                    ACTIVE TENDERS
+                                                </span>
+                                            </div>
+                                            {searchResults.activeTenders.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <ActiveTenderIcon size={14} className="text-lime-600 mt-1 flex-shrink-0" />
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-medium text-slate-800 text-sm truncate">
+                                                                {item.title}
+                                                            </p>
+                                                            <p className="text-xs text-slate-500 mt-1 truncate">
+                                                                {item.subtitle}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Media Gallery */}
+                                    {searchResults.mediaGallery && searchResults.mediaGallery.length > 0 && (
+                                        <div className="border-b border-slate-100">
+                                            <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+                                                <span className="text-xs font-semibold text-slate-600 flex items-center gap-2">
+                                                    <MediaIcon size={12} className="text-pink-600" />
+                                                    MEDIA GALLERY
+                                                </span>
+                                            </div>
+                                            {searchResults.mediaGallery.map((item) => (
+                                                <div
+                                                    key={item.id}
+                                                    onClick={() => handleSearchResultClick(item.route)}
+                                                    className="px-3 py-2 hover:bg-slate-50 cursor-pointer transition"
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <MediaIcon size={14} className="text-pink-600 mt-1 flex-shrink-0" />
                                                         <div className="flex-1 min-w-0">
                                                             <p className="font-medium text-slate-800 text-sm truncate">
                                                                 {item.title}
@@ -368,7 +554,13 @@ export default function Navbar() {
                                      !searchResults.news.length && 
                                      !searchResults.events.length && 
                                      !searchResults.tenderNotices.length && 
-                                     !searchResults.users.length && (
+                                     !searchResults.users.length &&
+                                     (!searchResults.pressReleases || searchResults.pressReleases.length === 0) &&
+                                     (!searchResults.leadershipTeam || searchResults.leadershipTeam.length === 0) &&
+                                     (!searchResults.boardDirectors || searchResults.boardDirectors.length === 0) &&
+                                     (!searchResults.jobOpenings || searchResults.jobOpenings.length === 0) &&
+                                     (!searchResults.activeTenders || searchResults.activeTenders.length === 0) &&
+                                     (!searchResults.mediaGallery || searchResults.mediaGallery.length === 0) && (
                                         <div className="p-6 text-center text-slate-500 text-sm">
                                             No results found
                                         </div>
